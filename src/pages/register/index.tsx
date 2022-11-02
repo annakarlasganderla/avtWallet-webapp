@@ -1,4 +1,4 @@
-import '../login/login.css';
+import styles from './register.module.scss';
 import { BsCurrencyEuro } from 'react-icons/bs';
 import accountIcon from '../../assets/account.svg';
 import Button from '../../components/Button';
@@ -9,21 +9,21 @@ export const Register = () => {
     return (
         <div>
             <header>
-                <div className='logo'>
+                <div className={styles.logo}>
                     <BsCurrencyEuro color='white' size={50} />
                 </div>
             </header>
 
-            <div className='container'>
-                <div className='input_area'>
-                    <div className='title_area'>
+            <div className={styles.container}>
+                <div className={styles.input_area}>
+                    <div className={styles.title_area}>
                         <img src={accountIcon} style={{ height: '30px', width: '30px' }} />
                         <p>
                             <strong>Register</strong>
                         </p>
                     </div>
 
-                    <div className='inputs'>
+                    <div className={styles.inputs}>
                         <TextField
                             type={'text'}
                             name={'name'}
@@ -48,7 +48,7 @@ export const Register = () => {
                     
                     <Button type='submit'>Register</Button>
                     
-                    <div className='links'>
+                    <div className={styles.links}>
                         <a href='#'>Login</a>
                     </div>
                 </div>

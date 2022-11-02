@@ -1,0 +1,158 @@
+header {
+    width: 100%;
+    background-color: black;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 25px; 
+}
+    
+.title_area {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    width: 100%;
+    font-size: 35px;
+    
+}
+
+p {
+    width: 60%;
+    font-weight: 100;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.logo {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px ;
+}
+
+/* Inputs */
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input_area {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    justify-content: center;
+    row-gap: 1rem;
+    margin-top: 2rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.button_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+button {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 20px 40px;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s all ease;
+}
+
+button:hover {
+    opacity: .8;
+}
+
+.links {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+}
+
+.links a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+@media(min-width:767px)  {
+
+    header {
+        height: 80px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .title_area {
+        background-color: black;
+        color: white;
+        border-radius: 50px 50px 0 0;
+        padding-top: 25px;
+        padding-bottom: 20px;
+    }
+
+    .input_area {
+        width: 30%;
+        border: 1px solid #c2c2c2;
+        border-radius: 50px;
+    }
+
+    .button_area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        padding: 10px 20px;
+        width: 50%;
+    }
+
+    .inputs {
+        padding: 20px 40px;
+    }
+
+    .links {
+        row-gap: .5rem;
+        margin-bottom: 2rem;
+    }
+}

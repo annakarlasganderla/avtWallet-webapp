@@ -15,8 +15,7 @@ header {
     align-items: center;
     color: black;
     width: 100%;
-    font-size: 35px;
-    
+    font-size: 35px;  
 }
 
 p {
@@ -53,24 +52,10 @@ strong {
     margin-top: 2rem;
 }
 
-label {
-    font-weight: bold;
-}
-
 .inputs {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-}
-
-.input {
-    display: flex;
-    flex-direction: column;
-}
-
-input {
-    border-radius: 5px;
-    padding: 5px 10px;
 }
 
 .button_area {
@@ -78,22 +63,6 @@ input {
     justify-content: center;
     align-items: center;
     width: 100%;
-}
-
-button {
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    padding: 20px 40px;
-    font-size: 20px;
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .2s all ease;
-}
-
-button:hover {
-    opacity: .8;
 }
 
 .links {
@@ -134,17 +103,6 @@ button:hover {
         width: 30%;
         border: 1px solid #c2c2c2;
         border-radius: 50px;
-    }
-
-    .button_area {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    button {
-        padding: 10px 20px;
-        width: 50%;
     }
 
     .inputs {

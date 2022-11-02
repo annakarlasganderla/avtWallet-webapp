@@ -1,7 +1,7 @@
 import './login.css';
-import reactLogo from '../../assets/react.svg'
-import { BsCurrencyEuro } from "react-icons/bs";
-
+import { BsCurrencyEuro } from 'react-icons/bs';
+import Button from '../../components/Button';
+import TextField from '../../components/TextField';
 
 export const Login = () => {
 
@@ -16,40 +16,31 @@ export const Login = () => {
             </header>
 
             <div className='container'>
-
                 <div className='input_area'>
                     <div className='title_area'>
                         <p> <strong>Welcome</strong>  to <strong>your</strong> best web <strong>wallet</strong> </p>
                     </div>
-
                     <div className='inputs'>
-                        <div className='input'>
-                            <label>Email</label>
-                            <input type="text" name='email' />
-                        </div>
-
-
-                        <div className='input'>
-                            <label>Password</label>
-                            <input type="text" name='password' />
-                        </div>
+                        <TextField 
+                            type={'text'} 
+                            name={'email'} 
+                            labeltext={'Email'} 
+                        />
+                        <TextField 
+                            type={'text'} 
+                            name={'password'} 
+                            labeltext={'Password'} 
+                        />
                     </div>
 
-                    <div className='button_area'>
-                        <button>Login</button>
-                    </div>
-
-
-
+                    <Button type='submit'>Login</Button>
+                    
                     <div className='links'>
                         <h3>OR</h3>
-
-                        <a href="#">Sign-up</a>
+                        <a href='#'>Sign-up</a>
                     </div>
-
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};

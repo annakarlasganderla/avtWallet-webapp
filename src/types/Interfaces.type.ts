@@ -7,7 +7,7 @@ export interface IButtonProps {
     width?: number;
     height?: number;
     onClick?: () => void;
-}
+};
 
 export interface ITextFieldProps {
     id?: string;
@@ -18,4 +18,4 @@ export interface ITextFieldProps {
     placeholder?: string;
     disabled?: boolean;
     onChange?: (event: any) => void;
-}
+};

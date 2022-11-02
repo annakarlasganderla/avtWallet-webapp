@@ -1,19 +1,14 @@
-import styles from './register.module.scss';
-import { BsCurrencyEuro } from 'react-icons/bs';
 import accountIcon from '../../assets/account.svg';
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 import TextField from '../../components/TextField';
+import styles from './register.module.scss';
 
 export const Register = () => {
     console.log(window.screen.width);
     return (
         <div>
-            <header>
-                <div className={styles.logo}>
-                    <BsCurrencyEuro color='white' size={50} />
-                </div>
-            </header>
-
+            <Header />
             <div className={styles.container}>
                 <div className={styles.input_area}>
                     <div className={styles.title_area}>

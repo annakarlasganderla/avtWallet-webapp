@@ -1,7 +1,7 @@
-import styles from './login.module.scss';
-import { BsCurrencyEuro } from 'react-icons/bs';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
+import Header from '../../components/Header';
+import styles from './login.module.scss';
 
 export const Login = () => {
 
@@ -9,12 +9,7 @@ export const Login = () => {
 
     return (
         <div>
-            <header>
-                <div className={styles.logo}>
-                    <BsCurrencyEuro color='white' size={50} />
-                </div>
-            </header>
-
+            <Header />
             <div className={styles.container}>
                 <div className={styles.input_area}>
                     <div className={styles.title_area}>

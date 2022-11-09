@@ -560,11 +560,6 @@
   dependencies:
     "prr" "~1.0.1"
 
-"esbuild-windows-64@0.15.12":
-  "integrity" "sha512-VActO3WnWZSN//xjSfbiGOSyC+wkZtI8I4KlgrTo5oHJM6z3MZZBCuFaZHd8hzf/W9KPhF0lY8OqlmWC9HO5AA=="
-  "resolved" "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.15.12.tgz"
-  "version" "0.15.12"
-
 "esbuild@^0.15.9":
   "integrity" "sha512-PcT+/wyDqJQsRVhaE9uX/Oq4XLrFh0ce/bs2TJh4CSaw9xuvI+xFrH2nAYOADbhQjUgAhNWC5LKoUsakm4dxng=="
   "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.15.12.tgz"

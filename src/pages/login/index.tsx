@@ -5,8 +5,6 @@ import styles from './login.module.scss';
 
 export const Login = () => {
 
-    console.log(window.screen.width)
-
     return (
         <div>
             <Header />

@@ -6,9 +6,15 @@ import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from
 import { useState } from 'react';
 import {auth} from '../../services/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
-
+import React from 'react';
+import { ILogin, LoginState } from '../../redux/redux.types';
+import { Dispatch } from "redux"
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/store/actionCreators';
 
 export const Login = () => {
+
+    const dispatch : Dispatch<any> = useDispatch();
 
     const navigate = useNavigate();
 
@@ -22,10 +28,18 @@ export const Login = () => {
         error,
       ] = useSignInWithEmailAndPassword(auth);
 
+      const saveLoginData = React.useCallback(
+        (loginInfos: ILogin) => dispatch(login(loginInfos)),
+        [dispatch]
+      )
+
     function handleSignIn() {
         signInWithEmailAndPassword(email, password)
         .then(() => 
-            navigate('/expense'))
+            {
+                saveLoginData({userName: email, password: password}),
+                navigate('/expense')
+            })
         .catch((error) => 
             console.log(error));
     }

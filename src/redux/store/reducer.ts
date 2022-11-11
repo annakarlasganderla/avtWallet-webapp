@@ -1,8 +1,8 @@
 import { expensiveTags, paymentMethods } from "../../pages/expenses/form/expensives.types"
-import { ExpensiveAction, ExpensiveState, IExpensive } from "../redux.types"
+import { ExpensiveAction, ExpensiveState, IExpensive, ILogin, LoginAction, LoginState } from "../redux.types"
 import * as actionTypes from "./actionTypes"
 
-const initialValue: ExpensiveState = {
+const initialExpensives: ExpensiveState = {
   expensives : [
     {
       id: 1,
@@ -15,8 +15,8 @@ const initialValue: ExpensiveState = {
   ]
 }
 
-const reducer = (
-  state: ExpensiveState = initialValue,
+export const reducerExpensives = (
+  state: ExpensiveState = initialExpensives,
   action: ExpensiveAction
 ): ExpensiveState => {
   switch (action.type) {
@@ -45,4 +45,34 @@ const reducer = (
   return state
 }
 
-export default reducer
+const initialLogged: LoginState = {
+  logged: {
+    userName: "",
+    password: ""
+  }
+}
+
+export const reducerLogin = (
+  state: LoginState = initialLogged,
+  action: LoginAction
+): LoginState => {
+  switch (action.type) {
+    case actionTypes.LOGIN:
+      const loggedUser: ILogin = {
+        userName: action.value.userName,
+        password: action.value.password
+      }
+      return {
+        ...state,
+        logged: loggedUser,
+      }
+    case actionTypes.LOGOUT:
+      return {
+        ...state,
+        logged: initialLogged.logged
+      }
+    case actionTypes.GET:
+      return state
+  }
+  return state
+}

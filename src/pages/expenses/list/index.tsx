@@ -1,6 +1,8 @@
 import styles from './expenseList.module.scss';
 import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
+import { ILogin, LoginState } from '../../../redux/redux.types';
+import { shallowEqual, useSelector } from 'react-redux';
 
 export const Expense = () => {
 
@@ -27,6 +29,12 @@ export const Expense = () => {
         }
     ]
 
+    const loggedUser: ILogin = useSelector(
+        (state: LoginState) => state.logged,
+        shallowEqual
+      )
+
+        console.log(loggedUser)
     return (
         <>
             <header className={styles.header}>

@@ -65,9 +65,16 @@ export const Login = () => {
                             labeltext={'Password'}
                             onChange={(e) => setPassword(e.target.value) }
                         />
+                        
+                        <Button 
+                            type='submit' 
+                            onClick={handleSignIn} 
+                            spacing={20}
+                        >
+                            Login
+                        </Button>
                     </div>
 
-                    <Button type='submit' onClick={handleSignIn}>Login</Button>
 
                     <div className={styles.links}>
                         <h3>OR</h3>

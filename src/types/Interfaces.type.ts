@@ -4,9 +4,17 @@ export interface IButtonProps {
     children: ReactNode;
     type: 'submit' | 'reset' | 'button' | undefined;
     disabled?: boolean;
-    width?: number;
-    height?: number;
+    width?: string;
+    height?: string;
+    textsize?: string;
+    outlined?: boolean;
+    spacing?: number | string;
     onClick?: React.MouseEventHandler<HTMLButtonElement> ;
+};
+
+export interface IHeaderProps {
+    text?: string;
+    height?: string; 
 };
 
 export interface ITextFieldProps {
@@ -14,8 +22,35 @@ export interface ITextFieldProps {
     type: HTMLInputTypeAttribute;
     name: string;
     value?: string;
-    labeltext: string;
+    labeltext?: string;
     placeholder?: string;
     disabled?: boolean;
     onChange?: (event: any) => void;
 };
+
+export interface ISelectOption {
+    text: string;
+    data: string;
+}
+
+export interface ISelectProps {
+    options: ISelectOption[] | [];
+    name?: string;
+    value?: any;
+    disabled?: boolean;
+    multiple?: boolean;
+    required?: boolean;
+    optionDefault?: string;
+    onChange?: (event: any) => void;
+};
+
+export interface IInputValueProps {
+    options: ISelectOption[] | [];
+    nameSelect?: string;
+    nameInput?: string;
+    valueSelect?: any;
+    valueInput?: number;
+    placeholder?: string;
+    disabled?: boolean;
+    onChange?: (event: any) => void;
+}

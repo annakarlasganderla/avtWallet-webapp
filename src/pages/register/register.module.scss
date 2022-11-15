@@ -8,6 +8,10 @@
     font-size: 35px;  
 }
 
+.input_area img {
+    display: none;
+}
+
 p {
     width: 60%;
     font-weight: 100;
@@ -75,6 +79,10 @@ strong {
         padding-bottom: 20px;
     }
 
+    .input_area img {
+        display: block;
+    }
+
     .input_area {
         width: 30%;
         border: 1px solid #c2c2c2;
@@ -82,7 +90,7 @@ strong {
     }
 
     .inputs {
-        padding: 20px 40px;
+        padding: 20px 100px;
     }
 
     .links {

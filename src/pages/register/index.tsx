@@ -62,9 +62,15 @@ export const Register = () => {
                             name={'confirmPassword'}
                             labeltext={'Confirm Password'}
                         />
+                        
+                        <Button 
+                            type='submit' 
+                            onClick={handleSignIn}
+                            spacing={20}
+                        >
+                            Register
+                        </Button>
                     </div>
-                    
-                    <Button type='submit' onClick={handleSignIn}>Register</Button>
                     
                     <div className={styles.links}>
                         <a href='#'>Login</a>

@@ -16,6 +16,8 @@ const InputValue = (props: IInputValueProps) => {
                 ))}
             </select>
             <input 
+                step={0.50}
+                min={0}
                 type='number'
                 disabled={props.disabled}
                 name={props.nameInput}

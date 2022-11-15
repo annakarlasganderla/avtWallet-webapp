@@ -31,27 +31,34 @@ const ExpensesForm = () => {
     return (
         <>
             <Header text={'New expense'} />
+            <h1 className={styles.title}>
+                New Expense{/* {title} */}
+            </h1>   
             <div className={styles.form}>
-                <TextField 
-                    type={'text'}
-                    name={'name'}
-                    placeholder={'Name'}
-                />
-                <InputValue
-                    nameInput={'value'}
-                    placeholder={'Value'} 
-                    options={coin} 
-                />
-                <Select
-                    name={'tag'} 
-                    optionDefault={'Tag'}
-                    options={teste} 
-                />
-                <Select
-                    name={'payMethod'} 
-                    optionDefault={'Pay Method'}
-                    options={teste} 
-                />
+                <div className={styles.inputRow}>
+                    <TextField 
+                        type={'text'}
+                        name={'name'}
+                        placeholder={'Name'}
+                    />
+                    <InputValue
+                        nameInput={'value'}
+                        placeholder={'Value'} 
+                        options={coin} 
+                    />
+                </div>
+                <div className={styles.inputRow}>
+                    <Select
+                        name={'tag'} 
+                        optionDefault={'Tag'}
+                        options={teste} 
+                    />
+                    <Select
+                        name={'payMethod'} 
+                        optionDefault={'Pay Method'}
+                        options={teste} 
+                    />
+                </div>
                 <textarea 
                     className={styles.textarea}
                     placeholder='Description'

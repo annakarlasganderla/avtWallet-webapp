@@ -16,9 +16,16 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     padding: 20px 80px;
     margin-top: 40px;
+}
+
+.inputRow {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .row {
@@ -26,4 +33,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.title {
+    display: none;
+    margin-top: 2rem;
+    font-size: 36px;
+    text-align: center;
+}
+
+@media(min-width:767px)  {
+
+    .form {
+        padding: 20px 18rem;
+    }
+
+    .inputRow {
+        display: flex;
+        flex-direction: row;
+        height: 50px;
+    }
+
+    .textarea {
+        height: 15vh;  
+    }
+
+    .title {
+        display: block;
+    } 
 }

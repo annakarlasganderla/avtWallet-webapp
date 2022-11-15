@@ -16,3 +16,9 @@
     background-position-y: 8px;
     background-position-x: 95%;
 }
+
+@media(min-width:767px)  {
+    .select {
+        background-position-y: 18px;
+    }
+}

@@ -11,15 +11,20 @@ const Select = (props: ISelectProps) => {
             onChange={props.onChange}
             className={styles.select}
             value={props.value}
+            defaultValue={''}
         >
-            <option 
-                disabled={true} 
-                selected
-                hidden
-                value=''
-            >
-                {props.optionDefault}
-            </option>
+            {
+                props.optionDefault ? 
+                    <option 
+                        disabled={true} 
+                        
+                        hidden
+                        value={''}
+                    >
+                        {props.optionDefault}
+                    </option>
+                : null
+            }
             {props.options.map((item: any, index) => (
                 <option key={index} value={item.data}>{item.text}</option>
             ))}

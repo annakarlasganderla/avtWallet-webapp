@@ -1,9 +1,15 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
+import { Dispatch } from 'redux';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 import InputValue from '../../../components/InputValue';
 import Select from '../../../components/Select';
 import TextField from '../../../components/TextField';
+import { IExpensive } from '../../../redux/redux.types';
+import { addExpensive } from '../../../redux/store/actionCreators';
 import { expensiveTags, paymentMethods } from './expensives.types';
 import styles from './form.module.scss';
 import useFormHook from './hooks/useFormHook';
@@ -11,8 +17,10 @@ import useFormHook from './hooks/useFormHook';
 const ExpensesForm = () => {
 
     const { type, id } = useParams();
-    const { handleChange, handleSubmit, disabled } = useFormHook({type: type, id: id});
-
+    const { handleChange, disabled, expensive } = useFormHook({type: type, id: id});
+    const navigate = useNavigate();
+    const dispatch: Dispatch<any> = useDispatch();
+    
     const tag = [
         {
             text: 'Alimentação',
@@ -61,6 +69,11 @@ const ExpensesForm = () => {
             data: 'US$'
         }
     ];
+
+    const handleSubmit = React.useCallback(
+        (expensive: IExpensive) => dispatch(addExpensive(expensive)),
+        [dispatch]
+    );
 
     return (
         <>
@@ -122,7 +135,7 @@ const ExpensesForm = () => {
                         width={'40%'} height={'35px'}
                         textsize={'16px'}
                         type={'submit'}
-                        onClick={handleSubmit}
+                        onClick={() => {handleSubmit(expensive); navigate('/wallet')}}
                     >
                         Save
                     </Button>

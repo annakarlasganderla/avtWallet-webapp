@@ -1,42 +1,21 @@
 import styles from './expenseList.module.scss';
 import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
-import { ILogin, LoginState } from '../../../redux/redux.types';
+import { ExpensiveState, IExpensive, ILogin, LoginState } from '../../../redux/redux.types';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 export const Expense = () => {
 
     const navigate = useNavigate();
-    const expenses = [
-        {
-            id: 1,
-            name: 'Makeup',
-            price: 99
-        },
-        {
-            id: 2,
-            name: 'Makeup',
-            price: 99
-        },
-        {
-            id: 3,
-            name: 'Makeup',
-            price: 99
-        },
-        {
-            id: 4,
-            name: 'Makeup',
-            price: 99
-        }
-    ]
+    const storedExpensives: IExpensive[] = useSelector((state: ExpensiveState) => state.expensives, shallowEqual);
+    const expenses: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
 
-    const loggedUser: ILogin = useSelector(
-        (state: LoginState) => state.logged,
-        shallowEqual
-      )
+    const loggedUser: ILogin = useSelector((state: LoginState) => state.logged, shallowEqual)
 
-        console.log(loggedUser)
+    console.log(loggedUser);
+    console.log(storedExpensives);
+
     return (
         <>
             <header className={styles.header}>
@@ -58,7 +37,7 @@ export const Expense = () => {
                             <h3>{item.name}</h3>
 
                             <div>
-                                <h3>{item.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
+                                <h3>{item.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
                                 <AiOutlineRight />
                             </div>
 

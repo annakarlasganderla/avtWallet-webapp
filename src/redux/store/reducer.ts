@@ -1,19 +1,29 @@
-import { expensiveTags, paymentMethods } from "../../pages/expenses/form/expensives.types"
-import { ExpensiveAction, ExpensiveState, IExpensive, ILogin, LoginAction, LoginState } from "../redux.types"
-import * as actionTypes from "./actionTypes"
+import {
+  expensiveTags,
+  paymentMethods,
+} from "../../pages/expenses/form/expensives.types";
+import {
+  ExpensiveAction,
+  ExpensiveState,
+  IExpensive,
+  ILogin,
+  LoginAction,
+  LoginState,
+} from "../redux.types";
+import * as actionTypes from "./actionTypes";
 
 const initialExpensives: ExpensiveState = {
-  expensives : [
+  expensives: [
     {
       id: 1,
       name: "Conta de luz",
       value: 120,
       tag: expensiveTags.alimentacao,
       methodPayment: paymentMethods.dinheiro,
-      description: ""
-    }
-  ]
-}
+      description: "",
+    },
+  ],
+};
 
 export const reducerExpensives = (
   state: ExpensiveState = initialExpensives,
@@ -22,35 +32,39 @@ export const reducerExpensives = (
   switch (action.type) {
     case actionTypes.ADD_EXPENSIVE:
       const newExpensive: IExpensive = {
-        id: (state.expensives[state.expensives.length].id + 1),
+        id: state.expensives[(state.expensives.length - 1)].id + 1,
         name: action.value.name,
         value: action.value.value,
         tag: action.value.tag,
         methodPayment: action.value.methodPayment,
-        description: action.value.description
-      }
+        description: action.value.description,
+      };
+      console.log({
+        ...state,
+        expensives: state.expensives.concat(newExpensive),
+      })
       return {
         ...state,
         expensives: state.expensives.concat(newExpensive),
-      }
+      };
     case actionTypes.REMOVE_EXPENSIVE:
-      const updatedArticles: IExpensive[] = state.expensives.filter(
-        article => article.id !== action.value.id
-      )
+      const updatedExpensives: IExpensive[] = state.expensives.filter(
+        (article) => article.id !== action.value.id
+      );
       return {
         ...state,
-        expensives: updatedArticles,
-      }
+        expensives: updatedExpensives,
+      };
   }
-  return state
-}
+  return state;
+};
 
 const initialLogged: LoginState = {
   logged: {
     userName: "",
-    password: ""
-  }
-}
+    password: "",
+  },
+};
 
 export const reducerLogin = (
   state: LoginState = initialLogged,
@@ -60,19 +74,19 @@ export const reducerLogin = (
     case actionTypes.LOGIN:
       const loggedUser: ILogin = {
         userName: action.value.userName,
-        password: action.value.password
-      }
+        password: action.value.password,
+      };
       return {
         ...state,
         logged: loggedUser,
-      }
+      };
     case actionTypes.LOGOUT:
       return {
         ...state,
-        logged: initialLogged.logged
-      }
+        logged: initialLogged.logged,
+      };
     case actionTypes.GET:
-      return state
+      return state;
   }
-  return state
-}
+  return state;
+};

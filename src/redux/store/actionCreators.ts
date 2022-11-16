@@ -1,23 +1,28 @@
-import { DispatchTypeExpensives, DispatchTypeLogin, DispatchTypeLoginGetInfos, ExpensiveAction, IExpensive, ILogin, LoginAction, LoginGetInfosAction } from "../redux.types";
+import { DispatchTypeExpensives, DispatchTypeLogin, DispatchTypeLoginGetInfos, ExpensiveAction, ExpensiveState, IExpensive, ILogin, LoginAction, LoginGetInfosAction } from "../redux.types";
 import * as actionTypes from "./actionTypes";
 
+/**
+ * Expensives area
+ */
 export function addExpensive(expensive: IExpensive){
   const action: ExpensiveAction = {
     type: actionTypes.ADD_EXPENSIVE,
     value: expensive,
   }
-
-  return simulateHttpRequest(action);
 }
 
-export function removeExpensive(article: IExpensive) {
+export function removeExpensive(expensive: IExpensive) {
   const action: ExpensiveAction = {
     type: actionTypes.REMOVE_EXPENSIVE,
-    value: article,
-  }
-  return simulateHttpRequest(action)
+    value: expensive,
+  } 
 }
 
+//-----------------------------------//
+
+/**
+ * Login/User area
+ */
 export function login(loginData: ILogin){
   const action: LoginAction = {
     type: actionTypes.LOGIN,
@@ -42,14 +47,6 @@ export function getInfos() {
   return simulateHttpRequestLoginGetInfos(action)
 }
 
-export function simulateHttpRequest(action: ExpensiveAction) {
-  return (dispatch: DispatchTypeExpensives) => {
-    setTimeout(() => {
-      dispatch(action)
-    }, 500)
-  }
-}
-
 export function simulateHttpRequestLogin(action: LoginAction) {
   return (dispatch: DispatchTypeLogin) => {
     setTimeout(() => {
@@ -65,3 +62,4 @@ export function simulateHttpRequestLoginGetInfos(action: LoginGetInfosAction){
     }, 500)
   }
 }
+//-----------------------------------//

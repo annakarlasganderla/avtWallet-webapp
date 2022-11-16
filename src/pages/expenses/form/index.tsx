@@ -9,7 +9,6 @@ import InputValue from '../../../components/InputValue';
 import Select from '../../../components/Select';
 import TextField from '../../../components/TextField';
 import { IExpensive } from '../../../redux/redux.types';
-import { addExpensive } from '../../../redux/store/actionCreators';
 import { expensiveTags, paymentMethods } from './expensives.types';
 import styles from './form.module.scss';
 import useFormHook from './hooks/useFormHook';
@@ -69,11 +68,6 @@ const ExpensesForm = () => {
             data: 'US$'
         }
     ];
-
-    const handleSubmit = React.useCallback(
-        (expensive: IExpensive) => dispatch(addExpensive(expensive)),
-        [dispatch]
-    );
 
     return (
         <>
@@ -135,7 +129,7 @@ const ExpensesForm = () => {
                         width={'40%'} height={'35px'}
                         textsize={'16px'}
                         type={'submit'}
-                        onClick={() => {handleSubmit(expensive); navigate('/wallet')}}
+                        onClick={() => {navigate('/wallet')}}
                     >
                         Save
                     </Button>

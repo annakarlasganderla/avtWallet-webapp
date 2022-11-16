@@ -6,7 +6,7 @@ import {
 export interface IExpensive {
   id: number;
   name: string;
-  value: number | null;
+  value: number;
   tag: expensiveTags | null;
   methodPayment: paymentMethods | null;
   description?: string;

@@ -1,16 +1,6 @@
-import {
-  expensiveTags,
-  paymentMethods,
-} from "../../pages/expenses/form/expensives.types";
-import {
-  ExpensiveAction,
-  ExpensiveState,
-  IExpensive,
-  ILogin,
-  LoginAction,
-  LoginState,
-} from "../redux.types";
-import * as actionTypes from "./actionTypes";
+import { expensiveTags, paymentMethods } from "../../pages/expenses/form/expensives.types";
+import { ExpensiveAction, ExpensiveState, IExpensive } from "../redux.types";
+import { ADD_EXPENSIVE, REMOVE_EXPENSIVE } from "./types";
 
 const initialExpensives: ExpensiveState = {
   expensives: [
@@ -20,7 +10,7 @@ const initialExpensives: ExpensiveState = {
       value: 120,
       tag: expensiveTags.alimentacao,
       methodPayment: paymentMethods.dinheiro,
-      description: "",
+      description: "Conta padrão.",
     },
   ],
 };
@@ -30,7 +20,7 @@ export const reducerExpensives = (
   action: ExpensiveAction
 ): ExpensiveState => {
   switch (action.type) {
-    case actionTypes.ADD_EXPENSIVE:
+    case ADD_EXPENSIVE:
       const newExpensive: IExpensive = {
         id: state.expensives[(state.expensives.length - 1)].id + 1,
         name: action.value.name,
@@ -47,7 +37,7 @@ export const reducerExpensives = (
         ...state,
         expensives: state.expensives.concat(newExpensive),
       };
-    case actionTypes.REMOVE_EXPENSIVE:
+    case REMOVE_EXPENSIVE:
       const updatedExpensives: IExpensive[] = state.expensives.filter(
         (article) => article.id !== action.value.id
       );
@@ -55,38 +45,6 @@ export const reducerExpensives = (
         ...state,
         expensives: updatedExpensives,
       };
-  }
-  return state;
-};
-
-const initialLogged: LoginState = {
-  logged: {
-    userName: "",
-    password: "",
-  },
-};
-
-export const reducerLogin = (
-  state: LoginState = initialLogged,
-  action: LoginAction
-): LoginState => {
-  switch (action.type) {
-    case actionTypes.LOGIN:
-      const loggedUser: ILogin = {
-        userName: action.value.userName,
-        password: action.value.password,
-      };
-      return {
-        ...state,
-        logged: loggedUser,
-      };
-    case actionTypes.LOGOUT:
-      return {
-        ...state,
-        logged: initialLogged.logged,
-      };
-    case actionTypes.GET:
-      return state;
   }
   return state;
 };

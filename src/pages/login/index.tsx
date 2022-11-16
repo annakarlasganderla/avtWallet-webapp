@@ -12,33 +12,18 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ILogin, LoginState } from "../../redux/redux.types";
 import { Dispatch } from "redux";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/store/actionCreators";
+import { connect, shallowEqual, useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux";
+
 
 export const Login = () => {
-  const dispatch: Dispatch<any> = useDispatch();
-
   const navigate = useNavigate();
-
+  
+  const dispatch: Dispatch<any> = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-
-  const saveLoginData = React.useCallback(
-    (loginInfos: ILogin) => dispatch(login(loginInfos)),
-    [dispatch]
-  );
-
-  function handleSignIn() {
-    signInWithEmailAndPassword(email, password)
-      .then(() => {
-        saveLoginData({ userName: email, password: password }),
-          navigate("/wallet");
-      })
-      .catch((error: any) => console.log(error));
-  }
+  const handleLogin = (credentials: ILogin) => dispatch(login(credentials));
 
   return (
     <div>
@@ -60,13 +45,17 @@ export const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
-              type={"text"}
+              type={"password"}
               name={"password"}
               labeltext={"Password"}
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button type="submit" onClick={handleSignIn} spacing={20}>
+            <Button
+              type="submit"
+              onClick={() => handleLogin({ userName: email, password: password })}
+              spacing={20}
+            >
               Login
             </Button>
           </div>
@@ -79,4 +68,4 @@ export const Login = () => {
       </div>
     </div>
   );
-};
+}

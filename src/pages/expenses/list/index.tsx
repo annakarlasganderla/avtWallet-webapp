@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router';
 export const Expense = () => {
 
     const navigate = useNavigate();
-    const storedExpensives: IExpensive[] = useSelector((state: ExpensiveState) => state.expensives, shallowEqual);
-    const expenses: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
+    const storedExpensives = useSelector((state: ExpensiveState) => state.expensives, shallowEqual);
+    const expensives: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
 
     const loggedUser: ILogin = useSelector((state: LoginState) => state.logged, shallowEqual)
 
@@ -30,10 +30,9 @@ export const Expense = () => {
                         <h1>R$ 199,99</h1>
                     </div>
                 </div>
-
                 <div className={styles.list}>
-                    {expenses.map((item) => (
-                        <div className={styles.item}>
+                    {expensives.map((item) => (
+                        <div className={styles.item} key={`${item.id}_${item.description}`}>
                             <h3>{item.name}</h3>
 
                             <div>

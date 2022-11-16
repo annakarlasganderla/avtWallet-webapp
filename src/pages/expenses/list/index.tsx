@@ -3,9 +3,11 @@ import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
 import { ILogin, LoginState } from '../../../redux/redux.types';
 import { shallowEqual, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 export const Expense = () => {
 
+    const navigate = useNavigate();
     const expenses = [
         {
             id: 1,
@@ -57,7 +59,6 @@ export const Expense = () => {
 
                             <div>
                                 <h3>{item.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
-
                                 <AiOutlineRight />
                             </div>
 
@@ -67,7 +68,10 @@ export const Expense = () => {
 
                 <div className={styles.button_area}>
                     <div className={styles.button}>
-                        <Button type='submit'>
+                        <Button 
+                            type={'button'} 
+                            onClick={() => navigate('/wallet/form/new')}
+                        >
                             + Expenses
                         </Button>
                     </div>

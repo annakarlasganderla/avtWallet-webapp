@@ -5,6 +5,7 @@ import { IUseFormHookProps } from "../expensives.types";
 
 const useFormHook = (props: IUseFormHookProps) => {
 
+    const disabled = props.type === 'view' ? true : false;
     const [expense, setExpense] = useState<IExpensive>(
         {
             id: 0,
@@ -26,7 +27,7 @@ const useFormHook = (props: IUseFormHookProps) => {
         addExpensive(expense);
     };
 
-    return { handleChange, handleSubmit };
+    return { handleChange, handleSubmit, disabled };
 };
 
 export default useFormHook;

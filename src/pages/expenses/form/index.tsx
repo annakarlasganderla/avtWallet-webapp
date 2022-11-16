@@ -11,8 +11,7 @@ import useFormHook from './hooks/useFormHook';
 const ExpensesForm = () => {
 
     const { type, id } = useParams();
-    const { handleChange, handleSubmit } = useFormHook({type: type, id: id});
-    const disabled = type === 'view' ? true : false;
+    const { handleChange, handleSubmit, disabled } = useFormHook({type: type, id: id});
 
     const tag = [
         {
@@ -122,7 +121,8 @@ const ExpensesForm = () => {
                         disabled={disabled}
                         width={'40%'} height={'35px'}
                         textsize={'16px'}
-                        type={'submit'} 
+                        type={'submit'}
+                        onClick={handleSubmit}
                     >
                         Save
                     </Button>

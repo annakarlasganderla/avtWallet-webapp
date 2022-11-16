@@ -10,6 +10,11 @@
     resize: none;
 }
 
+.textarea:disabled {
+    background-color: #E6E6E6;
+    opacity: 1;
+}
+
 .form {
     width: 100%;
     display: flex;

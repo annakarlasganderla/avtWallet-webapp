@@ -6,10 +6,10 @@ import {
 export interface IExpensive {
   id: number;
   name: string;
-  value: number;
-  tag: expensiveTags;
-  methodPayment: paymentMethods;
-  description: string;
+  value: number | null;
+  tag: expensiveTags | null;
+  methodPayment: paymentMethods | null;
+  description?: string;
 }
 
 export type ExpensiveState = {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {Login} from "../pages/login";
 import { Expense } from '../pages/expenses/list';
@@ -12,11 +11,15 @@ export function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />}></Route>
-                <Route path='/expenses/form' element={<ExpensesForm />} />
-                <Route path='/expense' element={<Expense />} />
+                <Route path='/wallet/form' element={<ExpensesForm />} >
+                    <Route path=':type'>
+                        <Route path=':id'/>
+                    </Route>
+                </Route>
+                <Route path='/wallet' element={<Expense />} />
                 <Route path='/register' element={<Register />}></Route>
             </Routes>
         </BrowserRouter>
     );
 
-}
+};

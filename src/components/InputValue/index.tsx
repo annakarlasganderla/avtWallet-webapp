@@ -10,6 +10,7 @@ const InputValue = (props: IInputValueProps) => {
                 value={props.valueSelect}
                 onChange={props.onChange}
                 className={styles.select}
+                defaultValue={props.valueSelect}
             >
                 {props.options.map((item: any, index) => (
                     <option key={index} value={item.data}>{item.text}</option>

@@ -10,14 +10,12 @@ const Select = (props: ISelectProps) => {
             required={props.required}
             onChange={props.onChange}
             className={styles.select}
-            value={props.value}
-            defaultValue={''}
+            defaultValue={props.value || ''}
         >
             {
                 props.optionDefault ? 
                     <option 
                         disabled={true} 
-                        
                         hidden
                         value={''}
                     >
@@ -30,6 +28,6 @@ const Select = (props: ISelectProps) => {
             ))}
         </select>
     );
-}
+};
 
 export default Select;

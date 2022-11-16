@@ -8,8 +8,8 @@ const initialExpensives: ExpensiveState = {
       id: 1,
       name: "Conta de luz",
       value: 120,
-      tag: expensiveTags.ContasDaCasa,
-      methodPayment: paymentMethods.Dinheiro,
+      tag: expensiveTags.alimentacao,
+      methodPayment: paymentMethods.dinheiro,
       description: ""
     }
   ]

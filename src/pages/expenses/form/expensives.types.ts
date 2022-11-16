@@ -1,7 +1,18 @@
-export enum expensiveTags{
-  ContasDaCasa
+export enum expensiveTags {
+    alimentacao,
+    lazer,
+    trabalho,
+    transporte,
+    saude
 }
 
-export enum paymentMethods{
-  Dinheiro
+export enum paymentMethods {
+    dinheiro,
+    credito,
+    debito
+}
+
+export interface IUseFormHookProps {
+    type?: string;
+    id?: string;
 }

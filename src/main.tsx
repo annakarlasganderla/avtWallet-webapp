@@ -8,10 +8,10 @@ import thunk from 'redux-thunk';
 
 const store: Store<LoginState, LoginAction> & {
   dispatch: DispatchTypeLogin
-} = createStore(reducerLogin, applyMiddleware(thunk))
+} = createStore(reducerLogin, applyMiddleware(thunk));
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <App />
   </Provider>
-)
+);

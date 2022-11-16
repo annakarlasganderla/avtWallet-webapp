@@ -38,7 +38,7 @@ export const Login = () => {
         .then(() => 
             {
                 saveLoginData({userName: email, password: password}),
-                navigate('/expense')
+                navigate('/wallet')
             })
         .catch((error: any) => 
             console.log(error));

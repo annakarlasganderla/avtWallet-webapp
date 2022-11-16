@@ -30,8 +30,8 @@ export interface ITextFieldProps {
 
 export interface ISelectOption {
     text: string;
-    data: string;
-}
+    data: any;
+};
 
 export interface ISelectProps {
     options: ISelectOption[] | [];
@@ -53,4 +53,4 @@ export interface IInputValueProps {
     placeholder?: string;
     disabled?: boolean;
     onChange?: (event: any) => void;
-}
+};

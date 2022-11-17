@@ -128,17 +128,20 @@ const ExpensesForm = () => {
                         textsize={'16px'}
                         outlined 
                     >
-                        Cancel
+                        {disabled ? 'Back' : 'Cancel'}
                     </Button> 
-                    <Button 
-                        disabled={disabled}
-                        width={'40%'} height={'35px'}
-                        textsize={'16px'}
-                        type={'submit'}
-                        onClick={() => {handleSubmit(expensive); navigate('/wallet')}}
-                    >
-                        Save
-                    </Button>
+                    {
+                        !disabled ? 
+                        <Button 
+                            width={'40%'} height={'35px'}
+                            textsize={'16px'}
+                            type={'submit'}
+                            onClick={() => {handleSubmit(expensive); navigate('/wallet')}}
+                        >
+                            Save
+                        </Button>
+                        : null
+                    }
                 </div>
             </div>
         </>

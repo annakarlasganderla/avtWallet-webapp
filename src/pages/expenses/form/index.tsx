@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 import InputValue from '../../../components/InputValue';
@@ -16,7 +16,8 @@ const ExpensesForm = () => {
         handleSubmit,
         tags,
         paymethod,
-        coin
+        coin,
+        navigate
     } = useFormHook({type: type, id: id});
 
     return (
@@ -71,6 +72,7 @@ const ExpensesForm = () => {
                         width={'40%'} height={'35px'}
                         textsize={'16px'}
                         outlined 
+                        onClick={() => navigate('/wallet')}
                     >
                         Cancel
                     </Button> 

@@ -1,8 +1,7 @@
 import styles from './expenseList.module.scss';
 import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
-import { ExpensiveState, IExpensive, ILogin, LoginState } from '../../../redux/redux.types';
-import { shallowEqual, useSelector } from 'react-redux';
+import { IExpensive } from '../../../redux/redux.types';
 import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 
@@ -18,6 +17,8 @@ export const Expense = () => {
     const storedExpensives = expensivesState.expensives;
     const expensives: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
 
+    console.log(expensivesState.expensives);
+
     return (
         <>
             <header className={styles.header}>
@@ -28,12 +29,11 @@ export const Expense = () => {
                 <div className={styles.amount_container}>
                     <div className={styles.amount}>
                         <p>Amount: </p>
-
                         <h1>R$ 199,99</h1>
                     </div>
                 </div>
                 <div className={styles.list}>
-                    {expensives.map((item) => (
+                    {expensivesState.expensives.map((item) => (
                         <div className={styles.item} key={`${item.id}_${item.description}`}>
                             <h3>{item.name}</h3>
 
@@ -55,12 +55,8 @@ export const Expense = () => {
                             + Expenses
                         </Button>
                     </div>
-
                 </div>
-
-
             </main>
-
         </>
     );
 };

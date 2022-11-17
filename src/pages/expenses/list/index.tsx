@@ -5,7 +5,6 @@ import { ExpensiveState, IExpensive, ILogin, LoginState } from '../../../redux/r
 import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
-import { get } from '../../../redux/session/reducer';
 
 export const Expense = () => {
 

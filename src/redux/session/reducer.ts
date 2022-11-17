@@ -17,11 +17,8 @@ export const sessionsSlice = createSlice({
     },
     logout: (state: LoginState) => {
       state.logged = initialState.logged;
-    },
-    get: (state: LoginState) => {
-      return state;
     }
   }
 });
 
-export const { login, logout, get } = sessionsSlice.actions;
+export const { login, logout } = sessionsSlice.actions;

@@ -1,4 +1,4 @@
-import { ISelectProps } from '../../types/Interfaces.type';
+import { ISelectOption, ISelectProps } from '../../types/Interfaces.type';
 import styles from './select.module.scss';
 
 const Select = (props: ISelectProps) => {
@@ -17,13 +17,13 @@ const Select = (props: ISelectProps) => {
                     <option 
                         disabled={true} 
                         hidden
-                        value={''}
+                        value={props.value || ''}
                     >
-                        {props.optionDefault}
+                        {props.value ? props.options.find((e) => e.data.toString() === props.value.toString())?.text : props.optionDefault}
                     </option>
                 : null
             }
-            {props.options.map((item: any, index) => (
+            {props.options.map((item: ISelectOption, index) => (
                 <option key={index} value={item.data}>{item.text}</option>
             ))}
         </select>

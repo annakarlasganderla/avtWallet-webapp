@@ -14,6 +14,7 @@ const TextField = (props: ITextFieldProps) => {
                 type={props.type} 
                 name={props.name}  
                 id={props.id}
+                value={props.value}
                 placeholder={props.placeholder}
                 disabled={props.disabled}
                 onChange={props.onChange}

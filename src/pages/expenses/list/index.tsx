@@ -1,7 +1,6 @@
 import styles from './expenseList.module.scss';
 import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
-import { IExpensive } from '../../../redux/redux.types';
 import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 
@@ -13,11 +12,6 @@ export const Expense = () => {
     const dispatch = useAppDispatch();
     
     const navigate = useNavigate();
-    
-    const storedExpensives = expensivesState.expensives;
-    const expensives: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
-
-    console.log(expensivesState.expensives);
 
     return (
         <>
@@ -33,8 +27,8 @@ export const Expense = () => {
                     </div>
                 </div>
                 <div className={styles.list}>
-                    {expensivesState.expensives.map((item) => (
-                        <div className={styles.item} key={`${item.id}_${item.description}`}>
+                    {expensivesState.expensives.map((item, index) => (
+                        <div className={styles.item} key={index} onClick={() => navigate(`form/view/${item.id}`)}>
                             <h3>{item.name}</h3>
 
                             <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { addExpensive } from '../../../../redux/expensives/reducer';
@@ -63,13 +63,26 @@ const useFormHook = (props: IUseFormHookProps) => {
     ];
 
     const [expensive, setExpensive] = useState<IExpensive>({
-        id: 0,
+        id: expensivesState.expensives.length + 1,
         name: '',
         value: 0,
         tag: null,
         methodPayment: null,
         description: '',
     });
+
+    useEffect(() => {
+        if (props.id && (props.type === 'edit' || props.type === 'view')) {
+            getById(Number(props.id));
+        }
+    }, []);
+
+    const getById = (id: number) => {
+        let expenseFind = expensivesState.expensives.find((expensive) => expensive.id === id);
+        if (expenseFind) {
+            setExpensive(expenseFind);
+        }
+    };
 
     const handleChange = (
         event: React.ChangeEvent<

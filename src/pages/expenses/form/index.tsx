@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 import InputValue from '../../../components/InputValue';
@@ -17,7 +17,8 @@ const ExpensesForm = () => {
         tags,
         paymethod,
         coin,
-        navigate
+        navigate,
+        expensive
     } = useFormHook({type: type, id: id});
 
     return (
@@ -33,6 +34,7 @@ const ExpensesForm = () => {
                         type={'text'}
                         name={'name'}
                         placeholder={'Name'}
+                        value={expensive.name}
                         onChange={(e) => handleChange(e)}
                     />
                     <InputValue
@@ -40,6 +42,7 @@ const ExpensesForm = () => {
                         nameInput={'value'}
                         placeholder={'Value'} 
                         options={coin} 
+                        valueInput={expensive.value}
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
@@ -49,6 +52,7 @@ const ExpensesForm = () => {
                         name={'tag'} 
                         optionDefault={'Tag'}
                         options={tags} 
+                        value={expensive.tag}
                         onChange={(e) => handleChange(e)}
                     />
                     <Select
@@ -56,6 +60,7 @@ const ExpensesForm = () => {
                         name={'methodPayment'} 
                         optionDefault={'Pay Method'}
                         options={paymethod} 
+                        value={expensive.methodPayment}
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
@@ -64,6 +69,7 @@ const ExpensesForm = () => {
                     className={styles.textarea}
                     name={'description'}
                     placeholder='Description'
+                    value={expensive.description}
                     onChange={(e) => handleChange(e)}
                 />
                 <div className={styles.row}>

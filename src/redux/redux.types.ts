@@ -1,3 +1,4 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import {
   expensiveTags,
   paymentMethods,
@@ -32,10 +33,7 @@ export type LoginState = {
   logged: ILogin
 }
 
-export type LoginAction = {
-  type: string;
-  value: ILogin;
-}
+export type LoginAction = PayloadAction<ILogin>
 
 export type DispatchTypeLogin = (args: LoginAction) => LoginAction 
 

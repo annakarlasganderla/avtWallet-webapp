@@ -4,17 +4,20 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { ExpensiveState, IExpensive, ILogin, LoginState } from '../../../redux/redux.types';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { get } from '../../../redux/session/reducer';
 
 export const Expense = () => {
 
+    const sessionState = useAppSelector((state) => state.session);
+    const expensivesState = useAppSelector((state) => state.expensives);
+    
+    const dispatch = useAppDispatch();
+    
     const navigate = useNavigate();
-    const storedExpensives = useSelector((state: ExpensiveState) => state.expensives, shallowEqual);
+    
+    const storedExpensives = expensivesState.expensives;
     const expensives: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
-
-    const loggedUser: ILogin = useSelector((state: LoginState) => state.logged, shallowEqual)
-
-    console.log(loggedUser);
-    console.log(storedExpensives);
 
     return (
         <>

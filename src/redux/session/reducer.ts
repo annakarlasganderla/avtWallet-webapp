@@ -1,35 +1,27 @@
-import { ILogin, LoginAction, LoginState } from "../redux.types";
-import { GET, LOGIN, LOGOUT } from "./types";
+import { createSlice } from "@reduxjs/toolkit";
+import { LoginAction, LoginState } from "../redux.types";
 
-const initialLogged: LoginState = {
+const initialState: LoginState = {
   logged: {
     userName: "",
     password: "",
   },
 };
 
-export const reducerLogin = (
-  state: LoginState = initialLogged,
-  action: LoginAction
-): LoginState => {
-  switch (action.type) {
-    case LOGIN:
-      const loggedUser: ILogin = {
-        userName: action.value.userName,
-        password: action.value.password,
-      };
-      console.log(action)
-      return {
-        ...state,
-        logged: loggedUser,
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        logged: initialLogged.logged,
-      };
-    case GET:
+export const sessionsSlice = createSlice({
+  name: "sessionsSlice",
+  initialState,
+  reducers: {
+    login: (state: LoginState, action: LoginAction) => {
+      state.logged = action.payload;
+    },
+    logout: (state: LoginState) => {
+      state.logged = initialState.logged;
+    },
+    get: (state: LoginState) => {
       return state;
+    }
   }
-  return state;
-};
+});
+
+export const { login, logout, get } = sessionsSlice.actions;

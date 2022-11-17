@@ -2,28 +2,23 @@ import Button from "../../components/Button";
 import TextField from "../../components/TextField";
 import Header from "../../components/Header";
 import styles from "./login.module.scss";
-import {
-  useCreateUserWithEmailAndPassword,
-  useSignInWithEmailAndPassword,
-} from "react-firebase-hooks/auth";
 import { useState } from "react";
-import { auth } from "../../services/firebaseConfig";
 import { useNavigate } from "react-router-dom";
-import React from "react";
-import { ILogin, LoginState } from "../../redux/redux.types";
-import { Dispatch } from "redux";
-import { connect, shallowEqual, useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux";
+import { ILogin } from "../../redux/redux.types";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { login } from "../../redux/session/reducer";
 
 
 export const Login = () => {
   const navigate = useNavigate();
   
-  const dispatch: Dispatch<any> = useDispatch();
+  const state = useAppSelector((state) => state.session);
+  const dispatch = useAppDispatch();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (credentials: ILogin) => dispatch(login(credentials));
+  const handleLogin = (credentials: ILogin) => {dispatch(login(credentials)); navigate("/wallet")};
 
   return (
     <div>

@@ -15,10 +15,10 @@ const initialExpensives: ExpensiveState = {
   ],
 };
 
-export const reducerExpensives = (
+function reducerExpensives(
   state: ExpensiveState = initialExpensives,
   action: ExpensiveAction
-): ExpensiveState => {
+){
   switch (action.type) {
     case ADD_EXPENSIVE:
       const newExpensive: IExpensive = {
@@ -29,10 +29,7 @@ export const reducerExpensives = (
         methodPayment: action.value.methodPayment,
         description: action.value.description,
       };
-      console.log({
-        ...state,
-        expensives: state.expensives.concat(newExpensive),
-      })
+      console.log("socuerro")
       return {
         ...state,
         expensives: state.expensives.concat(newExpensive),
@@ -48,3 +45,5 @@ export const reducerExpensives = (
   }
   return state;
 };
+
+export default reducerExpensives;

@@ -11,6 +11,7 @@ export const expensivesSlice = createSlice({
   reducers: {
     addExpensive: (state, action) => {
       state.expensives.push(action.payload);
+      console.log(action.payload)
     },
     updateExpensive: (state, action) => {
       const { id, newValue } = action.payload;
@@ -21,7 +22,7 @@ export const expensivesSlice = createSlice({
       })
     },
     removeExpensive: (state, action) => {
-      state.expensives = state.expensives.filter((expense) => expense.id === action.payload);
+      state.expensives = state.expensives.filter((expense) => expense.id !== action.payload);
     },
     resetExpensives: (state) => {
       return initialState;

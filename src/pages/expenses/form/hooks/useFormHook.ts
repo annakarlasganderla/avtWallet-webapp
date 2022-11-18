@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { addExpensive } from '../../../../redux/expensives/reducer';
+import { addExpensive, removeExpensive } from '../../../../redux/expensives/reducer';
 import { IExpensive } from '../../../../redux/redux.types';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import { expensiveTags, IUseFormHookProps, paymentMethods } from '../expensives.types';
@@ -69,6 +69,7 @@ const useFormHook = (props: IUseFormHookProps) => {
         tag: null,
         methodPayment: null,
         description: '',
+        coin: ''
     });
 
     useEffect(() => {
@@ -93,7 +94,7 @@ const useFormHook = (props: IUseFormHookProps) => {
     };
 
     const handleSubmit = () => {
-        dispatch(addExpensive(expensive));
+        dispatch(addExpensive(expensive))
         navigate('/wallet');
     };
 

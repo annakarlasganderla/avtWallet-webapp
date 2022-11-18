@@ -42,6 +42,7 @@ const ExpensesForm = () => {
                         nameInput={'value'}
                         placeholder={'Value'} 
                         options={coin} 
+                        valueSelect={expensive.coin}
                         valueInput={expensive.value}
                         onChange={(e) => handleChange(e)}
                     />

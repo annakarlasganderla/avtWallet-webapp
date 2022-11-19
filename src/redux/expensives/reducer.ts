@@ -11,15 +11,10 @@ export const expensivesSlice = createSlice({
   reducers: {
     addExpensive: (state, action) => {
       state.expensives.push(action.payload);
-      console.log(action.payload)
     },
     updateExpensive: (state, action) => {
       const { id, newValue } = action.payload;
-      state.expensives = state.expensives.map((e) => {
-        if(e.id === id){
-          return e = newValue 
-        }
-      })
+      state.expensives = [...state.expensives.slice(0,id-1), newValue, ...state.expensives.slice(id + 1)];
     },
     removeExpensive: (state, action) => {
       state.expensives = state.expensives.filter((expense) => expense.id !== action.payload);

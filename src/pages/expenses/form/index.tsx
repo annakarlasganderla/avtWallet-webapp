@@ -10,26 +10,26 @@ import useFormHook from './hooks/useFormHook';
 const ExpensesForm = () => {
 
     const { type, id } = useParams();
-    const { 
-        handleChange, 
-        disabled, 
+    const {
+        handleChange,
+        disabled,
         handleSubmit,
         tags,
         paymethod,
         coin,
         navigate,
         expensive
-    } = useFormHook({type: type, id: id});
+    } = useFormHook({ type: type, id: id });
 
     return (
         <>
             <Header text={'New expense'} />
             <h1 className={styles.title}>
                 New Expense{/* {title} */}
-            </h1>   
+            </h1>
             <div className={styles.form}>
                 <div className={styles.inputRow}>
-                    <TextField 
+                    <TextField
                         disabled={disabled}
                         type={'text'}
                         name={'name'}
@@ -39,6 +39,7 @@ const ExpensesForm = () => {
                     />
                     <InputValue
                         disabled={disabled}
+                        nameSelect={'coin'}
                         nameInput={'value'}
                         placeholder={'Value'} 
                         options={coin} 
@@ -50,22 +51,22 @@ const ExpensesForm = () => {
                 <div className={styles.inputRow}>
                     <Select
                         disabled={disabled}
-                        name={'tag'} 
+                        name={'tag'}
                         optionDefault={'Tag'}
-                        options={tags} 
+                        options={tags}
                         value={expensive.tag}
                         onChange={(e) => handleChange(e)}
                     />
                     <Select
                         disabled={disabled}
-                        name={'methodPayment'} 
+                        name={'methodPayment'}
                         optionDefault={'Pay Method'}
-                        options={paymethod} 
+                        options={paymethod}
                         value={expensive.methodPayment}
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
-                <textarea 
+                <textarea
                     disabled={disabled}
                     className={styles.textarea}
                     name={'description'}
@@ -74,16 +75,16 @@ const ExpensesForm = () => {
                     onChange={(e) => handleChange(e)}
                 />
                 <div className={styles.row}>
-                    <Button 
-                        type={'button'} 
+                    <Button
+                        type={'button'}
                         width={'40%'} height={'35px'}
                         textsize={'16px'}
-                        outlined 
+                        outlined
                         onClick={() => navigate('/wallet')}
                     >
                         Cancel
-                    </Button> 
-                    <Button 
+                    </Button>
+                    <Button
                         disabled={disabled}
                         width={'40%'} height={'35px'}
                         textsize={'16px'}

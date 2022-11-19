@@ -2,13 +2,11 @@ import styles from './expenseList.module.scss';
 import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router';
-import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { useAppSelector } from '../../../redux/store';
 import { BsTrash } from 'react-icons/bs';
+import { MdEdit } from 'react-icons/md';
 import { useListHook } from './hooks/useListHook';
-import { useState } from 'react';
-import { removeExpensive } from '../../../redux/expensives/reducer';
 import { IExpensive } from '../../../redux/redux.types';
-
 
 export const Expense = () => {
     const sessionState = useAppSelector((state) => state.session);
@@ -44,12 +42,25 @@ export const Expense = () => {
                                     <h3>{item.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
                                 </div>
 
-                                <button className={styles.buttonIcon}>
-                                    <BsTrash onClick={() => deleteExpensive(item.id)} />
+                                <button 
+                                    className={styles.buttonIcon}
+                                    onClick={() => navigate(`form/edit/${item.id}`)}
+                                >
+                                    <MdEdit />
+                                </button>
+
+                                <button 
+                                    className={styles.buttonIcon}
+                                    onClick={() => deleteExpensive(item.id)}
+                                >
+                                    <BsTrash />
                                 </button>
                                 
-                                <button className={styles.buttonIcon}>
-                                    <AiOutlineRight  onClick={() => navigate(`form/view/${item.id}`)} />
+                                <button 
+                                    className={styles.buttonIcon}
+                                    onClick={() => navigate(`form/view/${item.id}`)}
+                                >
+                                    <AiOutlineRight/>
                                 </button>
 
                             </div>

@@ -7,7 +7,7 @@ export const useListHook = () => {
 
     const deleteExpensive = (id: number) => {
         dispatch(removeExpensive(id))
-    }
+    };
 
-    return {deleteExpensive} 
-}
+    return { deleteExpensive };
+};

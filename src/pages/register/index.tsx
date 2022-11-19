@@ -4,29 +4,29 @@ import Button from '../../components/Button';
 import Header from '../../components/Header';
 import TextField from '../../components/TextField';
 import styles from './register.module.scss';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import {auth} from '../../services/firebaseConfig';
+// import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+// import {auth} from '../../services/firebaseConfig';
 
 export const Register = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    // const [
+    //     createUserWithEmailAndPassword,
+    //     user,
+    //     loading,
+    //     error,
+    // ] = useCreateUserWithEmailAndPassword(auth);
 
     function handleSignIn(e: any): void {
-        e.preventDefault();
-        createUserWithEmailAndPassword(email, password);
+        // e.preventDefault();
+        // createUserWithEmailAndPassword(email, password);
     }
 
-    if (loading) {
-        return <p>carregando....</p>
-    }
+    // if (loading) {
+    //     return <p>carregando....</p>
+    // }
     return (
         <div>
             <Header />

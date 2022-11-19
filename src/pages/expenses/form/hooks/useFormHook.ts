@@ -54,11 +54,11 @@ const useFormHook = (props: IUseFormHookProps) => {
     const coin = [
         {
             text: 'R$',
-            data: 'R$'
+            data: 'BRL'
         },
         {
             text: 'US$',
-            data: 'US$'
+            data: 'USD'
         }
     ];
 
@@ -90,7 +90,13 @@ const useFormHook = (props: IUseFormHookProps) => {
             HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
         >
     ) => {
-        setExpensive({ ...expensive, [event.target.name]: event.target.value });
+        if(event.target.name === 'value') {
+            return setExpensive({ 
+                ...expensive, 
+                [event.target.name]: Number(event.target.value)
+            });
+        }
+        return setExpensive({ ...expensive, [event.target.name]: event.target.value });
     };
 
     const handleSubmit = () => {

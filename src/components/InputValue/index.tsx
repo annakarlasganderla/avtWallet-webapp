@@ -9,6 +9,7 @@ const InputValue = (props: IInputValueProps) => {
                 name={props.nameSelect}
                 onChange={props.onChange}
                 className={styles.select}
+                value={props.valueSelect}
                 defaultValue={props.valueSelect}
             >   
                 {props.options.map((item: any, index) => (
@@ -21,7 +22,7 @@ const InputValue = (props: IInputValueProps) => {
                 type='number'
                 disabled={props.disabled}
                 name={props.nameInput}
-                value={props.valueInput}
+                value={props?.valueInput || ''}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 className={styles.input}

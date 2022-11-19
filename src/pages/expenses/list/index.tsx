@@ -6,18 +6,14 @@ import { useAppSelector } from '../../../redux/store';
 import { BsTrash } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
 import { useListHook } from './hooks/useListHook';
-import { IExpensive } from '../../../redux/redux.types';
+import Header from '../../../components/Header';
 
 export const Expense = () => {
     const sessionState = useAppSelector((state) => state.session);
-    const expensivesState = useAppSelector((state) => state.expensives);
-
+    
     const navigate = useNavigate();
 
-    const storedExpensives = expensivesState.expensives;
-    const expensives: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
-
-    const { deleteExpensive } = useListHook();
+    const { expensivesState , deleteExpensive, amount } = useListHook();
 
     return (
         <>
@@ -29,7 +25,7 @@ export const Expense = () => {
                 <div className={styles.amount_container}>
                     <div className={styles.amount}>
                         <p>Amount: </p>
-                        <h1>R$ 199,99</h1>
+                        <h1>{amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h1>
                     </div>
                 </div>
                 <div className={styles.list}>

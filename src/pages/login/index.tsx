@@ -6,7 +6,7 @@ import useLogin from './hooks/useLogin';
 
 export const Login = () => {
   
-  const { handleChange, handleLogin, credentials, navigate } = useLogin();
+  const { handleChange, handleLogin, credentials, navigate, form } = useLogin();
 
   return (
     <div>
@@ -23,9 +23,10 @@ export const Login = () => {
           <div className={styles.inputs}>
             <TextField
               type={'text'}
-              name={'userName'}
-              labeltext={'Username'}
-              value={credentials.userName}
+              name={'email'}
+              labeltext={'Email'}
+              value={credentials.email}
+              errorMessage={form.errorMessage.email}
               onChange={(e) => handleChange(e)}
             />
             <TextField
@@ -33,6 +34,7 @@ export const Login = () => {
               name={'password'}
               labeltext={'Password'}
               value={credentials.password}
+              errorMessage={form.errorMessage.password}
               onChange={(e) => handleChange(e)}
             />
 
@@ -43,6 +45,7 @@ export const Login = () => {
             >
               Login
             </Button>
+            <h4 className={styles.errorCredentials}>{form.errorMessage.credentials}</h4>
           </div>
 
           <div className={styles.links}>

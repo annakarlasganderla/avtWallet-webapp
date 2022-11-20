@@ -26,7 +26,7 @@ export type ExpensiveAction = {
 export type DispatchTypeExpensives = (args: ExpensiveAction) => ExpensiveAction 
 
 export interface ILogin {
-  userName: string;
+  email: string;
   password: string;
 }
 

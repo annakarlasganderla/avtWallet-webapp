@@ -19,7 +19,9 @@ const TextField = (props: ITextFieldProps) => {
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={styles.input}
+                style={{border: props.errorMessage ? '2px solid #E44060' : '2px solid #000000'}}
             />
+            <h5 className={styles.error}>{props.errorMessage}</h5>
         </div>
     );
 };

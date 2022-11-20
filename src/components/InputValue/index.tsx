@@ -26,7 +26,7 @@ const InputValue = (props: IInputValueProps) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 className={styles.input}
-            />
+            />  
         </div>
     );
 };

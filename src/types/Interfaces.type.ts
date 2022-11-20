@@ -25,6 +25,7 @@ export interface ITextFieldProps {
     labeltext?: string;
     placeholder?: string;
     disabled?: boolean;
+    errorMessage?: string;
     onChange?: (event: any) => void;
 };
 
@@ -54,3 +55,15 @@ export interface IInputValueProps {
     disabled?: boolean;
     onChange?: (event: any) => void;
 };
+
+export interface IValidLogin {
+    isValid: boolean;
+    error: boolean;
+    errorMessage: IErrorMessageLogin;
+};
+
+export interface IErrorMessageLogin {
+    email: string;
+    password: string;
+    credentials: string;
+}

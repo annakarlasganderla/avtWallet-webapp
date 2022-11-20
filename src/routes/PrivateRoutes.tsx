@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from "react-router";
-import { useAppSelector } from "../redux/store";
+import { Navigate, Outlet } from 'react-router';
+import { useAppSelector } from '../redux/store';
 
 const PrivateRoutes = () => {
     

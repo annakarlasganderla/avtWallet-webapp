@@ -3,7 +3,7 @@ import { LoginAction, LoginState } from '../redux.types';
 
 const initialState: LoginState = {
   logged: {
-    userName: '',
+    email: '',
     password: '',
   },
 };

@@ -8,9 +8,9 @@ import { expensiveTags, IUseFormHookProps, paymentMethods } from '../expensives.
 
 const useFormHook = (props: IUseFormHookProps) => {
 
-    const disabled = props.type === 'view' ? true : false;
-    const expensivesState = useAppSelector((state) => state.expensives);
     const dispatch = useAppDispatch();
+    const expensivesState = useAppSelector((state) => state.expensives);
+    const disabled = props.type === 'view' ? true : false;
     const navigate = useNavigate();
 
     const tags = [
@@ -75,14 +75,14 @@ const useFormHook = (props: IUseFormHookProps) => {
     useEffect(() => {
         if (props.id && (props.type === 'edit' || props.type === 'view')) {
             getById(Number(props.id));
-        }
+        };
     }, []);
 
     const getById = (id: number) => {
         let expenseFind = expensivesState.expensives.find((expensive) => expensive.id === id);
         if (expenseFind) {
             setExpensive(expenseFind);
-        }
+        };
     };
 
     const handleChange = (
@@ -95,7 +95,7 @@ const useFormHook = (props: IUseFormHookProps) => {
                 ...expensive, 
                 [event.target.name]: Number(event.target.value)
             });
-        }
+        };
         return setExpensive({ ...expensive, [event.target.name]: event.target.value });
     };
 
@@ -103,11 +103,11 @@ const useFormHook = (props: IUseFormHookProps) => {
         if (props.type === 'new' && !props.id){
             dispatch(addExpensive(expensive));
             return navigate('/wallet');
-        } 
+        } ;
         if (props.type === 'edit' && props.id) {
             dispatch(updateExpensive({id: props.id, newValue: expensive}));
             return navigate('/wallet');
-        }
+        };
         return null;
     };
 

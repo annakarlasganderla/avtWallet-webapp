@@ -1,8 +1,8 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction } from '@reduxjs/toolkit';
 import {
   expensiveTags,
   paymentMethods,
-} from "../pages/expenses/form/expensives.types";
+} from '../pages/expenses/form/expensives.types';
 
 export interface IExpensive {
   id: number;
@@ -15,7 +15,7 @@ export interface IExpensive {
 }
 
 export type ExpensiveState = {
-  expensives: IExpensive[]
+  expensives: IExpensive[];
 }
 
 export type ExpensiveAction = {
@@ -31,7 +31,7 @@ export interface ILogin {
 }
 
 export type LoginState = {
-  logged: ILogin
+  logged: ILogin;
 }
 
 export type LoginAction = PayloadAction<ILogin>
@@ -43,3 +43,13 @@ export type LoginGetInfosAction = {
 }
 
 export type DispatchTypeLoginGetInfos = (args: LoginGetInfosAction) => LoginGetInfosAction 
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export type UserState = {
+  users: IUser[];
+}

@@ -1,12 +1,14 @@
-import { sessionsSlice } from "./session/reducer";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { expensivesSlice } from "./expensives/reducer";
+import { sessionsSlice } from './session/reducer';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { expensivesSlice } from './expensives/reducer';
+import { usersSlice } from './users/reducer';
 
 export const store = configureStore({
   reducer: {
     session: sessionsSlice.reducer,
-    expensives: expensivesSlice.reducer
+    expensives: expensivesSlice.reducer,
+    users: usersSlice.reducer
   },
 });
 

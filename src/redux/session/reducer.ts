@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { LoginAction, LoginState } from "../redux.types";
+import { createSlice } from '@reduxjs/toolkit';
+import { LoginAction, LoginState } from '../redux.types';
 
 const initialState: LoginState = {
   logged: {
-    userName: "",
-    password: "",
+    userName: '',
+    password: '',
   },
 };
 
 export const sessionsSlice = createSlice({
-  name: "sessionsSlice",
+  name: 'sessionsSlice',
   initialState,
   reducers: {
     login: (state: LoginState, action: LoginAction) => {

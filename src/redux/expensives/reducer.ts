@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { ExpensiveState,  } from "../redux.types";
+import { createSlice } from '@reduxjs/toolkit';
+import { ExpensiveState } from '../redux.types';
 
 const initialState: ExpensiveState = {
   expensives: [],

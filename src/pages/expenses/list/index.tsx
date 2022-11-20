@@ -28,6 +28,7 @@ export const Expense = () => {
                         <h1>{amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h1>
                     </div>
                 </div>
+                
                 <div className={styles.list}>
                     {expensivesState.expensives.map((item, index) => (
                         <div className={styles.item} key={index}>
@@ -35,7 +36,12 @@ export const Expense = () => {
 
                             <div>
                                 <div>
-                                    <h3>{item.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
+                                    <h3>
+                                        {   
+                                            item.value.toLocaleString('pt-BR', 
+                                            { style: 'currency', currency: item.coin })
+                                        }
+                                    </h3>
                                 </div>
 
                                 <button 
@@ -58,9 +64,7 @@ export const Expense = () => {
                                 >
                                     <AiOutlineRight/>
                                 </button>
-
                             </div>
-
                         </div>
                     ))}
                 </div>

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { removeExpensive } from '../../../../redux/expensives/reducer';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 
-
 export const useListHook = () => {
 
     const dispatch = useAppDispatch();
@@ -15,7 +14,6 @@ export const useListHook = () => {
     }, [expensivesState]);
 
     const getAmount = async () => {
-        getBid();
         if (expensivesState.expensives.length === 0) {
             return setAmount(0);
         }
@@ -29,11 +27,6 @@ export const useListHook = () => {
         }).catch((error: any) => {
             console.log(error);
         });
-       
-    };
-
-    const getBid = async () => {
-        
     };
 
     const deleteExpensive = (id: number) => {

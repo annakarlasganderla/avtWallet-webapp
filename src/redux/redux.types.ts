@@ -11,7 +11,7 @@ export interface IExpensive {
   tag: expensiveTags | null;
   methodPayment: paymentMethods | null;
   description?: string;
-  coin?: string;
+  coin: string;
 }
 
 export type ExpensiveState = {

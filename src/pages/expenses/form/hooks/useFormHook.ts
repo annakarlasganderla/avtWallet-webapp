@@ -69,7 +69,7 @@ const useFormHook = (props: IUseFormHookProps) => {
         tag: null,
         methodPayment: null,
         description: '',
-        coin: ''
+        coin: 'BRL'
     });
 
     useEffect(() => {
@@ -84,8 +84,6 @@ const useFormHook = (props: IUseFormHookProps) => {
             setExpensive(expenseFind);
         };
     };
-
-    console.log(expensive)
 
     const handleChange = (
         event: React.ChangeEvent<

@@ -38,8 +38,10 @@ export const Expense = () => {
                                 <div>
                                     <h3>
                                         {   
-                                            item.value.toLocaleString('pt-BR', 
-                                            { style: 'currency', currency: item.coin })
+                                            `${item.coin === 'BRL' ? 
+                                                item.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) 
+                                                : item.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) } 
+                                            `
                                         }
                                     </h3>
                                 </div>

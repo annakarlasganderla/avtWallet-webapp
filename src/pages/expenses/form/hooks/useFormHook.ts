@@ -85,6 +85,8 @@ const useFormHook = (props: IUseFormHookProps) => {
         };
     };
 
+    console.log(expensive)
+
     const handleChange = (
         event: React.ChangeEvent<
             HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement

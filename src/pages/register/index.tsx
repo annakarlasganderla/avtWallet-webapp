@@ -35,6 +35,7 @@ export const Register = () => {
                             labeltext={'Name'}
                             value={user.name}
                             onChange={(e) => handleChange(e)}
+                            datatestid={'name-input'}
                         />
                         <TextField
                             type={'text'}
@@ -42,6 +43,7 @@ export const Register = () => {
                             labeltext={'Email'}
                             value={user.email}
                             onChange={(e) => handleChange(e)}
+                            datatestid={'email-input'}
                         />
                         <TextField
                             type={'password'}

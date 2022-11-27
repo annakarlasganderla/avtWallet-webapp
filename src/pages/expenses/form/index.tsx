@@ -30,6 +30,7 @@ const ExpensesForm = () => {
             <div className={styles.form}>
                 <div className={styles.inputRow}>
                     <TextField
+                        datatestid={'name-input'}
                         disabled={disabled}
                         type={'text'}
                         name={'name'}

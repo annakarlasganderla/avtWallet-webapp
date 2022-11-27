@@ -11,6 +11,7 @@ const TextField = (props: ITextFieldProps) => {
                 {props.labeltext}
             </label>
             <input 
+                data-testid={props.datatestid}
                 type={props.type} 
                 name={props.name}  
                 id={props.id}

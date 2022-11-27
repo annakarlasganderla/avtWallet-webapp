@@ -26,6 +26,7 @@ export interface ITextFieldProps {
     placeholder?: string;
     disabled?: boolean;
     errorMessage?: string;
+    datatestid?: string;
     onChange?: (event: any) => void;
 };
 

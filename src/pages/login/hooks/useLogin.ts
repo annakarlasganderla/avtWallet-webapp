@@ -40,6 +40,7 @@ const useLogin = () => {
         } else {
             dispatch({type: 'validPassword'});
         };
+        return true;
     };
 
     const isEmail = (value: string) => {
@@ -51,21 +52,20 @@ const useLogin = () => {
     };
 
     const handleLogin = () => {
-        validateForm();   
-        if (!form.error) {
-            if (stateUsers.users.find(user => user.email === credentials.email && user.password === credentials.password)) {  
-                dispatch({type: 'success'});
-                if (form.isValid && !form.error) {
+        if (validateForm() == true) {
+            if (!form.error) {
+                if (stateUsers.users.find(user => user.email === credentials.email && user.password === credentials.password)) {  
+                    dispatch({type: 'success'});
                     dispatchRedux(login(credentials));
                     navigate('/wallet');
+                } else {
+                    dispatch({type: 'errorCredentials', payload: 'Login or password are incorrect!'});
+                    setTimeout(() => {
+                        dispatch({type: 'errorCredentials', payload: ''});
+                    }, 2000);
                 }
-            } else {
-                dispatch({type: 'errorCredentials', payload: 'Login or password are incorrect!'});
-                setTimeout(() => {
-                    dispatch({type: 'errorCredentials', payload: ''});
-                }, 2000);
-            }
-        };
+            };
+        }
     };
 
     return { handleChange, handleLogin, credentials, navigate, form };

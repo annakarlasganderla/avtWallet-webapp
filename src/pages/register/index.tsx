@@ -17,7 +17,7 @@ export const Register = () => {
     } = useRegister();
 
     return (
-        <div>
+        <div data-testid='register'>
             <Header />
             <div className={styles.container}>
                 <div className={styles.input_area}>

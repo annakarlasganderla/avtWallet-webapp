@@ -102,13 +102,11 @@ const useFormHook = (props: IUseFormHookProps) => {
     const handleSubmit = () => {
         if (props.type === 'new' && !props.id){
             dispatch(addExpensive(expensive));
-            return navigate('/wallet');
-        } ;
+        };
         if (props.type === 'edit' && props.id) {
             dispatch(updateExpensive({id: props.id, newValue: expensive}));
-            return navigate('/wallet');
         };
-        return null;
+        return navigate('/wallet');
     };
 
     return { handleChange, disabled, handleSubmit, expensive, tags, paymethod, coin, navigate };

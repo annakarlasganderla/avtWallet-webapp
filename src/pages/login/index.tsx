@@ -28,6 +28,7 @@ export const Login = () => {
               value={credentials.email}
               errorMessage={form.errorMessage.email}
               onChange={(e) => handleChange(e)}
+              datatestid={'input-email'}
             />
             <TextField
               type={'password'}
@@ -36,6 +37,7 @@ export const Login = () => {
               value={credentials.password}
               errorMessage={form.errorMessage.password}
               onChange={(e) => handleChange(e)}
+              datatestid={'input-password'}
             />
 
             <Button

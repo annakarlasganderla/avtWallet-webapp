@@ -6,10 +6,10 @@ import { useAppSelector } from '../../../redux/store';
 import { BsTrash } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
 import { useListHook } from './hooks/useListHook';
-import Header from '../../../components/Header';
+import { BsCurrencyEuro } from 'react-icons/bs';
+import {CiLogin} from 'react-icons/ci'
 
 export const Expense = () => {
-    const sessionState = useAppSelector((state) => state.session);
     
     const navigate = useNavigate();
 
@@ -18,7 +18,14 @@ export const Expense = () => {
     return (
         <>
             <header className={styles.header}>
-                <h2>Hello, @fulano</h2>
+                <div className={styles.subheader}>
+                    <BsCurrencyEuro className={styles.icon} color='white' size={50} />
+                    <h2>Hello, @fulano</h2>
+                    <div className={styles.logout}>
+                        <p>Logout</p>
+                        <CiLogin className={styles.iconLogout} color='white' size={30} />
+                    </div>
+                </div>
             </header>
 
             <main>

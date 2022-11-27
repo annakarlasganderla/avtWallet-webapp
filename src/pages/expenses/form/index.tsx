@@ -30,13 +30,13 @@ const ExpensesForm = () => {
             <div className={styles.form}>
                 <div className={styles.inputRow}>
                     <TextField
-                        datatestid={'name-input'}
                         disabled={disabled}
                         type={'text'}
                         name={'name'}
                         placeholder={'Name'}
                         value={expensive.name}
                         onChange={(e) => handleChange(e)}
+                        datatestid={'name-input'}
                     />
                     <InputValue
                         disabled={disabled}
@@ -83,17 +83,20 @@ const ExpensesForm = () => {
                         outlined
                         onClick={() => navigate('/wallet')}
                     >
-                        Cancel
+                        {disabled ? 'Back' : 'Cancel'}
                     </Button>
-                    <Button
-                        disabled={disabled}
-                        width={'40%'} height={'35px'}
-                        textsize={'16px'}
-                        type={'submit'}
-                        onClick={() => handleSubmit()}
-                    >
-                        Save
-                    </Button>
+                    {
+                        !disabled ? 
+                        <Button 
+                            width={'40%'} height={'35px'}
+                            textsize={'16px'}
+                            type={'submit'}
+                            onClick={() => handleSubmit()}
+                        >
+                            Save
+                        </Button>
+                        : null
+                    }
                 </div>
             </div>
         </>

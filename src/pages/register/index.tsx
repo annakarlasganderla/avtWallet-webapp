@@ -51,6 +51,7 @@ export const Register = () => {
                             labeltext={'Password'}
                             value={user.password}
                             onChange={(e) => handleChange(e)}
+                            datatestid={'password-input'}
                         />
                         <TextField
                             type={'password'}
@@ -64,6 +65,7 @@ export const Register = () => {
                             type='submit' 
                             onClick={() => handleSubmit()}
                             spacing={20}
+                            datatestid={'register-button'}
                         >
                             Register
                         </Button>

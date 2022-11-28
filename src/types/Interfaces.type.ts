@@ -9,6 +9,7 @@ export interface IButtonProps {
     textsize?: string;
     outlined?: boolean;
     spacing?: number | string;
+    datatestid?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement> ;
 };
 

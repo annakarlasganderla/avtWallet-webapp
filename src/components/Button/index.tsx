@@ -28,6 +28,7 @@ const Button: FC<IButtonProps> = (props) => {
                 type={props.type}
                 disabled={props.disabled}
                 className={styles.button}
+                data-testid={props.datatestid}
             >
                 {props.children}
             </button>

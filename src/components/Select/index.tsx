@@ -11,6 +11,7 @@ const Select = (props: ISelectProps) => {
             onChange={props.onChange}
             className={styles.select}
             defaultValue={props.value || ''}
+            data-testid={props.datatestid}
         >
             {
                 props.optionDefault ? 

@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, ReactNode } from 'react';
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 
 export interface IButtonProps {
     children: ReactNode;
@@ -14,58 +14,61 @@ export interface IButtonProps {
 };
 
 export interface IHeaderProps {
-    text?: string;
-    height?: string; 
-};
+  text?: string;
+  height?: string;
+}
 
 export interface ITextFieldProps {
-    id?: string;
-    type: HTMLInputTypeAttribute;
-    name: string;
-    value?: string;
-    labeltext?: string;
-    placeholder?: string;
-    disabled?: boolean;
-    errorMessage?: string;
-    datatestid?: string;
-    onChange?: (event: any) => void;
-};
+  id?: string;
+  type: HTMLInputTypeAttribute;
+  name: string;
+  value?: string;
+  labeltext?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  errorMessage?: string;
+  datatestid?: string;
+  onChange?: (event: any) => void;
+}
 
 export interface ISelectOption {
-    text: string;
-    data: any;
-};
+  text: string;
+  data: any;
+}
 
 export interface ISelectProps {
-    options: ISelectOption[] | [];
-    name?: string;
-    value?: any;
-    disabled?: boolean;
-    multiple?: boolean;
-    required?: boolean;
-    optionDefault?: string;
-    onChange?: (event: any) => void;
-};
+  options: ISelectOption[] | [];
+  name?: string;
+  value?: any;
+  disabled?: boolean;
+  multiple?: boolean;
+  required?: boolean;
+  optionDefault?: string;
+  onChange?: (event: any) => void;
+  datatestid?: string;
+}
 
 export interface IInputValueProps {
-    options: ISelectOption[] | [];
-    nameSelect?: string;
-    nameInput?: string;
-    valueSelect?: any;
-    valueInput?: number;
-    placeholder?: string;
-    disabled?: boolean;
-    onChange?: (event: any) => void;
-};
+  options: ISelectOption[] | [];
+  nameSelect?: string;
+  nameInput?: string;
+  valueSelect?: any;
+  valueInput?: number;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange?: (event: any) => void;
+  datatestid0?: string;
+  datatestid1?: string;
+}
 
 export interface IValidLogin {
-    isValid: boolean;
-    error: boolean;
-    errorMessage: IErrorMessageLogin;
-};
+  isValid: boolean;
+  error: boolean;
+  errorMessage: IErrorMessageLogin;
+}
 
 export interface IErrorMessageLogin {
-    email: string;
-    password: string;
-    credentials: string;
+  email: string;
+  password: string;
+  credentials: string;
 }

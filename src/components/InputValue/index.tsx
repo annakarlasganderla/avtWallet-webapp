@@ -11,6 +11,7 @@ const InputValue = (props: IInputValueProps) => {
                 className={styles.select}
                 value={props.valueSelect}
                 defaultValue={props.valueSelect}
+                data-testid={props.datatestid0}
             >   
                 {props.options.map((item: any, index) => (
                     <option key={index} value={item.data}>{item.text}</option>
@@ -26,6 +27,7 @@ const InputValue = (props: IInputValueProps) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 className={styles.input}
+                data-testid={props.datatestid1}
             />  
         </div>
     );

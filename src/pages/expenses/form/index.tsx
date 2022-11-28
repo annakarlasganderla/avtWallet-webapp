@@ -42,11 +42,13 @@ const ExpensesForm = () => {
                         disabled={disabled}
                         nameSelect={'coin'}
                         nameInput={'value'}
-                        placeholder={'Value'} 
+                        placeholder={'Value'}
                         options={coin} 
                         valueSelect={expensive.coin}
                         valueInput={expensive.value}
                         onChange={(e) => handleChange(e)}
+                        datatestid0={'coin-input'}
+                        datatestid1={'value-input'}
                     />
                 </div>
                 <div className={styles.inputRow}>
@@ -57,6 +59,7 @@ const ExpensesForm = () => {
                         options={tags}
                         value={expensive.tag}
                         onChange={(e) => handleChange(e)}
+                        datatestid={'tag-input'}
                     />
                     <Select
                         disabled={disabled}
@@ -65,6 +68,7 @@ const ExpensesForm = () => {
                         options={paymethod}
                         value={expensive.methodPayment}
                         onChange={(e) => handleChange(e)}
+                        datatestid={'methodPayment-input'}
                     />
                 </div>
                 <textarea
@@ -74,6 +78,7 @@ const ExpensesForm = () => {
                     placeholder='Description'
                     value={expensive.description}
                     onChange={(e) => handleChange(e)}
+                    data-testid={'description-input'}
                 />
                 <div className={styles.row}>
                     <Button
@@ -92,6 +97,7 @@ const ExpensesForm = () => {
                             textsize={'16px'}
                             type={'submit'}
                             onClick={() => handleSubmit()}
+                            datatestid={"submit-expensive"}
                         >
                             Save
                         </Button>

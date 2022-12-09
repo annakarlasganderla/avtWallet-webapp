@@ -20,8 +20,8 @@ export interface IHeaderProps {
 
 export interface ITextFieldProps {
   id?: string;
-  type: HTMLInputTypeAttribute;
-  name: string;
+  type?: 'number'| 'text' | undefined;
+  name?: string;
   value?: string;
   labeltext?: string;
   placeholder?: string;

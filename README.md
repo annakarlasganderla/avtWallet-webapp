@@ -7,7 +7,7 @@ Histórico de Revisão de Documento
 |06/12/2022|1.0|Documentação inicial|
 
 Este projeto tem por objetivo ajudar as pessoas das mais diversas idades e classes sociais, a organizar melhor seus gastos para terem uma vida financeira cada vez melhor.
-`	`Por sua vez este documento se trata da descrição arquitetural do projeto, bem como suas principais funcionalidades e comportamentos esperados.
+Por sua vez este documento se trata da descrição arquitetural do projeto, bem como suas principais funcionalidades e comportamentos esperados.
 
 |Mecanismo de Análise|Mecanismo de Design|Mecanismo de Implementação|
 | - | :-: | :-: |

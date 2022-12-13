@@ -16,4 +16,4 @@ Por sua vez este documento se trata da descrição arquitetural do projeto, bem 
 |Testes|Conjunto de ferramentas de teste|Jest, React-testing-library e Vitest|
 |Build|Ambiente Local em formato de Imagem/Container|Docker|
 
-<img src="blob:https://web.whatsapp.com/f882dcab-d717-491b-a95c-dc6b6ac57fbb" width="250" height="250">
+<img src="[]blob:https://web.whatsapp.com/f882dcab-d717-491b-a95c-dc6b6ac57fbb" width="250" height="250">

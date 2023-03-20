@@ -1,7 +1,6 @@
 import styles from './expenseList.module.scss';
 import Button from '../../../components/Button';
 import { AiOutlineRight } from 'react-icons/ai';
-import { ExpensiveState, IExpensive, ILogin, LoginState } from '../../../redux/redux.types';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import accountIcon from '../../../assets/account.svg';
@@ -12,13 +11,8 @@ import {CiLogin} from 'react-icons/ci'
 export const Expense = () => {
 
     const navigate = useNavigate();
-    const storedExpensives: IExpensive[] = useSelector((state: ExpensiveState) => state.expensives, shallowEqual);
-    const expenses: IExpensive[] = storedExpensives !== undefined ? storedExpensives : []
 
-    const loggedUser: ILogin = useSelector((state: LoginState) => state.logged, shallowEqual)
-
-    console.log(loggedUser);
-    console.log(storedExpensives);
+    const expenses = [{ id: 1, name: 'Anna', value: 100 }]
 
     return (
         <>

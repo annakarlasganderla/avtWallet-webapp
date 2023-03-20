@@ -10,13 +10,9 @@ import { useState } from "react";
 import { auth } from "../../services/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { ILogin, LoginState } from "../../redux/redux.types";
 import { Dispatch } from "redux";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/store/actionCreators";
 
 export const Login = () => {
-  const dispatch: Dispatch<any> = useDispatch();
 
   const navigate = useNavigate();
 
@@ -26,19 +22,6 @@ export const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
-  const saveLoginData = React.useCallback(
-    (loginInfos: ILogin) => dispatch(login(loginInfos)),
-    [dispatch]
-  );
-
-  function handleSignIn() {
-    signInWithEmailAndPassword(email, password)
-      .then(() => {
-        saveLoginData({ userName: email, password: password }),
-          navigate("/wallet");
-      })
-      .catch((error: any) => console.log(error));
-  }
 
   return (
     <div>
@@ -66,7 +49,7 @@ export const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button type="submit" onClick={handleSignIn} spacing={20}>
+            <Button type="submit" spacing={20}>
               Login
             </Button>
           </div>

@@ -1,5 +1,5 @@
-import { ISelectProps } from '../../types/Interfaces.type';
 import styles from './select.module.scss';
+import { ISelectProps } from './select.types';
 
 const Select = (props: ISelectProps) => {
     return (

@@ -2,15 +2,8 @@ import Button from "../../components/Button";
 import TextField from "../../components/TextField";
 import Header from "../../components/Header";
 import styles from "./login.module.scss";
-import {
-  useCreateUserWithEmailAndPassword,
-  useSignInWithEmailAndPassword,
-} from "react-firebase-hooks/auth";
 import { useState } from "react";
-import { auth } from "../../services/firebaseConfig";
 import { useNavigate } from "react-router-dom";
-import React from "react";
-import { Dispatch } from "redux";
 
 export const Login = () => {
 
@@ -18,10 +11,6 @@ export const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-
 
   return (
     <div>

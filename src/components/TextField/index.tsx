@@ -1,5 +1,5 @@
-import { ITextFieldProps } from '../../types/Interfaces.type';
 import styles from './textfield.module.scss';
+import { ITextFieldProps } from './textfield.types';
 
 const TextField = (props: ITextFieldProps) => {
     return (

@@ -1,6 +1,6 @@
 import { BsCurrencyEuro } from 'react-icons/bs';
-import { IHeaderProps } from '../../types/Interfaces.type';
 import styles from './header.module.scss';
+import { IHeaderProps } from './header.types';
 
 const Header = (props: IHeaderProps) => {
     return (

@@ -1,5 +1,5 @@
-import { IInputValueProps } from '../../types/Interfaces.type';
 import styles from './inputvalue.module.scss';
+import { IInputValueProps } from './inputValue.types';
 
 const InputValue = (props: IInputValueProps) => {
     return (

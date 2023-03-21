@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { IButtonProps } from '../../types/Interfaces.type';
 import styles from './button.module.scss';
+import { IButtonProps } from './button.types';
 
 const Button: FC<IButtonProps> = (props) => {
 

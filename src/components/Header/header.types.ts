@@ -1,4 +1,4 @@
 export interface IHeaderProps {
-    text?: string;
-    height?: string; 
-};
+	text?: string;
+	height?: string;
+}

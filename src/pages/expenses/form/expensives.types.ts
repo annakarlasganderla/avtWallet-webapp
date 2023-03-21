@@ -1,18 +1,18 @@
 export enum expensiveTags {
-    alimentacao,
-    lazer,
-    trabalho,
-    transporte,
-    saude
+	alimentacao,
+	lazer,
+	trabalho,
+	transporte,
+	saude,
 }
 
 export enum paymentMethods {
-    dinheiro,
-    credito,
-    debito
+	dinheiro,
+	credito,
+	debito,
 }
 
 export interface IUseFormHookProps {
-    type?: string;
-    id?: string;
+	type?: string;
+	id?: string;
 }

@@ -1,32 +1,32 @@
 .button_area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .button {
-    font-weight: bold;
-    font-size: 20px;
-    width: 100%;
-    padding: 10px 0;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .2s all ease;
+	font-weight: bold;
+	font-size: 20px;
+	width: 100%;
+	padding: 10px 0;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: 0.2s all ease;
 }
 
 .button:hover {
-    opacity: .8;
+	opacity: 0.8;
 }
 
-@media(min-width:767px)  {
-    .button_area {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+@media (min-width: 767px) {
+	.button_area {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-    .button {
-        padding: 10px 20px;
-        width: 50%;
-    }
+	.button {
+		padding: 10px 20px;
+		width: 50%;
+	}
 }

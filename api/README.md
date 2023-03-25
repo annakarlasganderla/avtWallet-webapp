@@ -33,6 +33,25 @@ $ make install
 $ npm start
 ```
 
+## PgAdmin4
+
+Para se conectar ao banco via PgAdmin4
+
+```bash
+* Acessar o pg admin na porta -> http://localhost:5050
+* Botão direito em "Servers" -> "Register" -> "Server..."
+```
+No pop-up que abrir:
+
+```bash
+* Aba General: 
+ - "Name" -> não importa
+* Aba Connection: 
+ - "Host name/addres" -> 172.17.0.1 (É o ip do gateway entre o container do docker e o pc host)
+ - Username -> "admin"
+ - Password -> "postgres"
+```
+
 ## License
 
 Nest is [MIT licensed](LICENSE).

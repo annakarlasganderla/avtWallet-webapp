@@ -5,8 +5,11 @@ export interface ITextFieldProps {
 	type: HTMLInputTypeAttribute;
 	name: string;
 	value?: string;
-	labeltext?: string;
+	label?: string;
 	placeholder?: string;
 	disabled?: boolean;
+	error?: string;
+	width?: number;
+	height?: number;
 	onChange?: (event: any) => void;
 }

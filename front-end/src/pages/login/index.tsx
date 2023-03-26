@@ -26,13 +26,13 @@ export const Login = () => {
 						<TextField
 							type={"text"}
 							name={"email"}
-							labeltext={"Email"}
+							label={"Email"}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<TextField
-							type={"text"}
+							type={"password"}
 							name={"password"}
-							labeltext={"Password"}
+							label={"Password"}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 :root {
-  font-family: 'Quicksand', sans-serif;
+	font-family: "Quicksand", sans-serif;
 }

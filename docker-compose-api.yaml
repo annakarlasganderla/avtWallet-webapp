@@ -1,17 +1,13 @@
 version: '3.3'
 
 services:
-  app:
-    container_name: app
-    image: ua/tijolinho:1.0
-    # build:
-    #   context: .
-    #   target: development
+  api:
+    container_name: api
+    image: api_avtwallet:latest
     volumes:
-      - /home/thp/workspace/avtWallet-webapp/api:/workspace # - /usr/src/app/node_modules
+      - /home/thp/workspace/avtWallet-webapp/api:/workspace
     ports:
       - 7070:3000
-    #command: npm run start:dev
     depends_on:
       - postgres
 
@@ -30,13 +26,7 @@ services:
       - ./db:/docker-entrypoint-initdb.d/
 
     ports:
-      # local : inside_container
       - 5432:5432
-      # expose:
-      # - 5432
-
-      # networks:
-      #   - avt_wallet_api
 
     restart: always
 
@@ -56,9 +46,6 @@ services:
 
     ports:
       - 5050:80
-
-    networks:
-      - avt_wallet_api
 
     restart: unless-stopped
 

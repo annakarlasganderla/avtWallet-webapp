@@ -52,6 +52,27 @@ No pop-up que abrir:
  - Password -> "postgres"
 ```
 
+## Docker
+
+Para buildar o back end do projeto
+
+Abra um terminal na pasta "api" e digite o comando:
+
+```bash
+* docker build --tag "api_avtwallet" .
+```
+
+Obs: importante validar se no arquivo docker-compose.yaml, no volume da api, o atributo "image:"</br> 
+está com o valor correto. O valor correto vai ser o valor digitado depois de "--tag". Segundo o</br> 
+exemplo: "api_avtWallet:latest". Passar a versão como "lastest" é necessário, poís não foi</br> 
+especificado uma versão na hora do build
+
+Depois de ter buildado a imagem o que resta é rodar o projeto:
+
+```bash
+* docker-compose up -d
+```
+
 ## License
 
 Nest is [MIT licensed](LICENSE).

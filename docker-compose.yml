@@ -1,6 +1,14 @@
 version: '3.3'
 
 services:
+  app:
+      container_name: avt
+      image: front_end:latest
+      volumes:
+        - /home/thp/workspace/avtWallet-webapp/app:/workspace
+      ports:
+          - '3001:3000'
+  
   api:
     container_name: api
     image: api_avtwallet:latest
@@ -30,7 +38,6 @@ services:
 
     restart: always
 
-  # To manage the data base
   pgadmin:
     container_name: avt_wallet_postgres_admin
 

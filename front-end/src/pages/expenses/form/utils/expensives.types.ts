@@ -1,4 +1,4 @@
-export enum expensiveTags {
+export enum expensesTags {
 	alimentacao,
 	lazer,
 	trabalho,
@@ -12,7 +12,8 @@ export enum paymentMethods {
 	debito,
 }
 
-export interface IUseFormHookProps {
-	type?: string;
-	id?: string;
+type FormType = "NEW" | "VIEW" | "EDIT";
+
+export interface IExpensesForm {
+	type: FormType;
 }

@@ -22,20 +22,20 @@ export const Register = () => {
 					</div>
 
 					<div className={styles.inputs}>
-						<TextField type={"text"} name={"name"} labeltext={"Name"} />
+						<TextField type={"text"} name={"name"} label={"Name"} />
 						<TextField
 							type={"text"}
 							name={"email"}
-							labeltext={"Email"}
+							label={"Email"}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<TextField
 							type={"text"}
 							name={"password"}
-							labeltext={"Password"}
+							label={"Password"}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<TextField type={"text"} name={"confirmPassword"} labeltext={"Confirm Password"} />
+						<TextField type={"text"} name={"confirmPassword"} label={"Confirm Password"} />
 
 						<Button type="submit" onClick={() => {}} spacing={20}>
 							Register

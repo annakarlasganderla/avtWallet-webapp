@@ -5,62 +5,10 @@ import Header from "../../../components/Header";
 import InputValue from "../../../components/InputValue";
 import Select from "../../../components/Select";
 import TextField from "../../../components/TextField";
-import { expensiveTags, paymentMethods } from "./expensives.types";
+import { expensesTags, IExpensesForm, paymentMethods } from "./utils/expensives.types";
 import styles from "./form.module.scss";
 
-const ExpensesForm = () => {
-	const { type, id } = useParams();
-	const navigate = useNavigate();
-
-	const tag = [
-		{
-			text: "Alimentação",
-			data: expensiveTags.alimentacao,
-		},
-		{
-			text: "Lazer",
-			data: expensiveTags.lazer,
-		},
-		{
-			text: "Trabalho",
-			data: expensiveTags.trabalho,
-		},
-		{
-			text: "Transporte",
-			data: expensiveTags.transporte,
-		},
-		{
-			text: "Saúde",
-			data: expensiveTags.saude,
-		},
-	];
-
-	const paymethod = [
-		{
-			text: "Dinheiro",
-			data: paymentMethods.dinheiro,
-		},
-		{
-			text: "Cartão de Crédito",
-			data: paymentMethods.credito,
-		},
-		{
-			text: "Cartão de Débito",
-			data: paymentMethods.debito,
-		},
-	];
-
-	const coin = [
-		{
-			text: "R$",
-			data: "R$",
-		},
-		{
-			text: "US$",
-			data: "US$",
-		},
-	];
-
+const ExpensesForm = (props: IExpensesForm) => {
 	return (
 		<>
 			<Header text={"New expense"} />
@@ -68,11 +16,11 @@ const ExpensesForm = () => {
 			<div className={styles.form}>
 				<div className={styles.inputRow}>
 					<TextField type={"text"} name={"name"} placeholder={"Name"} />
-					<InputValue nameInput={"value"} placeholder={"Value"} options={coin} />
+					<InputValue nameInput={"value"} placeholder={"Value"} options={[]} />
 				</div>
 				<div className={styles.inputRow}>
-					<Select name={"tag"} optionDefault={"Tag"} options={tag} />
-					<Select name={"methodPayment"} optionDefault={"Pay Method"} options={paymethod} />
+					<Select name={"tag"} optionDefault={"Tag"} options={[]} />
+					<Select name={"methodPayment"} optionDefault={"Pay Method"} options={[]} />
 				</div>
 				<textarea className={styles.textarea} name={"description"} placeholder="Description" />
 				<div className={styles.row}>

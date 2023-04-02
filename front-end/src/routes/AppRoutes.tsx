@@ -8,14 +8,14 @@ export function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Login />}></Route>
+				<Route path="/" element={<Login />} />
 				<Route path="/wallet/form" element={<ExpensesForm type={"NEW"} />}>
 					<Route path=":type">
 						<Route path=":id" />
 					</Route>
 				</Route>
 				<Route path="/wallet" element={<Expense />} />
-				<Route path="/register" element={<Register />}></Route>
+				<Route path="/register" element={<Register />} />
 			</Routes>
 		</BrowserRouter>
 	);

@@ -1,11 +1,9 @@
-import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
 import InputValue from "../../../components/InputValue";
 import Select from "../../../components/Select";
 import TextField from "../../../components/TextField";
-import { expensesTags, IExpensesForm, paymentMethods } from "./utils/expensives.types";
+import { IExpensesForm } from "./utils/expensives.types";
 import styles from "./form.module.scss";
 
 const ExpensesForm = (props: IExpensesForm) => {
@@ -33,7 +31,7 @@ const ExpensesForm = (props: IExpensesForm) => {
 						height={"35px"}
 						textsize={"16px"}
 						type={"submit"}
-						onClick={() => {}}
+						onClick={() => { }}
 					>
 						Save
 					</Button>

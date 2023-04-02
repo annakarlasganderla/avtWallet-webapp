@@ -1,5 +1,8 @@
 module.exports = {
   content: ["./src/**/*.tsx"],
+	mode: 'jit',
+  purge: ['./index.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
+  darkMode: false,
   theme: {
     extend: {
       colors: {
@@ -15,6 +18,5 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('tailwind-scrollbar'),
   ],
 }

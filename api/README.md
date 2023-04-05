@@ -16,7 +16,7 @@ Avt Wallet API with [Nest](https://github.com/nestjs/nest) framework repository.
 ```bash
 # normal
 $ npm install
-$ docker volume create --name=avt_wallet_api
+$ docker volume create --name=api_avtwallet
 $ docker-compose up -d
 ```
 
@@ -41,12 +41,13 @@ Para se conectar ao banco via PgAdmin4
 * Acessar o pg admin na porta -> http://localhost:5050
 * Botão direito em "Servers" -> "Register" -> "Server..."
 ```
+
 No pop-up que abrir:
 
 ```bash
-* Aba General: 
+* Aba General:
  - "Name" -> não importa
-* Aba Connection: 
+* Aba Connection:
  - "Host name/addres" -> 172.17.0.1 (É o ip do gateway entre o container do docker e o pc host)
  - Username -> "admin"
  - Password -> "postgres"
@@ -62,7 +63,7 @@ Abra um terminal na pasta "api" e digite o comando:
 * docker build --tag "api_avtwallet" .
 ```
 
-Depois 
+Depois
 
 Abra um terminal na pasta "front-end" e digite o comando:
 
@@ -70,9 +71,9 @@ Abra um terminal na pasta "front-end" e digite o comando:
 * docker build --tag "app_avtwallet" .
 ```
 
-Obs: importante validar se no arquivo docker-compose.yaml, no volume da api e do app, os atributos "image:"</br> 
-estão com os valores corretos. Os valores corretos serão iguais os valores digitados de "--tag" nos comandos de </br> 
-builds alteriores. Segundo o exemplo: "api_avtWallet:latest". Passar a versão como "lastest" é necessário, poís como não foi</br> 
+Obs: importante validar se no arquivo docker-compose.yaml, no volume da api e do app, os atributos "image:"</br>
+estão com os valores corretos. Os valores corretos serão iguais os valores digitados de "--tag" nos comandos de </br>
+builds alteriores. Segundo o exemplo: "api_avtWallet:latest". Passar a versão como "lastest" é necessário, poís como não foi</br>
 especificado uma versão na hora do build o default é pegar a versão "latest"
 
 Depois de ter buildado a imagem o que resta é rodar o projeto. Para isso navegue para a pasta raiz do projeto </br>

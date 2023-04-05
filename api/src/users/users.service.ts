@@ -13,20 +13,27 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     const user = this.usersRepository.create(createUserDto);
     return this.usersRepository.save(user);
   }
 
-  findAll() {
+  async findAll(): Promise<User[]> {
     return this.usersRepository.find()
   }
 
-  findOne(id: string): Promise<User | null> {
+  async findOne(id: string): Promise<User | null> {
     return this.usersRepository.findOneBy({id});
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     return this.usersRepository.update(id, updateUserDto);
+  }
+
+  async softDelete(id: string) {
+    this.usersRepository.findOneBy({id}).then(user => {
+      user.deletedAt = new Date();
+      return this.usersRepository.save(user);
+    });
   }
 }

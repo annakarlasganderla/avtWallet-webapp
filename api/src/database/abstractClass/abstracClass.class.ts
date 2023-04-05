@@ -1,20 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, BeforeInsert } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export abstract class AbstractClass {
   
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @CreateDateColumn()
     createdAt: Date;
 
-    @Column()
+    @Column({nullable: true})
     updatedAt: Date;
 
-    @Column()
+    @Column({nullable: true})
     deletedAt: Date;
+
+    @BeforeInsert()
+    addUuid() {
+        this.id = uuidv4();
+    }
 
 }

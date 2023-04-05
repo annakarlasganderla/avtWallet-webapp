@@ -3,16 +3,15 @@ import { Entity, Column } from 'typeorm';
 
 @Entity()
 export class User extends AbstractClass {
-    
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password: string;
 
-    @Column()
-    login: string;
+  @Column()
+  login: string;
 }

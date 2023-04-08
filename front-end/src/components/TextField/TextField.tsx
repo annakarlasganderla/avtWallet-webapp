@@ -13,15 +13,19 @@ const TextField = (props: ITextFieldProps) => {
 					placeholder={props.placeholder}
 					disabled={props.disabled}
 					onChange={props.onChange}
-					className={`w-full block text-sm border-2 rounded-lg
+					className={
+						props.classname
+							? props.classname
+							: `w-full block text-sm border-2 rounded-lg
 							disabled:bg-gray-300 disabled:border-gray-400
 							focus:outline-none focus:ring-0.2 focus: ring-offset-0.5
 						${
 							props.error
 								? "border-red-500 focus:border-red-500 focus:ring-red-500"
 								: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
-						}`}
-					style={{ height: props.height }}
+						}`
+					}
+					style={props.style ? props.style : { height: props.height }}
 				/>
 			) : (
 				<input
@@ -31,15 +35,19 @@ const TextField = (props: ITextFieldProps) => {
 					placeholder={props.placeholder}
 					disabled={props.disabled}
 					onChange={props.onChange}
-					className={`w-full h-100 block text-sm border-2 rounded-lg
-							disabled:bg-gray-300 disabled:border-gray-400
+					className={
+						props.classname
+							? props.classname
+							: `w-full h-100 block text-sm border-2 rounded-lg
+							disabled:bg-gray-300 disabled:border-gray-400 resize-none
 							focus:outline-none focus:ring-0.2 focus: ring-offset-0.5
 							${
 								props.error
 									? "border-red-500 focus:border-red-500 focus:ring-red-500"
 									: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
-							}`}
-					style={{ height: props.height }}
+							}`
+					}
+					style={props.style ? props.style : { height: props.height }}
 				/>
 			)}
 			{props.error && (

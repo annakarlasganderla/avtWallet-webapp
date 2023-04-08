@@ -11,5 +11,7 @@ export interface ITextFieldProps {
 	error?: string;
 	width?: number;
 	height?: number;
+	classname?: string;
+	style?: React.CSSProperties | undefined;
 	onChange?: (event: any) => void;
 }

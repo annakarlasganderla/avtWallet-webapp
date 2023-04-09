@@ -1,4 +1,9 @@
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,7 +28,7 @@ export class UsersService {
   private handleErrors(message: string) {
     this.logger.log(message);
 
-    throw HttpException;
+    throw new HttpException(message, 500);
   }
 
   async create(createUserDto: CreateUserDto): Promise<CreatedEntity> {
@@ -56,7 +61,19 @@ export class UsersService {
         },
       });
 
-      if (!user) throw HttpException;
+      if (!user) throw new HttpException('user_not_found', 404);
+
+      return user;
+    } catch (e: any) {
+      this.handleErrors(e.message);
+    }
+  }
+
+  async findByLogin(login: string): Promise<User> {
+    try {
+      const user = await this.usersRepository.findOneBy({ login });
+
+      if (!user) throw new HttpException('user_not_found', 404);
 
       return user;
     } catch (e: any) {
@@ -87,7 +104,7 @@ export class UsersService {
         return { message: updateUserDto.name };
       }
 
-      throw HttpException;
+      throw new InternalServerErrorException();
     } catch (e: any) {
       this.handleErrors(e.message);
     }

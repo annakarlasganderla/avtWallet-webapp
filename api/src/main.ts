@@ -2,8 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { Connection } from 'typeorm';
 
 import { config } from 'dotenv';
+import Seeder from './database/seeds/default-user.seeder';
 config();
 
 async function bootstrap() {
@@ -20,6 +22,12 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   app.enableCors();
+
+  //#region Seeder
+  const connection = app.get(Connection);
+  await connection.synchronize();
+  await Seeder.run(connection);
+  //#endregion
 
   logger.log(`Application is running on: http://localhost:${3000}`);
   await app.listen(3000);

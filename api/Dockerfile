@@ -2,14 +2,12 @@ FROM node:18-alpine
 
 WORKDIR /user/src/app
 
+COPY package*.json ./
+
+RUN yarn install
+
 COPY . .
 
-RUN npm ci --omit=dev
+RUN yarn build
 
-RUN npm install -g @nestjs/cli
-
-RUN npm run build
-
-USER node
-
-CMD ["npm", "run", "start:prod"]
+CMD [ "yarn", "start:prod" ]

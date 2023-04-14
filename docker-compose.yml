@@ -1,7 +1,7 @@
 version: '3.3'
 
 networks:
-  avt_wallet_api:
+  avt_wallet:
     driver: bridge
     ipam:
       config:
@@ -16,7 +16,7 @@ services:
     ports:
       - '3000:3000'
     networks:
-      avt_wallet_api:
+      avt_wallet:
         ipv4_address: 172.25.0.2
 
   api:
@@ -29,7 +29,7 @@ services:
     depends_on:
       - postgres
     networks:
-      avt_wallet_api:
+      avt_wallet:
         ipv4_address: 172.25.0.3
         
   postgres:
@@ -46,7 +46,7 @@ services:
     ports:
       - '5432:5432'
     networks:
-      avt_wallet_api:
+      avt_wallet:
         ipv4_address: 172.25.0.4
     restart: always
 
@@ -60,6 +60,6 @@ services:
     ports:
       - '5050:80'
     networks:
-      avt_wallet_api:
+      avt_wallet:
         ipv4_address: 172.25.0.5
     restart: unless-stopped

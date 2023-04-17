@@ -7,7 +7,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import {
   CreatedEntity,
@@ -23,7 +23,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   private handleErrors(message: string) {
     this.logger.log(message);
@@ -57,7 +57,7 @@ export class UsersService {
       const user = await this.usersRepository.findOne({
         where: {
           id,
-          deletedAt: Not(null),
+          deletedAt: IsNull(),
         },
       });
 
@@ -89,7 +89,7 @@ export class UsersService {
       const user = await this.usersRepository.findOne({
         where: {
           id,
-          deletedAt: Not(null),
+          deletedAt: IsNull(),
         },
       });
 

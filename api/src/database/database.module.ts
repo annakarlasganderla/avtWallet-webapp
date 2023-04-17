@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Source } from 'src/sources/entities/source.entity';
+import { Tag } from 'src/tags/entities/tag.entity';
 import { User } from 'src/users/entities/user.entity';
 
 @Module({
@@ -13,7 +14,7 @@ import { User } from 'src/users/entities/user.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'postgres',
-      entities: [User, Source],
+      entities: [User, Source, Tag],
       synchronize: true, // A configuração synchronize: true não deve ser usada na produção - caso contrário, você pode perder dados de produção. (peguei da documentaçãp)
     }),
   ],

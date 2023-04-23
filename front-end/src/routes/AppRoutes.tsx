@@ -9,12 +9,10 @@ export function AppRoutes() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Login />} />
-				<Route path="/wallet/form" element={<ExpensesForm type={"NEW"} />}>
-					<Route path=":type">
-						<Route path=":id" />
-					</Route>
-				</Route>
-				<Route path="/wallet" element={<Expense />} />
+				<Route path="/revenue/form/new" element={<ExpensesForm type={"NEW"} />} />
+				<Route path="/revenue/form/:id" element={<ExpensesForm type={"VIEW"} />} />
+				<Route path="/revenue/form/:id/edit" element={<ExpensesForm type={"EDIT"} />} />
+				<Route path="/revenue" element={<Expense />} />
 				<Route path="/register" element={<Register />} />
 			</Routes>
 		</BrowserRouter>

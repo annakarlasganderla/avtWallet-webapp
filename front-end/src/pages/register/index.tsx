@@ -35,7 +35,11 @@ export const Register = () => {
 							label={"Password"}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<TextField type={"text"} name={"confirmPassword"} label={"Confirm Password"} />
+						<TextField
+							type={"text"}
+							name={"confirmPassword"}
+							label={"Confirm Password"}
+						/>
 
 						<Button type="submit" onClick={() => {}} spacing={20}>
 							Register
@@ -43,7 +47,7 @@ export const Register = () => {
 					</div>
 
 					<div className={styles.links}>
-						<a href="#">Login</a>
+						<a href="/">Login</a>
 					</div>
 				</div>
 			</div>

@@ -12,7 +12,8 @@ module.exports = {
         }
       },
       borderRadius: {
-        md: '4px'
+        md: '4px',
+				area: '50px',
       }
     },
   },

@@ -42,12 +42,10 @@ export const Login = () => {
 						<Button type="submit" spacing={20}>
 							Login
 						</Button>
-						{error !== null && (
-							<span className="text-center text-sm text-red-500">{error}</span>
-						)}
+						{error && <span className="text-center text-sm text-red-500">{error}</span>}
 					</form>
 
-					<div className="flex flex-col justify-center items-center gap-y-4 mt-2 mb-4">
+					<div className="flex flex-col justify-center items-center gap-y-4 mb-4">
 						<h3>OR</h3>
 						<a className="no-underline text-sky-500 font-bold" href="register">
 							Sign-up

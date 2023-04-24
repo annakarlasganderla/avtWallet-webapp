@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "../pages/login";
-import { Expense } from "../pages/expenses/list";
+import RevenueList from "../pages/expenses/list";
 import ExpensesForm from "../pages/expenses/form/";
 import { Register } from "../pages/register";
 
@@ -12,7 +12,7 @@ export function AppRoutes() {
 				<Route path="/revenue/form/new" element={<ExpensesForm type={"NEW"} />} />
 				<Route path="/revenue/form/:id" element={<ExpensesForm type={"VIEW"} />} />
 				<Route path="/revenue/form/:id/edit" element={<ExpensesForm type={"EDIT"} />} />
-				<Route path="/revenue" element={<Expense />} />
+				<Route path="/revenue" element={<RevenueList />} />
 				<Route path="/register" element={<Register />} />
 			</Routes>
 		</BrowserRouter>

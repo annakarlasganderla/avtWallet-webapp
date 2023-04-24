@@ -33,9 +33,9 @@ export class Revenue extends AbstractClass {
 
     @Column()
     @ManyToOne(() => Source)
-    source: string;
+    source: Source;
 
     @Column()
     @ManyToOne(() => Tag)
-    tag: string;
+    tag: Tag;
 }

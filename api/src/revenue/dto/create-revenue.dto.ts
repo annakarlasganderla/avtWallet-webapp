@@ -2,10 +2,10 @@ export class CreateRevenueDto {
     name: string;
     coin: number;
     value: number;
-    payMethod: string;
+    payMethod: payMethod;
     date: Date;
     description: string;
-    typeRevenue: string;
+    typeRevenue: typeRevenue;
     userId: string;
     source: string;
     tag: string;

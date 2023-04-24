@@ -1,5 +1,8 @@
 import { AbstractClass } from "src/database/abstractClass/abstracClass.class";
-import { Column, Entity } from "typeorm";
+import { Source } from "src/sources/entities/source.entity";
+import { Tag } from "src/tags/entities/tag.entity";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, ManyToOne } from "typeorm";
 
 @Entity()
 export class Revenue extends AbstractClass {
@@ -13,7 +16,7 @@ export class Revenue extends AbstractClass {
     value: number;
 
     @Column()
-    payMethod: string;
+    payMethod: payMethod;
 
     @Column()
     date: Date;
@@ -22,14 +25,17 @@ export class Revenue extends AbstractClass {
     description: string;
 
     @Column()
-    typeRevenue: string;
+    typeRevenue: typeRevenue;
 
     @Column()
+    @ManyToOne(() => User, user => user.id)
     userId: string;
 
     @Column()
+    @ManyToOne(() => Source)
     source: string;
 
     @Column()
+    @ManyToOne(() => Tag)
     tag: string;
 }

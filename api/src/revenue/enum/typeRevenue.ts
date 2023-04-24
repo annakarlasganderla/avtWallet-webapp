@@ -1,0 +1,4 @@
+enum typeRevenue {
+    EXPENSE,
+    INCOMING
+}

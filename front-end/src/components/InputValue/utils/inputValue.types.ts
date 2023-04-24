@@ -1,4 +1,4 @@
-import { ISelectOption } from "../../types/Interfaces.type";
+import { ISelectOption } from "../../../types/Interfaces.type";
 
 export interface IInputValueProps {
 	options: ISelectOption[] | [];
@@ -8,5 +8,8 @@ export interface IInputValueProps {
 	valueInput?: number;
 	placeholder?: string;
 	disabled?: boolean;
+	class?: string;
+	style?: React.CSSProperties | undefined;
+	error?: string;
 	onChange?: (event: any) => void;
 }

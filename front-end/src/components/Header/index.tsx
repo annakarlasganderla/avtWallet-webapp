@@ -11,7 +11,8 @@ const Header = (props: IHeaderProps) => {
 			<div className={styles.title_area}>
 				{!props.text && (
 					<p>
-						<strong>Welcome </strong> to<strong> your</strong> best web<strong> wallet</strong>
+						<strong>Welcome </strong> to<strong> your</strong> best web
+						<strong> wallet</strong>
 					</p>
 				)}
 				<strong>{props.text}</strong>

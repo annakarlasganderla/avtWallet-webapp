@@ -11,6 +11,7 @@ config();
 async function bootstrap() {
   const logger = new Logger();
   const app = await NestFactory.create(AppModule);
+  const PORT = process.env.STAGE === 'dev' ? 3030 : process.env.PORT;
 
   const config = new DocumentBuilder()
     .setTitle('Avt Wallet API')
@@ -29,7 +30,7 @@ async function bootstrap() {
   await Seeder.run(connection);
   //#endregion
 
-  logger.log(`Application is running on: http://localhost:${3000}`);
-  await app.listen(3000);
+  logger.log(`Application is running on: http://localhost:${PORT}`);
+  await app.listen(PORT);
 }
 bootstrap();

@@ -1,3 +1,6 @@
+import { payMethod } from "../enum/payMethod";
+import { typeRevenue } from "../enum/typeRevenue";
+
 export class CreateRevenueDto {
     name: string;
     coin: number;

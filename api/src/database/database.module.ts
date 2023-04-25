@@ -9,7 +9,7 @@ import { User } from 'src/users/entities/user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.STAGE === 'dev' ? 'localhost' : '172.25.0.4',
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'postgres',
@@ -19,4 +19,4 @@ import { User } from 'src/users/entities/user.entity';
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }

@@ -5,7 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { Connection } from 'typeorm';
 
 import { config } from 'dotenv';
-import Seeder from './database/seeds/default-user.seeder';
+import Seeder from './database/seeds/default-seeder.seeder';
 config();
 
 async function bootstrap() {

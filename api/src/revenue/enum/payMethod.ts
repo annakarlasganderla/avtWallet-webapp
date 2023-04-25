@@ -1,4 +1,4 @@
-enum payMethod {
+export enum payMethod {
     PIX,
     CREDITCARD,
     DEBITCARD,

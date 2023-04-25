@@ -10,17 +10,20 @@ import {
 import { SourcesService } from './sources.service';
 import { CreateSourceDto } from './dto/create-source.dto';
 import { UpdateSourceDto } from './dto/update-source.dto';
+import { Public } from 'src/auth/decorators/auth.decorators';
 
 @Controller('sources')
 export class SourcesController {
   constructor(private readonly sourcesService: SourcesService) { }
 
   @Post()
+  @Public()
   create(@Body() createSourceDto: CreateSourceDto) {
     return this.sourcesService.create(createSourceDto);
   }
 
   @Get()
+  @Public()
   findAll() {
     return this.sourcesService.findAll();
   }

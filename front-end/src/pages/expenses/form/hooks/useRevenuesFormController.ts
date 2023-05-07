@@ -2,8 +2,10 @@ import { useFormik } from "formik";
 import { revenuesFormSchema } from "../utils/revenuesForm.schemas";
 import { IRevenueSchema, IRevenuesForm } from "../utils/revenuesForm.types";
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useRevenuesFormController = (props: IRevenuesForm) => {
+	const navigate = useNavigate();
 	const coinsOptions = [
 		{ text: "R$", data: "BRL" },
 		{ text: "U$", data: "USD" },
@@ -41,5 +43,5 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 		return "";
 	}, [props.type]);
 
-	return { coinsOptions, revenue, title };
+	return { coinsOptions, revenue, title, navigate };
 };

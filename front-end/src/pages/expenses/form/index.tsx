@@ -7,7 +7,7 @@ import { useRevenuesFormController } from "./hooks/useRevenuesFormController";
 import { IRevenuesForm } from "./utils/revenuesForm.types";
 
 const RevenuesForm = (props: IRevenuesForm) => {
-	const { coinsOptions, revenue, title } = useRevenuesFormController(props);
+	const { coinsOptions, revenue, title, navigate } = useRevenuesFormController(props);
 
 	return (
 		<>
@@ -102,6 +102,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 							textsize={"16px"}
 							type={"button"}
 							outlined
+							onClick={() => navigate(-1)}
 						>
 							Cancel
 						</Button>

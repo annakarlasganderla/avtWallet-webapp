@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { RevenueService } from './revenue.service';
+import { RevenueService } from './services/revenue.service';
 import { RevenueController } from './revenue.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Revenue } from './entities/revenue.entity';
@@ -7,6 +7,6 @@ import { Revenue } from './entities/revenue.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Revenue])],
   controllers: [RevenueController],
-  providers: [RevenueService]
+  providers: [RevenueService],
 })
-export class RevenueModule { }
+export class RevenueModule {}

@@ -1,9 +1,10 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
-import { CreateRevenueDto } from './dto/create-revenue.dto';
-import { UpdateRevenueDto } from './dto/update-revenue.dto';
-import { Revenue } from './entities/revenue.entity';
+import { CreateRevenueDto } from '../dto/create-revenue.dto';
+import { UpdateRevenueDto } from '../dto/update-revenue.dto';
+import { Revenue } from '../entities/revenue.entity';
 import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { handleErrors } from 'src/common/services/common.service';
 
 @Injectable()
 export class RevenueService {
@@ -12,13 +13,7 @@ export class RevenueService {
   constructor(
     @InjectRepository(Revenue)
     private revenueRepository: Repository<Revenue>,
-  ) { }
-
-  private handleErrors(message: string) {
-    this.logger.log(message);
-
-    throw new HttpException(message, 500);
-  }
+  ) {}
 
   async create(createRevenueDto: CreateRevenueDto) {
     try {
@@ -29,7 +24,7 @@ export class RevenueService {
 
       return { message: revenue.name };
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -37,7 +32,7 @@ export class RevenueService {
     try {
       return this.revenueRepository.find();
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -54,7 +49,7 @@ export class RevenueService {
 
       return revenue;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -85,7 +80,7 @@ export class RevenueService {
 
       throw HttpException;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -100,7 +95,7 @@ export class RevenueService {
 
       return { message: revenue.name };
     } catch (e) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 }

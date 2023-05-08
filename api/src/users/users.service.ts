@@ -14,7 +14,7 @@ import {
   DeletedUserDto,
   UpdatedEntity,
 } from 'src/common/dto/default-responses';
-import { Not } from 'typeorm';
+import { handleErrors } from 'src/common/services/common.service';
 
 @Injectable()
 export class UsersService {
@@ -23,13 +23,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) { }
-
-  private handleErrors(message: string) {
-    this.logger.log(message);
-
-    throw new HttpException(message, 500);
-  }
+  ) {}
 
   async create(createUserDto: CreateUserDto): Promise<CreatedEntity> {
     try {
@@ -40,7 +34,7 @@ export class UsersService {
 
       return { message: user.name };
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -48,7 +42,7 @@ export class UsersService {
     try {
       return this.usersRepository.find();
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -65,7 +59,7 @@ export class UsersService {
 
       return user;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -77,7 +71,7 @@ export class UsersService {
 
       return user;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -106,7 +100,7 @@ export class UsersService {
 
       throw new InternalServerErrorException();
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -119,7 +113,7 @@ export class UsersService {
 
       return { message: user.name };
     } catch (e) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 }

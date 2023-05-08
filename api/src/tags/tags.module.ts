@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TagsService } from './tags.service';
+import { TagsService } from './services/tags.service';
 import { TagsController } from './tags.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tag } from './entities/tag.entity';
@@ -7,6 +7,6 @@ import { Tag } from './entities/tag.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Tag])],
   controllers: [TagsController],
-  providers: [TagsService]
+  providers: [TagsService],
 })
-export class TagsModule { }
+export class TagsModule {}

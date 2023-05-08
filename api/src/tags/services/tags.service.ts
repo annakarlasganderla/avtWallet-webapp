@@ -1,9 +1,10 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
-import { CreateTagDto } from './dto/create-tag.dto';
-import { UpdateTagDto } from './dto/update-tag.dto';
-import { Tag } from './entities/tag.entity';
+import { CreateTagDto } from '../dto/create-tag.dto';
+import { UpdateTagDto } from '../dto/update-tag.dto';
+import { Tag } from '../entities/tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
+import { handleErrors } from 'src/common/services/common.service';
 
 @Injectable()
 export class TagsService {
@@ -12,32 +13,30 @@ export class TagsService {
   constructor(
     @InjectRepository(Tag)
     private tagRepository: Repository<Tag>,
-  ) { }
-
-  private handleErrors(message: string) {
-    this.logger.log(message);
-
-    throw new HttpException(message, 500);
-  }
+  ) {}
 
   async create(createTagDto: CreateTagDto) {
     try {
       const tag = this.tagRepository.create(createTagDto);
 
-      this.logger.log('Tag created successfully');
+      this.logger.log('Created successfully');
       this.tagRepository.save(tag);
 
       return { message: tag.name };
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
   async findAll(): Promise<Tag[]> {
     try {
-      return this.tagRepository.find();
+      return await this.tagRepository.find({
+        where: {
+          deletedAt: IsNull(),
+        },
+      });
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -54,7 +53,7 @@ export class TagsService {
 
       return tag;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -77,22 +76,20 @@ export class TagsService {
 
       throw HttpException;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
   async softDelete(id: string) {
     try {
-      const tag = await this.tagRepository
-        .findOneBy({ id })
-        .then((tag) => {
-          tag.deletedAt = new Date();
-          return this.tagRepository.save(tag);
-        });
+      const tag = await this.tagRepository.findOneBy({ id }).then((tag) => {
+        tag.deletedAt = new Date();
+        return this.tagRepository.save(tag);
+      });
 
       return { message: tag.name };
     } catch (e) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 }

@@ -1,11 +1,11 @@
 import { Injectable, Logger, HttpException, HttpStatus } from '@nestjs/common';
-import { CreateSourceDto } from './dto/create-source.dto';
-import { UpdateSourceDto } from './dto/update-source.dto';
+import { CreateSourceDto } from '../dto/create-source.dto';
+import { UpdateSourceDto } from '../dto/update-source.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Source } from './entities/source.entity';
+import { Source } from '../entities/source.entity';
 import { IsNull, Repository } from 'typeorm';
-import { Not } from 'typeorm';
 import { DeletedUserDto } from 'src/common/dto/default-responses';
+import { handleErrors } from '../../common/services/common.service';
 
 @Injectable()
 export class SourcesService {
@@ -14,13 +14,7 @@ export class SourcesService {
   constructor(
     @InjectRepository(Source)
     private sourceRepository: Repository<Source>,
-  ) { }
-
-  private handleErrors(message: string) {
-    this.logger.log(message);
-
-    throw new HttpException(message, 500);
-  }
+  ) {}
 
   async create(createSourceDto: CreateSourceDto) {
     try {
@@ -31,7 +25,7 @@ export class SourcesService {
 
       return { message: source.name };
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -39,7 +33,7 @@ export class SourcesService {
     try {
       return this.sourceRepository.find();
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -56,7 +50,7 @@ export class SourcesService {
 
       return source;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -79,7 +73,7 @@ export class SourcesService {
 
       throw HttpException;
     } catch (e: any) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 
@@ -94,7 +88,7 @@ export class SourcesService {
 
       return { message: source.name };
     } catch (e) {
-      this.handleErrors(e.message);
+      handleErrors(e.message);
     }
   }
 }

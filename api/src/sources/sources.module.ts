@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { SourcesService } from './sources.service';
+import { SourcesService } from './services/sources.service';
 import { SourcesController } from './sources.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Source } from './entities/source.entity';

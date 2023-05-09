@@ -1,6 +1,6 @@
 export enum payMethod {
-    PIX,
-    CREDITCARD,
-    DEBITCARD,
-    MONEY
+  PIX,
+  CREDITCARD,
+  DEBITCARD,
+  MONEY,
 }

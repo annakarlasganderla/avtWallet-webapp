@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
@@ -11,7 +10,6 @@ import {
 import { RevenueService } from './services/revenue.service';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
 import { UpdateRevenueDto } from './dto/update-revenue.dto';
-import { Public } from 'src/auth/decorators/auth.decorators';
 
 @Controller('revenue')
 export class RevenueController {

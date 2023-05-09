@@ -1,6 +1,3 @@
-import { randomUUID } from 'crypto';
-import { CreateRevenueDto } from 'src/revenue/dto/create-revenue.dto';
-import { Revenue } from 'src/revenue/entities/revenue.entity';
 import { CreateSourceDto } from 'src/sources/dto/create-source.dto';
 import { Source } from 'src/sources/entities/source.entity';
 import { CreateTagDto } from 'src/tags/dto/create-tag.dto';
@@ -8,9 +5,6 @@ import { Tag } from 'src/tags/entities/tag.entity';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { Connection } from 'typeorm';
-import { payMethod } from '../../revenue/enum/payMethod';
-import { typeRevenue } from 'src/revenue/enum/typeRevenue';
-
 
 export default class Seeder {
   public static async run(connection: Connection): Promise<void> {
@@ -30,16 +24,16 @@ export default class Seeder {
     }
 
     const default_tag: CreateTagDto = {
-      name: 'Tag Deafult'
-    }
+      name: 'Tag Deafult',
+    };
 
     if ((await tagRepository.find()).length === 0) {
-      await tagRepository.insert(default_tag)
+      await tagRepository.insert(default_tag);
     }
 
     const default_source: CreateSourceDto = {
-      name: 'Source Default'
-    }
+      name: 'Source Default',
+    };
 
     if ((await sourceRepository.find()).length === 0) {
       await sourceRepository.insert(default_source);

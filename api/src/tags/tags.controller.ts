@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
@@ -11,7 +10,6 @@ import {
 import { TagsService } from './services/tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
-import { Public } from 'src/auth/decorators/auth.decorators';
 
 @Controller('tags')
 export class TagsController {

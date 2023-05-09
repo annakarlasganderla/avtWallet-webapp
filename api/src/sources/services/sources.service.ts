@@ -1,4 +1,4 @@
-import { Injectable, Logger, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, Logger, HttpException } from '@nestjs/common';
 import { CreateSourceDto } from '../dto/create-source.dto';
 import { UpdateSourceDto } from '../dto/update-source.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -25,7 +25,7 @@ export class SourcesService {
 
       return { message: source.name };
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -33,7 +33,7 @@ export class SourcesService {
     try {
       return this.sourceRepository.find();
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -50,7 +50,7 @@ export class SourcesService {
 
       return source;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -73,7 +73,7 @@ export class SourcesService {
 
       throw HttpException;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -88,7 +88,7 @@ export class SourcesService {
 
       return { message: source.name };
     } catch (e) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 }

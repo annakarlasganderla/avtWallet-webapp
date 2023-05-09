@@ -24,7 +24,7 @@ export class TagsService {
 
       return { message: tag.name };
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -36,7 +36,7 @@ export class TagsService {
         },
       });
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -53,7 +53,7 @@ export class TagsService {
 
       return tag;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -76,7 +76,7 @@ export class TagsService {
 
       throw HttpException;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -89,7 +89,7 @@ export class TagsService {
 
       return { message: tag.name };
     } catch (e) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 }

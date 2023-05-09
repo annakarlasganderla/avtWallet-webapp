@@ -1,4 +1,4 @@
 export enum typeRevenue {
-    EXPENSE,
-    INCOMING
+  EXPENSE,
+  INCOMING,
 }

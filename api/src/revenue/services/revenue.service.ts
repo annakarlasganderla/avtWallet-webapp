@@ -17,14 +17,12 @@ export class RevenueService {
 
   async create(createRevenueDto: CreateRevenueDto) {
     try {
-      const revenue = this.revenueRepository.create(createRevenueDto);
-
+      this.revenueRepository.create(createRevenueDto);
       this.logger.log('Revenue created successfully');
-      this.revenueRepository.save(revenue);
 
-      return { message: revenue.name };
+      return { message: createRevenueDto.name };
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -32,7 +30,7 @@ export class RevenueService {
     try {
       return this.revenueRepository.find();
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -49,7 +47,7 @@ export class RevenueService {
 
       return revenue;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -62,25 +60,23 @@ export class RevenueService {
         },
       });
 
-      if (revenue) {
-        revenue.name = updateRevenueDto.name;
-        revenue.coin = updateRevenueDto.coin;
-        revenue.value = updateRevenueDto.value;
-        revenue.payMethod = updateRevenueDto.payMethod;
-        revenue.date = updateRevenueDto.date;
-        revenue.description = updateRevenueDto.description;
-        revenue.typeRevenue = updateRevenueDto.typeRevenue;
-        revenue.source = updateRevenueDto.source;
-        revenue.tag = updateRevenueDto.tag;
-        revenue.updatedAt = new Date();
+      if (!revenue) throw new HttpException('Revenue not found', 404);
 
-        await this.revenueRepository.update(id, revenue);
-        return { message: updateRevenueDto.name };
-      }
+      revenue.name = updateRevenueDto.name;
+      revenue.coin = updateRevenueDto.coin;
+      revenue.value = updateRevenueDto.value;
+      revenue.payMethod = updateRevenueDto.payMethod;
+      revenue.date = updateRevenueDto.date;
+      revenue.description = updateRevenueDto.description;
+      revenue.typeRevenue = updateRevenueDto.typeRevenue;
+      revenue.source = updateRevenueDto.source;
+      revenue.tag = updateRevenueDto.tag;
+      revenue.updatedAt = new Date();
 
-      throw HttpException;
+      await this.revenueRepository.update(id, revenue);
+      return { message: updateRevenueDto.name };
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -95,7 +91,7 @@ export class RevenueService {
 
       return { message: revenue.name };
     } catch (e) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 }

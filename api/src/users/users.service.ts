@@ -34,7 +34,7 @@ export class UsersService {
 
       return { message: user.name };
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -42,7 +42,7 @@ export class UsersService {
     try {
       return this.usersRepository.find();
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -59,7 +59,7 @@ export class UsersService {
 
       return user;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -71,7 +71,7 @@ export class UsersService {
 
       return user;
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -100,7 +100,7 @@ export class UsersService {
 
       throw new InternalServerErrorException();
     } catch (e: any) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 
@@ -113,7 +113,7 @@ export class UsersService {
 
       return { message: user.name };
     } catch (e) {
-      handleErrors(e.message);
+      handleErrors(e.message, e.code);
     }
   }
 }

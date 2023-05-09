@@ -1,8 +1,8 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthDto, AuthResponse } from './dto/auth.dto';
 import { AuthService } from './services/auth.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { AuthGuard } from './auth.guard';
+import { Public } from './decorators/auth.decorators';
 
 @Controller('auth')
 export class AuthController {
@@ -15,6 +15,7 @@ export class AuthController {
     type: AuthResponse,
   })
   @Post()
+  @Public()
   public async login(@Body() authDto: AuthDto): Promise<AuthResponse> {
     return await this.authService.login(authDto);
   }

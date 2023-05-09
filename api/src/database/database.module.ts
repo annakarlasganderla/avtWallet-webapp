@@ -15,8 +15,8 @@ import { User } from 'src/users/entities/user.entity';
       password: 'postgres',
       database: 'postgres',
       entities: [User, Source, Tag, Revenue],
-      synchronize: true, // A configuração synchronize: true não deve ser usada na produção - caso contrário, você pode perder dados de produção. (peguei da documentaçãp)
+      synchronize: true,
     }),
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

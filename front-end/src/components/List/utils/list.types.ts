@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export type columnType = "date" | "text" | "currency";
-
+type align = "start" | "center" | "end";
 export interface IColumn<T> {
 	title?: string;
 	name: string;
@@ -9,6 +9,8 @@ export interface IColumn<T> {
 	minSize?: number;
 	type?: columnType;
 	bold?: boolean;
+	align?: align;
+	classname?: string;
 	onRender?: (item: T) => ReactNode | string | number;
 }
 

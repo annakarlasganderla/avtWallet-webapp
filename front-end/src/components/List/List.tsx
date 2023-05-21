@@ -1,6 +1,5 @@
 import moment from "moment";
 import { IListProps, columnType } from "./utils/list.types";
-import { CiPalette } from "react-icons/ci";
 
 function List(props: IListProps) {
 	const { columns, items, loading, isTitle } = props;
@@ -42,8 +41,9 @@ function List(props: IListProps) {
 							maxWidth: column.maxSize,
 							minWidth: column.minSize,
 							fontWeight: column.bold ? "bold" : "normal",
+							justifyContent: column.align,
 						}}
-						className="text-black"
+						className={`text-black ${column.classname}`}
 					>
 						{column.onRender
 							? column.onRender(item)

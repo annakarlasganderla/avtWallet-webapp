@@ -13,31 +13,31 @@ import { UpdateTagDto } from './dto/update-tag.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('tags')
-@Controller()
+@Controller('tags')
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() createTagDto: CreateTagDto) {
     return this.tagsService.create(createTagDto);
   }
 
-  @Get()
+  @Get('list-all')
   findAll() {
     return this.tagsService.findAll();
   }
 
-  @Get(':id')
+  @Get('get/:id')
   findOne(@Param('id') id: string) {
     return this.tagsService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('edit/:id')
   update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
     return this.tagsService.update(id, updateTagDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.tagsService.softDelete(id);
   }

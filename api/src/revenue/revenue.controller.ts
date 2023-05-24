@@ -15,31 +15,31 @@ import { PageOptionsDto } from './dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('revenues')
-@Controller()
+@Controller('revenues')
 export class RevenueController {
   constructor(private readonly revenueService: RevenueService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() createRevenueDto: CreateRevenueDto) {
     return this.revenueService.create(createRevenueDto);
   }
 
-  @Get()
+  @Get('list-all')
   findAll(@Query() pageOptionsDto: PageOptionsDto) {
     return this.revenueService.findAll(pageOptionsDto);
   }
 
-  @Get(':id')
+  @Get('get/:id')
   findOne(@Param('id') id: string) {
     return this.revenueService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('edit/:id')
   update(@Param('id') id: string, @Body() updateRevenueDto: UpdateRevenueDto) {
     return this.revenueService.update(id, updateRevenueDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.revenueService.softDelete(id);
   }

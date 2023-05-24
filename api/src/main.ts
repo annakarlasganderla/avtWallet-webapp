@@ -28,7 +28,6 @@ async function bootstrap() {
     .setTitle('Avt Wallet API')
     .setDescription('The avt wallet API description')
     .setVersion('1.0')
-    .addTag('avt')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

@@ -17,27 +17,27 @@ import { ApiTags } from '@nestjs/swagger';
 export class SourcesController {
   constructor(private readonly sourcesService: SourcesService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() createSourceDto: CreateSourceDto) {
     return this.sourcesService.create(createSourceDto);
   }
 
-  @Get()
+  @Get('list-all')
   findAll() {
     return this.sourcesService.findAll();
   }
 
-  @Get(':id')
+  @Get('get/:id')
   findOne(@Param('id') id: string) {
     return this.sourcesService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('edit/:id')
   update(@Param('id') id: string, @Body() updateSourceDto: UpdateSourceDto) {
     return this.sourcesService.update(id, updateSourceDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.sourcesService.softDelete(id);
   }

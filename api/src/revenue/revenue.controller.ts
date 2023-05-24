@@ -14,7 +14,7 @@ import { UpdateRevenueDto } from './dto/update-revenue.dto';
 import { PageOptionsDto } from './dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Revenues')
+@ApiTags('revenues')
 @Controller()
 export class RevenueController {
   constructor(private readonly revenueService: RevenueService) {}

@@ -12,7 +12,7 @@ import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Tags')
+@ApiTags('tags')
 @Controller()
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}

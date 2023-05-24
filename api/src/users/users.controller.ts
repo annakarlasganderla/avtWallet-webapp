@@ -13,7 +13,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from 'src/auth/decorators/auth.decorators';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Users')
+@ApiTags('users')
 @Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

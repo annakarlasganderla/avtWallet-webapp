@@ -6,10 +6,12 @@ import {
   Param,
   Delete,
   Put,
+  Query,
 } from '@nestjs/common';
 import { RevenueService } from './services/revenue.service';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
 import { UpdateRevenueDto } from './dto/update-revenue.dto';
+import { PageOptionsDto } from './dto/page.dto';
 
 @Controller('revenue')
 export class RevenueController {
@@ -21,8 +23,8 @@ export class RevenueController {
   }
 
   @Get()
-  findAll() {
-    return this.revenueService.findAll();
+  findAll(@Query() pageOptionsDto: PageOptionsDto) {
+    return this.revenueService.findAll(pageOptionsDto);
   }
 
   @Get(':id')

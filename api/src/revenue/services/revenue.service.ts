@@ -5,6 +5,7 @@ import { Revenue } from '../entities/revenue.entity';
 import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { handleErrors } from 'src/common/services/common.service';
+import { PageDto, PageMetaDto, PageOptionsDto } from '../dto/page.dto';
 
 @Injectable()
 export class RevenueService {
@@ -26,9 +27,19 @@ export class RevenueService {
     }
   }
 
-  async findAll(): Promise<Revenue[]> {
+  async findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<Revenue>> {
     try {
-      return this.revenueRepository.find();
+      const { order, skip, take } = pageOptionsDto;
+      const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
+
+      queryBuilder.orderBy('revenue.createdAt', order).skip(skip).take(take);
+
+      const itemCount = await queryBuilder.getCount();
+      const { entities } = await queryBuilder.getRawAndEntities();
+
+      const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
+
+      return new PageDto(entities, pageMetaDto);
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }

@@ -67,10 +67,7 @@ const SideNav = (props: ISideNavProps) => {
                                     type={"submit"}>
                                     Aplicar filtros
                                 </Button>
-
                             </div>
-
-
 
                         </div>
                     </div>

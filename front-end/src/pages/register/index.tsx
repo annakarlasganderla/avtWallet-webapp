@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import TextField from "../../components/TextField";
 import { useRegisterController } from "./hooks/useRegisterController";
 
-export const Register = () => {
+const Register = () => {
 	const { userForm, error } = useRegisterController();
 
 	return (
@@ -72,3 +72,5 @@ export const Register = () => {
 		</div>
 	);
 };
+
+export default Register;

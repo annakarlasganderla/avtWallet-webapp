@@ -3,7 +3,7 @@ import TextField from "../../components/TextField";
 import Header from "../../components/Header";
 import { useLoginController } from "./hooks/useLoginController";
 
-export const Login = () => {
+const Login = () => {
 	const { loginForm, error } = useLoginController();
 
 	return (
@@ -56,3 +56,5 @@ export const Login = () => {
 		</div>
 	);
 };
+
+export default Login;

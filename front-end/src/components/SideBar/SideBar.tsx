@@ -13,7 +13,7 @@ const SideBar = () => {
 	return (
 		<div
 			className="w-full h-20 fixed bottom-0 left-0 border-t-2 border-black 
-				md:w-72 md:h-screen md:relative md:border-0 bg-gray-100 flex flex-col gap-2"
+				md:w-72 md:h-full md:relative md:border-0 bg-gray-100 flex flex-col gap-2"
 		>
 			<div className="flex md:flex-col justify-between flex-grow">
 				<div className="w-full justify-around flex md:flex-col">
@@ -50,7 +50,7 @@ const SideBar = () => {
 								classname="h-full md:h-auto"
 							/>
 						}
-						classname="h-full flex items-center md:h-auto md:absolute md:bottom-20"
+						classname="h-full flex items-center md:h-auto md:absolute md:bottom-0"
 					>
 						<li className="px-4 py-2 hover:bg-gray-100">Profile</li>
 						<li className="px-4 py-2 hover:bg-gray-100">Logout</li>

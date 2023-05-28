@@ -17,14 +17,18 @@ const ExtractsList = () => {
 			bold: true,
 		},
 		{
+			minSize: 80,
 			name: "value",
 			type: "currency",
 			bold: true,
 		},
 		{
+			maxSize: 120,
+			minSize: 90,
 			name: "tag",
+			classname: "hidden md:flex",
 			onRender: (item) => (
-				<div className="bg-black text-white font-bold rounded-lg p-1 hidden md:flex">
+				<div className="w-full bg-black text-white font-bold rounded-lg p-1 px-4 hidden justify-center md:flex">
 					{item.tag?.name}
 				</div>
 			),
@@ -63,7 +67,7 @@ const ExtractsList = () => {
 		<>
 			<SideNav isOpen={open} setIsOpen={setOpen} />
 
-			<main className="w-full flex flex-col items-center">
+			<main className="flex flex-1 flex flex-col items-center">
 				<div className="w-4/5 h-20 flex items-center justify-end mt-2 mb-2 md:w-3/5">
 					<AiOutlineFilter
 						className="block"
@@ -73,8 +77,13 @@ const ExtractsList = () => {
 						size={30}
 					/>
 				</div>
-				<div className="w-4/5 flex justify-center items-center mb-8 md:w-3/5">
-					<List columns={columns} items={items} isTitle={false} />
+				<div className="w-4/5 h-3/5 md:h-4/6 md:w-3/5 ">
+					<List
+						columns={columns}
+						items={items}
+						isTitle={false}
+						onChangePage={(number) => console.log(number)}
+					/>
 				</div>
 			</main>
 		</>

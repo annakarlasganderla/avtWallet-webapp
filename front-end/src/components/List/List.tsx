@@ -2,7 +2,7 @@ import moment from "moment";
 import { IListProps, columnType } from "./utils/list.types";
 
 function List(props: IListProps) {
-	const { columns, items, loading, isTitle } = props;
+	const { columns, items, loading, onChangePage, isTitle } = props;
 
 	const renderHeader = () => {
 		return (
@@ -19,6 +19,13 @@ function List(props: IListProps) {
 			</div>
 		);
 	};
+
+	function handleScroll(event: React.UIEvent<HTMLDivElement>) {
+		const target = event.target as HTMLDivElement;
+		if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+			onChangePage && onChangePage(1);
+		}
+	}
 
 	const convertColumnType = (type: columnType, item: any) => {
 		if (type === "text") return item;
@@ -57,12 +64,13 @@ function List(props: IListProps) {
 	};
 
 	return (
-		<>
-			<div className="w-full flex flex-col items-center gap-8 overflow-auto">
-				{isTitle && renderHeader()}
-				<div className="w-full h-full flex flex-col gap-4">{items.map(renderCell)}</div>
-			</div>
-		</>
+		<div
+			className="w-full h-full flex-1 flex flex-col justify-start items-center gap-8 overflow-auto"
+			onScroll={handleScroll}
+		>
+			{isTitle && renderHeader()}
+			<div className="w-full flex flex-1 flex-col gap-4">{items.map(renderCell)}</div>
+		</div>
 	);
 }
 

@@ -5,9 +5,9 @@ import { Outlet } from "react-router-dom";
 
 const Layout: FC = () => {
 	return (
-		<div className="w-screen h-screen overflow-y-auto md:overflow-y-hidden">
+		<div className="w-screen h-screen flex flex-col flex-1">
 			<Header />
-			<div className="w-screen h-screen flex">
+			<div className="flex flex-row flex-1 overflow-auto">
 				<SideBar />
 				<Outlet />
 			</div>

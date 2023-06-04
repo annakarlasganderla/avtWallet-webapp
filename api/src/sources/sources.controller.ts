@@ -13,9 +13,9 @@ import { UpdateSourceDto } from './dto/update-source.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('sources')
-@Controller()
+@Controller('sources')
 export class SourcesController {
-  constructor(private readonly sourcesService: SourcesService) {}
+  constructor(private readonly sourcesService: SourcesService) { }
 
   @Post('create')
   create(@Body() createSourceDto: CreateSourceDto) {

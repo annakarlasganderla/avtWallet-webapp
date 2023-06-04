@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../../../context/hooks/useAuth";
 import { ILoginRequest } from "../../../types/auth.types";
-import { login } from "../../../api/Auth";
+import AuthApi from "../../../api/Auth";
 
 export const useLoginController = () => {
+	const api = AuthApi();
 	const navigate = useNavigate();
 	const { setToken } = useAuth();
 	const [error, setError] = useState();
@@ -16,13 +17,12 @@ export const useLoginController = () => {
 		},
 		onSubmit: async (value) => {
 			try {
-				const response = await login(value);
+				const response = await api.login(value);
 				if (response.access_token) {
 					setToken(response.access_token);
 					navigate("revenue");
 				}
 			} catch (error: any) {
-				console.log(error);
 				setError(error);
 			}
 		},

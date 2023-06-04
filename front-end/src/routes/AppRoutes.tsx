@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loading from "../components/Loading/Loading";
+import { AuthProvider } from "../context/AuthContext";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Layout = lazy(() => import("../components/Layout/Layout"));
 const Login = lazy(() => import("../pages/login"));
@@ -12,22 +14,29 @@ const RevenueList = lazy(() => import("../pages/expenses/list"));
 export function AppRoutes() {
 	return (
 		<BrowserRouter>
-			<Suspense fallback={<Loading />}>
-				<Routes>
-					<Route path="/" element={<Login />} />
-					<Route path="/register" element={<Register />} />
-					<Route element={<Layout />}>
-						<Route path="/revenue/form/new" element={<ExpensesForm type={"NEW"} />} />
-						<Route path="/revenue/form/:id" element={<ExpensesForm type={"VIEW"} />} />
-						<Route
-							path="/revenue/form/:id/edit"
-							element={<ExpensesForm type={"EDIT"} />}
-						/>
-						<Route path="/revenue" element={<RevenueList />} />
-						<Route path="/extracts" element={<ExtractsList />} />
-					</Route>
-				</Routes>
-			</Suspense>
+			<AuthProvider>
+				<Suspense fallback={<Loading />}>
+					<Routes>
+						<Route path="/" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+						<Route element={<ProtectedRoute />}>
+							<Route element={<Layout />}>
+								<Route path="/revenue/form/new" element={<ExpensesForm type={"NEW"} />} />
+								<Route
+									path="/revenue/form/:id"
+									element={<ExpensesForm type={"VIEW"} />}
+								/>
+								<Route
+									path="/revenue/form/:id/edit"
+									element={<ExpensesForm type={"EDIT"} />}
+								/>
+								<Route path="/revenue" element={<RevenueList />} />
+								<Route path="/extracts" element={<ExtractsList />} />
+							</Route>
+						</Route>
+					</Routes>
+				</Suspense>
+			</AuthProvider>
 		</BrowserRouter>
 	);
 }

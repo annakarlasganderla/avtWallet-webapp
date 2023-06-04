@@ -24,11 +24,11 @@ const Login = () => {
 					>
 						<TextField
 							type={"text"}
-							name={"email"}
+							name={"login"}
 							label={"Email"}
-							value={loginForm.values.email}
+							value={loginForm.values.login}
 							onChange={loginForm.handleChange}
-							error={loginForm.errors.email}
+							error={loginForm.errors.login}
 						/>
 						<TextField
 							type={"password"}

@@ -51,7 +51,7 @@ const Menu: React.FC<MenuProps> = ({ target, children, classname }) => {
 			</div>
 			{isOpen && (
 				<div
-					className="w-4/5 md:w-auto fixed z-10 bg-white rounded shadow-lg"
+					className="w-5/6 md:w-auto fixed z-10 bg-white rounded shadow-lg"
 					style={calculateMenuPosition()}
 				>
 					<ul className="py-2 px-4 md:px-2">{children}</ul>

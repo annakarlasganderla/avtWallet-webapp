@@ -1,30 +1,50 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 const api: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:8080/',
-    headers: {
-        "Content-Type": "application/json;charset=utf-8",
-    },
+	baseURL: "http://localhost:3030/",
+	headers: {
+		"Content-Type": "application/json;charset=utf-8",
+	},
 });
+const AuthorizationInterceptor: React.FC = () => {
+	const [cookies] = useCookies(["token"]);
+	const token = cookies.token;
 
-// Interceptar todas as requisições e adicionar o token de autenticação, se estiver disponível
-api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        config.headers!.Authorization = `Bearer ${token}`;
-    }
-    return config;
-});
+	useEffect(() => {
+		const requestInterceptor = api.interceptors.request.use(
+			(config) => {
+				if (token) {
+					config.headers!.Authorization = `Bearer ${token}`;
+				}
+				return config;
+			},
+			(error) => {
+				return Promise.reject(error);
+			},
+		);
 
-// Interceptar todas as respostas e tratar erros de autorização ou outros erros
-api.interceptors.response.use(
-    (response: AxiosResponse) => response,
-    (error) => {
-        if (error.response?.status === 401) {
-            // Redirecionar para a página de login ou tratar o erro de autenticação de acordo com o seu fluxo
-        }
-        return Promise.reject(error);
-    }
-);
+		const responseInterceptor = api.interceptors.response.use(
+			(response: AxiosResponse) => response,
+			(error) => {
+				console.log(error.response.statusText);
+				if (error.response?.status === 401) {
+					// Tratar erro de autorização aqui
+				}
+				return Promise.reject(error);
+			},
+		);
+
+		return () => {
+			api.interceptors.request.eject(requestInterceptor);
+			api.interceptors.response.eject(responseInterceptor);
+		};
+	}, [token]);
+
+	return null;
+};
 
 export default api;
+
+export { AuthorizationInterceptor };

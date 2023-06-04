@@ -5,10 +5,12 @@ import { IoMdAdd } from "react-icons/io";
 import { FaList, FaUserCircle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import Menu from "../Menu";
+import useAuth from "../../context/hooks/useAuth";
 
 const SideBar = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { logout } = useAuth();
 
 	return (
 		<div
@@ -53,7 +55,9 @@ const SideBar = () => {
 						classname="h-full flex items-center md:h-auto md:absolute md:bottom-0"
 					>
 						<li className="px-4 py-2 hover:bg-gray-100">Profile</li>
-						<li className="px-4 py-2 hover:bg-gray-100">Logout</li>
+						<li className="px-4 py-2 hover:bg-gray-100" onClick={logout}>
+							Logout
+						</li>
 					</Menu>
 				</div>
 			</div>

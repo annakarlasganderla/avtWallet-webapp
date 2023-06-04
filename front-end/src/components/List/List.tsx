@@ -22,7 +22,7 @@ function List(props: IListProps) {
 
 	function handleScroll(event: React.UIEvent<HTMLDivElement>) {
 		const target = event.target as HTMLDivElement;
-		if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+		if (target.scrollHeight - target.scrollTop <= target.clientHeight) {
 			onChangePage && onChangePage(1);
 		}
 	}
@@ -38,7 +38,7 @@ function List(props: IListProps) {
 	const renderCell = (item: any, index: number) => {
 		return (
 			<div
-				className="w-full h-12 flex justify-between items-center px-8 gap-x-4 border-2 border-black rounded-lg overflow-x-auto"
+				className="w-full h-12 flex justify-between items-center px-8 gap-x-4 border-2 border-black rounded-lg overflow-y-none overflow-x-auto"
 				key={index}
 			>
 				{columns.map((column, index) => (

@@ -1,8 +1,19 @@
 import { ILoginRequest, ILoginResponse } from "../types/auth.types";
-import { post } from "./Common";
+import api from "./Api";
+import { handleErrors } from "./Common";
 
-const path = "/auth";
+const AuthApi = () => {
+	const path = `${api.defaults.baseURL}auth`;
 
-export async function login(body: ILoginRequest): Promise<ILoginResponse> {
-	return await post(`${path}/login`, body);
-}
+	const login = async (body: ILoginRequest): Promise<ILoginResponse> => {
+		try {
+			return (await api.post(`${path}/login`, body)).data;
+		} catch (error) {
+			return handleErrors(error);
+		}
+	};
+
+	return { login };
+};
+
+export default AuthApi;

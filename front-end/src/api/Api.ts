@@ -28,7 +28,6 @@ const AuthorizationInterceptor: React.FC = () => {
 		const responseInterceptor = api.interceptors.response.use(
 			(response: AxiosResponse) => response,
 			(error) => {
-				console.log(error.response.statusText);
 				if (error.response?.status === 401) {
 					// Tratar erro de autorização aqui
 				}

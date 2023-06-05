@@ -13,7 +13,7 @@ const Button = (props: IButtonProps) => {
 				className={
 					props.classname
 						? props.classname
-						: `w-full py-2 md:py-2 font-bold text-xl rounded-lg cursor-pointer hover:opacity-80 w-80
+						: `w-full h-full py-2 flex justify-center items-center md:py-2 font-bold text-xl rounded-lg cursor-pointer hover:opacity-80 w-80
 					${props.outlined && "border-3 border-gray-900 bg-white"}
 					${props.disabled ? "bg-gray-700" : "bg-black"} 
 					${props.outlined ? "bg-white border-2 border-black" : ""} 

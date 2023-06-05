@@ -24,8 +24,8 @@ export class RevenueController {
     return this.revenueService.create(createRevenueDto);
   }
 
-  @Get('list-all')
-  findAll(@Query() pageOptionsDto: PageOptionsDto) {
+  @Post('list-all')
+  findAll(@Body() pageOptionsDto: PageOptionsDto) {
     return this.revenueService.findAll(pageOptionsDto);
   }
 

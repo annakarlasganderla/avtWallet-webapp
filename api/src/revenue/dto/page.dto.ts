@@ -1,7 +1,23 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Order } from '../enum/order';
-import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';
+import {
+  IsEnum,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 import { Type } from 'class-transformer';
+import { PayMethod } from '../enum/payMethod';
+
+interface WhereDto {
+  name: string;
+  value: number;
+  tagId: number;
+  payMethod: PayMethod;
+}
 
 export class PageOptionsDto {
   @ApiPropertyOptional({ enum: Order, default: Order.ASC })
@@ -30,6 +46,16 @@ export class PageOptionsDto {
   @Max(50)
   @IsOptional()
   readonly take?: number = 10;
+
+  @ApiProperty({
+    example: {
+      name: 'Conta de Luz',
+      value: 172,
+      tagId: 1,
+      payMethod: PayMethod.MONEY,
+    },
+  })
+  readonly where: WhereDto;
 
   get skip(): number {
     return (this.page - 1) * this.take;

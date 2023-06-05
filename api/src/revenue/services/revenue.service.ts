@@ -6,6 +6,7 @@ import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { handleErrors } from 'src/common/services/common.service';
 import { PageDto, PageMetaDto, PageOptionsDto } from '../dto/page.dto';
+import { PayMethod } from '../enum/payMethod';
 
 @Injectable()
 export class RevenueService {
@@ -32,7 +33,14 @@ export class RevenueService {
       const { order, skip, take } = pageOptionsDto;
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
 
-      queryBuilder.orderBy('revenue.createdAt', order).skip(skip).take(take);
+      queryBuilder
+        .orderBy('revenue.createdAt', order)
+        .skip(skip)
+        .take(take)
+        .where('revenue.tagId = :tagId AND revenue.payMethod :payMethod', {
+          tagId: 1,
+          payMethod: PayMethod.MONEY,
+        });
 
       const itemCount = await queryBuilder.getCount();
       const { entities } = await queryBuilder.getRawAndEntities();
@@ -105,4 +113,10 @@ export class RevenueService {
       handleErrors(e.message, e.code);
     }
   }
+
+  /**
+   * HELPERS
+   */
+
+  private buildWhere(options: any) {}
 }

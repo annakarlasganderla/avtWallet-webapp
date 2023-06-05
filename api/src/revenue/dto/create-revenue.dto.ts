@@ -1,4 +1,4 @@
-import { payMethod } from '../enum/payMethod';
+import { PayMethod } from '../enum/payMethod';
 import { typeRevenue } from '../enum/typeRevenue';
 
 export class CreateRevenueDto {
@@ -7,7 +7,7 @@ export class CreateRevenueDto {
   value: number;
   source: string;
   tag: string;
-  payMethod: payMethod;
+  payMethod: PayMethod;
   date: Date;
   description: string;
   typeRevenue: typeRevenue;

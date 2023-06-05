@@ -3,7 +3,7 @@ import { Source } from 'src/sources/entities/source.entity';
 import { Tag } from 'src/tags/entities/tag.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { payMethod } from '../enum/payMethod';
+import { PayMethod } from '../enum/payMethod';
 import { typeRevenue } from '../enum/typeRevenue';
 
 @Entity()
@@ -18,7 +18,7 @@ export class Revenue extends AbstractClass {
   value: number;
 
   @Column()
-  payMethod: payMethod;
+  payMethod: PayMethod;
 
   @Column()
   date: Date;

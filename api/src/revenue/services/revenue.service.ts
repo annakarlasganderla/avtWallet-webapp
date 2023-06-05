@@ -5,7 +5,12 @@ import { Revenue } from '../entities/revenue.entity';
 import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { handleErrors } from 'src/common/services/common.service';
-import { PageDto, PageMetaDto, PageOptionsDto } from '../dto/page.dto';
+import {
+  PageDto,
+  PageMetaDto,
+  PageOptionsDto,
+  WhereDto,
+} from '../dto/page.dto';
 import { PayMethod } from '../enum/payMethod';
 
 @Injectable()
@@ -30,17 +35,25 @@ export class RevenueService {
 
   async findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<Revenue>> {
     try {
-      const { order, skip, take } = pageOptionsDto;
+      const { order, skip, take, where } = pageOptionsDto;
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
+
+      const { whereString, values } = this.buildWhere(where);
+
+      // queryBuilder
+      //   .orderBy('revenue.createdAt', order)
+      //   .skip(skip)
+      //   .take(take)
+      //   .where('revenue.tagId = :tagId AND revenue.payMethod :payMethod', {
+      //     tagId: 1,
+      //     payMethod: PayMethod.MONEY,
+      //   });
 
       queryBuilder
         .orderBy('revenue.createdAt', order)
         .skip(skip)
         .take(take)
-        .where('revenue.tagId = :tagId AND revenue.payMethod :payMethod', {
-          tagId: 1,
-          payMethod: PayMethod.MONEY,
-        });
+        .where(whereString, values);
 
       const itemCount = await queryBuilder.getCount();
       const { entities } = await queryBuilder.getRawAndEntities();
@@ -118,5 +131,49 @@ export class RevenueService {
    * HELPERS
    */
 
-  private buildWhere(options: any) {}
+  private buildWhere(options: WhereDto) {
+    let whereString = '';
+    let values = {};
+
+    if (options.name != '') {
+      whereString += `revenue.name = :name`;
+
+      values['name'] = options.name;
+    }
+
+    if (options.payMethod) {
+      const condition = `revenue.payMethod = :payMethod`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : `${condition}`;
+
+      values['payMethod'] = options.payMethod;
+    }
+
+    if (options.tagId) {
+      const condition = `revenue.tagId = :tagId`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : `${condition}`;
+
+      values['tagId'] = options.tagId;
+    }
+
+    if (options.value) {
+      const condition = `revenue.value = :value`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : `${condition}`;
+
+      values['value'] = options.value;
+    }
+
+    return {
+      whereString,
+      values,
+    };
+  }
 }

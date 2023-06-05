@@ -12,11 +12,11 @@ import {
 import { Type } from 'class-transformer';
 import { PayMethod } from '../enum/payMethod';
 
-interface WhereDto {
-  name: string;
-  value: number;
-  tagId: number;
-  payMethod: PayMethod;
+export interface WhereDto {
+  name?: string;
+  value?: number;
+  tagId?: number;
+  payMethod?: PayMethod;
 }
 
 export class PageOptionsDto {

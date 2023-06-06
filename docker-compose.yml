@@ -44,7 +44,7 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
       avt_wallet:
         ipv4_address: 172.25.0.4

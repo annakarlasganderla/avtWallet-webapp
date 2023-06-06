@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 
 interface AuthData {
+	isAuthenticated: boolean;
 	token: string | null;
 	setToken: (token: string | null) => void;
 	logout: () => void;
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthData | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 	const [token, setToken] = useState<string | null>(cookies.token || null);
 	const navigate = useNavigate();
 
@@ -27,6 +29,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 			if (exp && exp * 1000 > Date.now()) {
 				setToken(storedToken);
+				setIsAuthenticated(true);
 			} else {
 				logout();
 			}
@@ -50,6 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		if (newToken) {
 			setCookie("token", newToken, { secure: true, httpOnly: true });
 			setToken(newToken);
+			setIsAuthenticated(true);
 		} else {
 			logout();
 		}
@@ -58,11 +62,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const logout = () => {
 		removeCookie("token");
 		setToken(null);
+		setIsAuthenticated(false);
 		navigate("/");
 	};
 
 	return (
-		<AuthContext.Provider value={{ token, setToken: handleSetToken, logout }}>
+		<AuthContext.Provider
+			value={{ isAuthenticated, token, setToken: handleSetToken, logout }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

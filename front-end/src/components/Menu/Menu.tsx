@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { MenuProps } from "./utils/munu.types";
+import { IMenuProps } from "./utils/munu.types";
 
-const Menu: React.FC<MenuProps> = ({ target, children, classname }) => {
+const Menu: React.FC<IMenuProps> = ({ target, children, classname }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const menuRef = useRef<HTMLDivElement | null>(null);
 

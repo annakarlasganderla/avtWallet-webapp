@@ -20,4 +20,5 @@ export interface IListProps {
 	loading?: boolean;
 	isTitle: boolean;
 	onChangePage?: (page: number) => void;
+	onClick?: (index: string | number) => void;
 }

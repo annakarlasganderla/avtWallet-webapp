@@ -9,7 +9,7 @@ export default {
 	component: SideBar,
 } as Meta;
 
-export const Default: Story = () => {
-	return <SideBar />;
+export const Default: Story = (args) => {
+	return <SideBar {...args} />;
 };
 Default.storyName = "Padrão";

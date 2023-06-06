@@ -1,8 +1,7 @@
-import Button from "../Button";
-import { ModalProps } from "./utils/modal.types";
+import { IModalProps } from "./utils/modal.types";
 import { IoMdClose } from "react-icons/io";
 
-const Modal: React.FC<ModalProps> = (props: ModalProps) => {
+const Modal: React.FC<IModalProps> = (props: IModalProps) => {
 	const { open, onClose, title, width, height, children } = props;
 
 	const overlayClasses = `fixed top-0 left-0 w-full h-full bg-black ${
@@ -22,9 +21,11 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
 			>
 				<div className="flex justify-between items-center px-4 py-2 bg-gray-200 rounded-t-lg">
 					{title && <h2 className="text-lg font-bold">{title}</h2>}
-					<Button onClick={onClose} type="button" width="1.75rem" height="1.75rem">
-						<IoMdClose className="w-5 h-5" color="white" />
-					</Button>
+					<IoMdClose
+						className="w-6 h-6 cursor-pointer hover:opacity-80"
+						color="black"
+						onClick={onClose}
+					/>
 				</div>
 				<div className="p-4 h-full overflow-auto">{children}</div>
 			</div>

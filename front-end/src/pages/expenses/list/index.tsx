@@ -117,7 +117,7 @@ const RevenueList = () => {
 				</div>
 			</div>
 
-			<div className="w-4/5 h-2/3 md:h-3/5 md:w-3/5 ">
+			<div className="w-4/5 h-2/3 md:h-3/5 md:w-3/5">
 				<List
 					columns={columns}
 					items={items}

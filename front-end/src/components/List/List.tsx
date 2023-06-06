@@ -2,7 +2,7 @@ import moment from "moment";
 import { IListProps, columnType } from "./utils/list.types";
 
 function List(props: IListProps) {
-	const { columns, items, loading, onChangePage, isTitle } = props;
+	const { columns, items, loading, onChangePage, isTitle, onClick } = props;
 
 	const renderHeader = () => {
 		return (
@@ -40,6 +40,7 @@ function List(props: IListProps) {
 			<div
 				className="w-full h-12 flex justify-between items-center px-8 gap-x-4 border-2 border-black rounded-lg overflow-y-none overflow-x-auto"
 				key={index}
+				onClick={() => (onClick ? onClick(item.id ? item.id : index) : null)}
 			>
 				{columns.map((column, index) => (
 					<div

@@ -10,7 +10,7 @@ const SideBarItem = (props: ISiderBarItemProps) => {
 				hover:border-b-4 md:hover:border-b-0 md:hover:border-l-8`}
 			onClick={props.onClick}
 		>
-			<span>{props.icon}</span>
+			{props.icon && <span>{props.icon}</span>}
 			<span className="font-bold text-black text-xl hidden md:block">{props.text}</span>
 		</div>
 	);

@@ -98,8 +98,8 @@ export class PageMetaDto {
 
 export class PageDto<T> {
   constructor(data: T[], options: PageMetaDto) {
-    this.data;
-    this.options;
+    this.data = data;
+    this.options = options;
   }
 
   @ApiProperty({ isArray: true })

@@ -11,7 +11,9 @@ import {
   PageOptionsDto,
   WhereDto,
 } from '../dto/page.dto';
-import { PayMethod } from '../enum/payMethod';
+import { TagsService } from 'src/tags/services/tags.service';
+import { SourcesService } from 'src/sources/services/sources.service';
+import { UsersService } from 'src/users/services/users.service';
 
 @Injectable()
 export class RevenueService {
@@ -20,11 +22,41 @@ export class RevenueService {
   constructor(
     @InjectRepository(Revenue)
     private revenueRepository: Repository<Revenue>,
+    private userService: UsersService,
+    private sourceService: SourcesService,
+    private tagService: TagsService,
   ) {}
 
   async create(createRevenueDto: CreateRevenueDto) {
+    const { sourceId, tagId, userId } = createRevenueDto;
+
+    const user = await this.userService.findOne(userId);
+
+    if (!user) throw new HttpException('user_not_found', 404);
+
+    const source = await this.sourceService.findOne(sourceId);
+
+    if (!source) throw new HttpException('source_not_found', 404);
+
+    const tag = await this.tagService.findOne(tagId);
+
+    if (!tag) throw new HttpException('tag_not_found', 404);
+
+    const newRevenue = new Revenue();
+
+    newRevenue.name = createRevenueDto.name;
+    newRevenue.coin = createRevenueDto.coin;
+    newRevenue.value = createRevenueDto.value;
+    newRevenue.source = source;
+    newRevenue.tag = tag;
+    newRevenue.payMethod = createRevenueDto.payMethod;
+    newRevenue.description = createRevenueDto.description;
+    newRevenue.typeRevenue = createRevenueDto.typeRevenue;
+    newRevenue.user = user;
+    newRevenue.date = new Date();
+
     try {
-      this.revenueRepository.create(createRevenueDto);
+      await this.revenueRepository.save(newRevenue);
       this.logger.log('Revenue created successfully');
 
       return { message: createRevenueDto.name };
@@ -39,15 +71,6 @@ export class RevenueService {
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
 
       const { whereString, values } = this.buildWhere(where);
-
-      // queryBuilder
-      //   .orderBy('revenue.createdAt', order)
-      //   .skip(skip)
-      //   .take(take)
-      //   .where('revenue.tagId = :tagId AND revenue.payMethod :payMethod', {
-      //     tagId: 1,
-      //     payMethod: PayMethod.MONEY,
-      //   });
 
       queryBuilder
         .orderBy('revenue.createdAt', order)
@@ -84,6 +107,8 @@ export class RevenueService {
   }
 
   async update(id: string, updateRevenueDto: UpdateRevenueDto) {
+    const { sourceId, tagId } = updateRevenueDto;
+
     try {
       const revenue = await this.revenueRepository.findOne({
         where: {
@@ -94,6 +119,14 @@ export class RevenueService {
 
       if (!revenue) throw new HttpException('Revenue not found', 404);
 
+      const source = await this.sourceService.findOne(sourceId);
+
+      if (!source) throw new HttpException('source_not_found', 404);
+
+      const tag = await this.tagService.findOne(tagId);
+
+      if (!tag) throw new HttpException('tag_not_found', 404);
+
       revenue.name = updateRevenueDto.name;
       revenue.coin = updateRevenueDto.coin;
       revenue.value = updateRevenueDto.value;
@@ -101,8 +134,8 @@ export class RevenueService {
       revenue.date = updateRevenueDto.date;
       revenue.description = updateRevenueDto.description;
       revenue.typeRevenue = updateRevenueDto.typeRevenue;
-      revenue.source = updateRevenueDto.source;
-      revenue.tag = updateRevenueDto.tag;
+      revenue.source = source;
+      revenue.tag = tag;
       revenue.updatedAt = new Date();
 
       await this.revenueRepository.update(id, revenue);
@@ -135,7 +168,7 @@ export class RevenueService {
     let whereString = '';
     let values = {};
 
-    if (options.name != '') {
+    if (options.name && options.name != '') {
       whereString += `revenue.name = :name`;
 
       values['name'] = options.name;
@@ -146,7 +179,7 @@ export class RevenueService {
 
       whereString.length > 0
         ? (whereString += ` AND ${condition}`)
-        : `${condition}`;
+        : (whereString = `${condition}`);
 
       values['payMethod'] = options.payMethod;
     }
@@ -156,7 +189,7 @@ export class RevenueService {
 
       whereString.length > 0
         ? (whereString += ` AND ${condition}`)
-        : `${condition}`;
+        : (whereString = `${condition}`);
 
       values['tagId'] = options.tagId;
     }
@@ -166,7 +199,7 @@ export class RevenueService {
 
       whereString.length > 0
         ? (whereString += ` AND ${condition}`)
-        : `${condition}`;
+        : (whereString = `${condition}`);
 
       values['value'] = options.value;
     }

@@ -13,13 +13,13 @@ export abstract class AbstractClass {
   id: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @Column({ nullable: true })
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @Column({ nullable: true })
-  deletedAt: Date;
+  deletedAt?: Date;
 
   @BeforeInsert()
   addUuid() {

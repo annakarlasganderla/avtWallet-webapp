@@ -29,15 +29,12 @@ export class Revenue extends AbstractClass {
   @Column()
   typeRevenue: typeRevenue;
 
-  @Column()
-  @ManyToOne(() => User, (user) => user.id)
-  userId: string;
+  @ManyToOne(() => User, (user) => user.revenues)
+  user: User;
 
-  @Column()
-  @ManyToOne(() => Source, (source) => source.id)
-  source: string;
+  @ManyToOne(() => Source, (source) => source)
+  source: Source;
 
-  @Column()
-  @ManyToOne(() => Tag, (tag) => tag.id)
-  tag: string;
+  @ManyToOne(() => Tag, (tag) => tag)
+  tag: Tag;
 }

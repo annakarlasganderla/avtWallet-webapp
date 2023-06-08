@@ -8,5 +8,6 @@ import { Source } from './entities/source.entity';
   imports: [TypeOrmModule.forFeature([Source])],
   controllers: [SourcesController],
   providers: [SourcesService],
+  exports: [SourcesService],
 })
 export class SourcesModule {}

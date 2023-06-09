@@ -26,7 +26,7 @@ export class UsersController {
 
   @Get('get/:id')
   async findOne(@Param('id') id: string) {
-    return await this.usersService.findOne(id);
+    return await this.usersService.findById(id);
   }
 
   @Put('edit/:id')

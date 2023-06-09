@@ -15,6 +15,7 @@ import {
   UpdatedEntity,
 } from 'src/common/dto/default-responses';
 import { handleErrors } from 'src/common/services/common.service';
+import { GetUserResponse } from '../dto/get-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -34,6 +35,27 @@ export class UsersService {
       this.logger.debug('User created successfully');
 
       return { message: `User ${user.name} created successfully` };
+    } catch (e: any) {
+      handleErrors(e.message, e.code);
+    }
+  }
+
+  async findById(id: string): Promise<GetUserResponse> {
+    try {
+      const user = await this.usersRepository.findOne({
+        where: {
+          id,
+          deletedAt: IsNull(),
+        },
+      });
+
+      if (!user) throw new HttpException('user_not_found', 404);
+
+      return {
+        name: user.name,
+        email: user.email,
+        login: user.login,
+      };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }

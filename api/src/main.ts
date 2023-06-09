@@ -11,7 +11,9 @@ import * as basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const logger = new Logger();
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'debug'],
+  });
   const PORT = process.env.STAGE === 'dev' ? 3030 : process.env.PORT;
 
   app.use(
@@ -42,7 +44,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  logger.log(`Application is running on: http://localhost:${PORT}`);
+  logger.debug(`Application is running on: http://localhost:${PORT}`);
   await app.listen(PORT);
 }
 bootstrap();

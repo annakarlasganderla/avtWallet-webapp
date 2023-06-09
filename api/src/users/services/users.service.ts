@@ -29,10 +29,11 @@ export class UsersService {
     try {
       const user = this.usersRepository.create(createUserDto);
 
-      this.logger.log('User created successfully');
       this.usersRepository.save(user);
 
-      return { message: user.name };
+      this.logger.debug('User created successfully');
+
+      return { message: `User ${user.name} created successfully` };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }

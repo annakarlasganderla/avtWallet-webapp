@@ -38,14 +38,6 @@ export class UsersService {
     }
   }
 
-  async findAll(): Promise<User[]> {
-    try {
-      return this.usersRepository.find();
-    } catch (e: any) {
-      handleErrors(e.message, e.code);
-    }
-  }
-
   async findOne(id: string): Promise<User> {
     try {
       const user = await this.usersRepository.findOne({

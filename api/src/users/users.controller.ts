@@ -24,11 +24,6 @@ export class UsersController {
     return await this.usersService.create(createUserDto);
   }
 
-  @Get('list-all')
-  async findAll() {
-    return await this.usersService.findAll();
-  }
-
   @Get('get/:id')
   async findOne(@Param('id') id: string) {
     return await this.usersService.findOne(id);

@@ -5,7 +5,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { UpdateUserDto, UpdateUserResponse } from '../dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
@@ -71,7 +71,7 @@ export class UsersService {
   async update(
     id: string,
     updateUserDto: UpdateUserDto,
-  ): Promise<UpdatedEntity> {
+  ): Promise<UpdateUserResponse> {
     try {
       const user = await this.usersRepository.findOne({
         where: {
@@ -88,7 +88,14 @@ export class UsersService {
         user.updatedAt = new Date();
 
         await this.usersRepository.update(id, user);
-        return { message: updateUserDto.name };
+
+        this.logger.debug('User updated successfully');
+
+        return {
+          name: user.name,
+          email: user.email,
+          login: user.login,
+        };
       }
 
       throw new InternalServerErrorException();

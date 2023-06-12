@@ -8,7 +8,7 @@ const TagsApi = () => {
         return Promise.reject(error.response);
     };
 
-    const getTags = async () => {
+    const listAllTags = async () => {
         try {
             return await listAll(url);
         } catch (e: any) {
@@ -40,7 +40,7 @@ const TagsApi = () => {
         }
     }
 
-    return { getTags, postTags, updateTag, deleteTag }
+    return { listAllTags, postTags, updateTag, deleteTag }
 }
 
 export default TagsApi;

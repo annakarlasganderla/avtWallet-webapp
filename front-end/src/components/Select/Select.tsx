@@ -1,8 +1,16 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import { ISelectProps } from "./utils/select.types";
 import { ISelectOption } from "../../types/Interfaces.type";
 
 const Select = (props: ISelectProps) => {
+	const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		let selectedValue;
+		if (props.type == "number") {
+			selectedValue = Number(event.target.value);
+		}
+		props.onChange(selectedValue);
+	};
+
 	return (
 		<div className={"flex flex-col w-full"}>
 			<select
@@ -10,14 +18,15 @@ const Select = (props: ISelectProps) => {
 				disabled={props.disabled}
 				multiple={props.multiple}
 				required={props.required}
-				onChange={props.onChange}
-				className={`w-full h-full block text-sm border-2 rounded-lg
+				onChange={handleChange}
+				className={`w-full block text-sm border-2 rounded-lg
 					disabled:bg-gray-300 disabled:border-gray-400 resize-none
 					focus:outline-none focus:ring-0.2 focus:ring-offset-0.5
-				${props.error
+				${
+					props.error
 						? "border-red-500 focus:border-red-500 focus:ring-red-500"
 						: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
-					}`}
+				}`}
 				defaultValue={props.value || ""}
 			>
 				{props.optionDefault ? (

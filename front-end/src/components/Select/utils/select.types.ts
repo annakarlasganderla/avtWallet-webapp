@@ -1,6 +1,5 @@
 import { ISelectOption } from "../../../types/Interfaces.type";
 
-type selectType = "string" | "number";
 export interface ISelectProps {
 	options: ISelectOption[] | [];
 	name?: string;
@@ -12,6 +11,5 @@ export interface ISelectProps {
 	class?: string;
 	style?: React.CSSProperties | undefined;
 	error?: string;
-	type?: selectType;
 	onChange: (event: any) => void;
 }

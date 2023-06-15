@@ -8,6 +8,7 @@ const Select = (props: ISelectProps) => {
 		if (props.type == "number") {
 			selectedValue = Number(event.target.value);
 		}
+		selectedValue = event.target.value;
 		props.onChange(selectedValue);
 	};
 

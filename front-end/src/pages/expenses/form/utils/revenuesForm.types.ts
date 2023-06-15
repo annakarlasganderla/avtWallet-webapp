@@ -1,4 +1,4 @@
-import { ISource, ITags, TypeRevenue } from "../../../../types/Interfaces.type";
+import { ISource, ITags, PaymentMethods, TypeRevenue } from "../../../../types/Interfaces.type";
 
 export enum revenuesTags {
 	alimentacao,
@@ -25,10 +25,11 @@ export interface IRevenueSchema {
 	name: string;
 	coin: string;
 	value: number;
-	source: ISource | null;
-	tag: ITags | null;
-	payMethod: string;
+	sourceId: ISource | null;
+	tagId: ITags | null;
+	payMethod: PaymentMethods | null;
 	date: Date | null;
 	typeRevenue: TypeRevenue | null;
 	description?: string;
+	userId: string;
 }

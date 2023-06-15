@@ -1,5 +1,5 @@
+import React from "react";
 import Button from "../../../components/Button";
-import Header from "../../../components/Header";
 import InputValue from "../../../components/InputValue/InputValue";
 import Select from "../../../components/Select/Select";
 import TextField from "../../../components/TextField";
@@ -7,7 +7,7 @@ import { useRevenuesFormController } from "./hooks/useRevenuesFormController";
 import { IRevenuesForm } from "./utils/revenuesForm.types";
 
 const RevenuesForm = (props: IRevenuesForm) => {
-	const { coinsOptions, revenue, title, navigate } = useRevenuesFormController(props);
+	const { coinsOptions, revenue, title, navigate, tags, sources, payMethods, typeRevenues } = useRevenuesFormController(props);
 
 	return (
 		<div className="w-full flex flex-col items-center mt-12">
@@ -40,27 +40,27 @@ const RevenuesForm = (props: IRevenuesForm) => {
 				</div>
 				<div className="flex flex-col md:flex-row gap-4">
 					<Select
-						name={"source"}
+						name={"sourceId"}
 						optionDefault={"Source"}
-						options={[]}
-						value={revenue.values.source}
+						options={sources}
+						value={revenue.values.sourceId}
 						onChange={revenue.handleChange}
-						error={revenue.errors.source}
+						error={revenue.errors.sourceId}
 					/>
 					<Select
-						name={"tag"}
+						name={"tagId"}
 						optionDefault={"Tag"}
-						options={[]}
-						value={revenue.values.tag}
+						options={tags}
+						value={revenue.values.tagId}
 						onChange={revenue.handleChange}
-						error={revenue.errors.tag}
+						error={revenue.errors.tagId}
 					/>
 				</div>
 				<div className="flex flex-col md:flex-row gap-4">
 					<Select
 						name={"payMethod"}
 						optionDefault={"Pay Method"}
-						options={[]}
+						options={payMethods}
 						value={revenue.values.payMethod}
 						onChange={revenue.handleChange}
 						error={revenue.errors.payMethod}
@@ -68,7 +68,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 					<Select
 						name={"typeRevenue"}
 						optionDefault={"Type Revenue"}
-						options={[]}
+						options={typeRevenues}
 						value={revenue.values.typeRevenue}
 						onChange={revenue.handleChange}
 						error={revenue.errors.typeRevenue}

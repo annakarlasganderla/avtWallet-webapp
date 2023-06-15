@@ -12,7 +12,7 @@ export class Revenue extends AbstractClass {
   name: string;
 
   @Column()
-  coin: number;
+  coin: string;
 
   @Column()
   value: number;

@@ -11,9 +11,11 @@ import { SourcesService } from './services/sources.service';
 import { CreateSourceDto } from './dto/create-source.dto';
 import { UpdateSourceDto } from './dto/update-source.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/decorators/auth.decorators';
 
 @ApiTags('sources')
 @Controller('sources')
+@Public()
 export class SourcesController {
   constructor(private readonly sourcesService: SourcesService) { }
 

@@ -18,11 +18,10 @@ export class CreateRevenueDto {
   name: string;
 
   @ApiProperty({
-    example: 50,
+    example: "BRL",
   })
-  @IsNumber()
   @IsNotEmpty()
-  coin: number;
+  coin: string;
 
   @ApiProperty({
     example: 400,
@@ -61,7 +60,6 @@ export class CreateRevenueDto {
     example: 'Almocos no Chefe lops',
   })
   @IsString()
-  @IsNotEmpty()
   description: string;
 
   @ApiProperty({

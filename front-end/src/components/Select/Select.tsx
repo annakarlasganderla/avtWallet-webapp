@@ -1,4 +1,6 @@
+import React from "react";
 import { ISelectProps } from "./utils/select.types";
+import { ISelectOption } from "../../types/Interfaces.type";
 
 const Select = (props: ISelectProps) => {
 	return (
@@ -12,11 +14,10 @@ const Select = (props: ISelectProps) => {
 				className={`w-full h-full block text-sm border-2 rounded-lg
 					disabled:bg-gray-300 disabled:border-gray-400 resize-none
 					focus:outline-none focus:ring-0.2 focus:ring-offset-0.5
-				${
-					props.error
+				${props.error
 						? "border-red-500 focus:border-red-500 focus:ring-red-500"
 						: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
-				}`}
+					}`}
 				defaultValue={props.value || ""}
 			>
 				{props.optionDefault ? (
@@ -24,9 +25,9 @@ const Select = (props: ISelectProps) => {
 						{props.optionDefault}
 					</option>
 				) : null}
-				{props.options.map((item: any, index) => (
+				{props.options?.map((item: ISelectOption, index) => (
 					<option key={index} value={item.data}>
-						{item.text}
+						{item.name}
 					</option>
 				))}
 			</select>

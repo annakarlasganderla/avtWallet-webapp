@@ -25,7 +25,7 @@ export class RevenueService {
     private userService: UsersService,
     private sourceService: SourcesService,
     private tagService: TagsService,
-  ) {}
+  ) { }
 
   async create(createRevenueDto: CreateRevenueDto) {
     const { sourceId, tagId, userId } = createRevenueDto;

@@ -3,7 +3,7 @@ import { typeRevenue } from '../enum/typeRevenue';
 
 export class UpdateRevenueDto {
   name: string;
-  coin: number;
+  coin: string;
   value: number;
   sourceId: string;
   tagId: string;

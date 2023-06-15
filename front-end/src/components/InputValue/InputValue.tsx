@@ -1,3 +1,4 @@
+import { ISelectOption } from "../../types/Interfaces.type";
 import { IInputValueProps } from "./utils/inputValue.types";
 
 const InputValue = (props: IInputValueProps) => {
@@ -14,9 +15,9 @@ const InputValue = (props: IInputValueProps) => {
 						disabled:bg-gray-300 focus:outline-0"
 					defaultValue={props.valueSelect}
 				>
-					{props.options.map((item: any, index) => (
+					{props.options.map((item: ISelectOption, index) => (
 						<option key={index} value={item.data}>
-							{item.text}
+							{item.name}
 						</option>
 					))}
 				</select>
@@ -36,10 +37,9 @@ const InputValue = (props: IInputValueProps) => {
 						[&::-webkit-outer-spin-button]:appearance-none 
 						[&::-webkit-inner-spin-button]:m-0 
 						[&::-webkit-inner-spin-button]:appearance-none
-						${
-							props.error
-								? "border-red-500 focus:border-red-500 focus:ring-red-500"
-								: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
+						${props.error
+							? "border-red-500 focus:border-red-500 focus:ring-red-500"
+							: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
 						}`}
 				/>
 			</div>

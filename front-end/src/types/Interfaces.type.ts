@@ -1,6 +1,6 @@
-export interface ISelectOption {
-	text: string;
-	data: any;
+export interface ISelectOption<T = any> {
+	name: string;
+	data: T;
 }
 
 export type PageOrder = "ASC" | "DESC";
@@ -19,7 +19,17 @@ export interface ITags {
 	name: string;
 }
 
-export type TypeRevenue = "EXPENSE" | "INCOMING";
+export enum TypeRevenue {
+	EXPENSE,
+	INCOMING
+}
+
+export enum PaymentMethods {
+	PIX,
+	CREDITCARD,
+	DEBITCARD,
+	MONEY,
+}
 
 export interface IRevenue {
 	id?: string;
@@ -31,8 +41,8 @@ export interface IRevenue {
 	value: number;
 	source: ISource;
 	tag: ITags;
-	payMethod: string;
+	payMethod: number;
 	date: Date;
-	typeRevenue: TypeRevenue;
+	typeRevenue: number;
 	description?: string;
 }

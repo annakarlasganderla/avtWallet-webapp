@@ -11,11 +11,13 @@ import { TagsService } from './services/tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/decorators/auth.decorators';
 
 @ApiTags('tags')
 @Controller('tags')
+@Public()
 export class TagsController {
-  constructor(private readonly tagsService: TagsService) {}
+  constructor(private readonly tagsService: TagsService) { }
 
   @Post('create')
   create(@Body() createTagDto: CreateTagDto) {

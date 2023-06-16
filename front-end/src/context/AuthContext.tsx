@@ -1,5 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
 interface AuthData {
@@ -16,20 +15,21 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthData | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-	const [token, setToken] = useState<string | null>(cookies.token || null);
+	// const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+	const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const storedToken = cookies.token;
+	const isAuthenticated = useMemo(() => {
+		return token ? true : false;
+	}, [token]);
 
+	useEffect(() => {
+		const storedToken = localStorage.getItem("token");
 		if (storedToken) {
 			const { exp } = parseToken(storedToken);
 
 			if (exp && exp * 1000 > Date.now()) {
 				setToken(storedToken);
-				setIsAuthenticated(true);
 			} else {
 				logout();
 			}
@@ -51,18 +51,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	const handleSetToken = (newToken: string | null) => {
 		if (newToken) {
-			setCookie("token", newToken, { secure: true, httpOnly: true });
+			localStorage.setItem("token", newToken);
 			setToken(newToken);
-			setIsAuthenticated(true);
 		} else {
 			logout();
 		}
 	};
 
 	const logout = () => {
-		removeCookie("token");
+		localStorage.removeItem("token");
 		setToken(null);
-		setIsAuthenticated(false);
 		navigate("/");
 	};
 

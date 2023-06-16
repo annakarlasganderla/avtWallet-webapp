@@ -1,6 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { useEffect } from "react";
-import { useCookies } from "react-cookie";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 const api: AxiosInstance = axios.create({
 	baseURL: "http://localhost:3030/",
@@ -8,42 +6,23 @@ const api: AxiosInstance = axios.create({
 		"Content-Type": "application/json;charset=utf-8",
 	},
 });
-const AuthorizationInterceptor: React.FC = () => {
-	const [cookies] = useCookies(["token"]);
-	const token = cookies.token;
 
-	useEffect(() => {
-		const requestInterceptor = api.interceptors.request.use(
-			(config) => {
-				if (token) {
-					config.headers!.Authorization = `Bearer ${token}`;
-				}
-				return config;
-			},
-			(error) => {
-				return Promise.reject(error);
-			},
-		);
+api.interceptors.request.use((config) => {
+	const token = localStorage.getItem("token");
+	if (token) {
+		config.headers!.Authorization = `Bearer ${token}`;
+	}
+	return config;
+});
 
-		const responseInterceptor = api.interceptors.response.use(
-			(response: AxiosResponse) => response,
-			(error) => {
-				if (error.response?.status === 401) {
-					// Tratar erro de autorização aqui
-				}
-				return Promise.reject(error);
-			},
-		);
-
-		return () => {
-			api.interceptors.request.eject(requestInterceptor);
-			api.interceptors.response.eject(responseInterceptor);
-		};
-	}, [token]);
-
-	return null;
-};
+api.interceptors.response.use(
+	(response: AxiosResponse) => response,
+	(error) => {
+		if (error.response?.status === 401) {
+			// Tratar erro de autorização aqui
+		}
+		return Promise.reject(error);
+	},
+);
 
 export default api;
-
-export { AuthorizationInterceptor };

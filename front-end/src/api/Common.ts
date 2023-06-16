@@ -15,7 +15,7 @@ export const post = async <T>(route: string, body: T) => {
 	}
 };
 
-export const listAll = async (route: string) => {
+export const listAll = async <U>(route: string): Promise<U> => {
 	try {
 		return (await api.get(`${route}/list-all`)).data;
 	} catch (e: any) {
@@ -23,7 +23,7 @@ export const listAll = async (route: string) => {
 	}
 };
 
-export const getById = async (route: string, id: string) => {
+export const getById = async <U>(route: string, id: string): Promise<U> => {
 	try {
 		return (await api.get(`${route}/get/${id}`)).data;
 	} catch (e: any) {
@@ -31,7 +31,7 @@ export const getById = async (route: string, id: string) => {
 	}
 };
 
-export const update = async <T>(route: string, body: T, id: string) => {
+export const update = async <T, U>(route: string, body: T, id: string): Promise<U> => {
 	try {
 		return (await api.put(`${route}/edit/${id}`, body)).data;
 	} catch (e: any) {

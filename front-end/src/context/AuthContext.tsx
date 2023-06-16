@@ -15,7 +15,6 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthData | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	// const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 	const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
 	const navigate = useNavigate();
 

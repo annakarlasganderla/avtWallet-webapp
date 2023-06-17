@@ -10,5 +10,6 @@ export const registerFormSchema = () => {
 		confirmPassword: Yup.string()
 			.oneOf([Yup.ref("password"), ""], "Password must match")
 			.required("Confirm Password is required"),
+		login: Yup.string().required("Login is required").matches(/^\S+$/, 'Não pode conter espaços entre os textos'),
 	});
 };

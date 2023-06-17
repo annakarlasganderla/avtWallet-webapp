@@ -63,6 +63,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						options={payMethods}
 						value={revenue.values.payMethod}
 						onChange={revenue.handleChange}
+						type="number"
 						error={revenue.errors.payMethod}
 					/>
 					<Select
@@ -71,6 +72,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						options={typeRevenues}
 						value={revenue.values.typeRevenue}
 						onChange={revenue.handleChange}
+						type="number"
 						error={revenue.errors.typeRevenue}
 					/>
 				</div>

@@ -25,7 +25,7 @@ const Login = () => {
 						<TextField
 							type={"text"}
 							name={"login"}
-							label={"Email"}
+							label={"Login"}
 							value={loginForm.values.login}
 							onChange={loginForm.handleChange}
 							error={loginForm.errors.login}

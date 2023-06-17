@@ -1,6 +1,7 @@
 import { IRevenueSchema } from "../pages/expenses/form/utils/revenuesForm.types";
-import { IPageable, PageOrder, IRevenue } from "../types/Interfaces.type";
+import { IPageable, PageOrder } from "../types/Interfaces.type";
 import { listAll, post, remove, update } from './Common';
+import { IRevenueList } from "../pages/expenses/list/utils/revenuesList.types";
 
 const RevenueApi = () => {
     const url = '/revenues';
@@ -9,7 +10,13 @@ const RevenueApi = () => {
         return Promise.reject(error.response);
     };
 
-    // falta fazer o list-all 
+    const listAllRevenues = async (obj: IRevenueList) => {
+        try {
+            return await listAll(url);
+        } catch (e: any) {
+            return handleError(e);
+        }
+    }
 
     const postRevenue = async (obj: IRevenueSchema) => {
         try {
@@ -35,7 +42,7 @@ const RevenueApi = () => {
         }
     }
 
-    return { postRevenue, updateRevenue, deleteRevenue }
+    return { postRevenue, updateRevenue, deleteRevenue, listAllRevenues }
 }
 
 export default RevenueApi;

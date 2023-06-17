@@ -77,11 +77,7 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 		},
 		validationSchema: validationSchema,
 		onSubmit: (value) => {
-			let newObject = value;
-			newObject.payMethod = Number(newObject.payMethod);
-			newObject.typeRevenue = Number(newObject.typeRevenue);
-
-			revenueApi.postRevenue(newObject)
+			revenueApi.postRevenue(value)
 		},
 	});
 

@@ -40,6 +40,14 @@ const Register = () => {
 							error={userForm.errors.email}
 						/>
 						<TextField
+							type={"text"}
+							name={"login"}
+							label={"Login"}
+							value={userForm.values.login}
+							onChange={userForm.handleChange}
+							error={userForm.errors.login}
+						/>
+						<TextField
 							type={"password"}
 							name={"password"}
 							label={"Password"}

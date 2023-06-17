@@ -13,12 +13,14 @@ import {
 	TypeRevenue,
 } from "../../../../types/Interfaces.type";
 import { Tags } from "../../../../types/tags.types";
+import useAuth from "../../../../context/hooks/useAuth";
 
 export const useRevenuesFormController = (props: IRevenuesForm) => {
 	const navigate = useNavigate();
 	const sourceApi = SourcesApi();
 	const tagApi = TagsApi();
 	const revenueApi = RevenueApi();
+	const { user } = useAuth()
 
 	const [tags, setTags] = useState<ISelectOption[]>([]);
 	const [sources, setSources] = useState<ISelectOption[]>([]);
@@ -83,7 +85,7 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 			typeRevenue: null,
 			date: null,
 			description: "",
-			userId: "5d2422d4-3360-4ad8-a127-d5323969fde6",
+			userId: user.uuid,
 		},
 		validationSchema: validationSchema,
 		validateOnChange: false,

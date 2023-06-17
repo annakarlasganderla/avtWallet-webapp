@@ -19,9 +19,11 @@ export const useRegisterController = () => {
 			confirmPassword: ""
 		},
 		validationSchema: validationSchema,
+		validateOnChange: false,
 		onSubmit: (value) => {
 			const { confirmPassword, ...restValues } = value;
 			userApi.postUser(restValues)
+			userForm.resetForm({ values: userForm.initialValues });
 		},
 	});
 

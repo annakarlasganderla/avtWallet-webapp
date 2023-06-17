@@ -2,11 +2,13 @@ import { IRevenueSchema } from "../pages/expenses/form/utils/revenuesForm.types"
 import { IPageable, PageOrder } from "../types/Interfaces.type";
 import { listAll, post, remove, update } from './Common';
 import { IRevenueList } from "../pages/expenses/list/utils/revenuesList.types";
+import toast from 'react-hot-toast';
 
 const RevenueApi = () => {
     const url = '/revenues';
 
     const handleError = (error: any) => {
+        toast.error('Critical error! Contact the administrator')
         return Promise.reject(error.response);
     };
 
@@ -20,6 +22,7 @@ const RevenueApi = () => {
 
     const postRevenue = async (obj: IRevenueSchema) => {
         try {
+            toast.success('Revenue created successfully')
             return await post(url, obj)
         } catch (e: any) {
             return handleError(e);
@@ -28,6 +31,7 @@ const RevenueApi = () => {
 
     const updateRevenue = async (obj: IRevenueSchema, id: string) => {
         try {
+            toast.success('Revenue updated successfully')
             return await update(url, obj, id);
         } catch (e: any) {
             return handleError(e);
@@ -36,6 +40,7 @@ const RevenueApi = () => {
 
     const deleteRevenue = async (id: string) => {
         try {
+            toast.success('Revenue deleted successfully')
             return await remove(url, id);
         } catch (e: any) {
             return handleError(e);

@@ -13,6 +13,7 @@ import {
 	TypeRevenue,
 } from "../../../../types/Interfaces.type";
 import { Tags } from "../../../../types/tags.types";
+import toast, { Toaster } from 'react-hot-toast';
 
 export const useRevenuesFormController = (props: IRevenuesForm) => {
 	const navigate = useNavigate();
@@ -86,12 +87,14 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 			userId: "5d2422d4-3360-4ad8-a127-d5323969fde6",
 		},
 		validationSchema: validationSchema,
+		validateOnChange: false,
 		onSubmit: (value) => {
 			let newObject = value;
 			newObject.payMethod = Number(newObject.payMethod);
 			newObject.typeRevenue = Number(newObject.typeRevenue);
 
 			revenueApi.postRevenue(newObject);
+			revenue.resetForm({ values: revenue.initialValues });
 		},
 	});
 

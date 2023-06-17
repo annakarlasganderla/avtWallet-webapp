@@ -1,10 +1,12 @@
 import { listAll, post, remove, update } from './Common';
 import { UsersDto } from '../types/users.types';
+import toast from 'react-hot-toast';
 
 const UserApi = () => {
     const url = '/users'
 
     const handleError = (error: any) => {
+        toast.error('Critical error! Contact the administrator')
         return Promise.reject(error.response);
     };
 
@@ -18,6 +20,7 @@ const UserApi = () => {
 
     const postUser = async (obj: UsersDto) => {
         try {
+            toast.success('User created successfully')
             return await post(url, obj);
         } catch (e: any) {
             return handleError(e);

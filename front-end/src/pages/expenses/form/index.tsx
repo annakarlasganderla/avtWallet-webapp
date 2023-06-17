@@ -5,6 +5,7 @@ import Select from "../../../components/Select/Select";
 import TextField from "../../../components/TextField";
 import { useRevenuesFormController } from "./hooks/useRevenuesFormController";
 import { IRevenuesForm } from "./utils/revenuesForm.types";
+import { toast } from 'react-hot-toast';
 
 const RevenuesForm = (props: IRevenuesForm) => {
 	const { coinsOptions, revenue, title, navigate, tags, sources, payMethods, typeRevenues } = useRevenuesFormController(props);
@@ -63,7 +64,6 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						options={payMethods}
 						value={revenue.values.payMethod}
 						onChange={revenue.handleChange}
-						type="number"
 						error={revenue.errors.payMethod}
 					/>
 					<Select
@@ -72,7 +72,6 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						options={typeRevenues}
 						value={revenue.values.typeRevenue}
 						onChange={revenue.handleChange}
-						type="number"
 						error={revenue.errors.typeRevenue}
 					/>
 				</div>

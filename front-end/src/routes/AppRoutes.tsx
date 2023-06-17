@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import Loading from "../components/Loading/Loading";
 import { AuthProvider } from "../context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 
 const Layout = lazy(() => import("../components/Layout/Layout"));
 const Login = lazy(() => import("../pages/login"));
@@ -16,6 +17,8 @@ export function AppRoutes() {
 		<BrowserRouter>
 			<AuthProvider>
 				<Suspense fallback={<Loading />}>
+					<Toaster position="top-right" />
+
 					<Routes>
 						<Route path="/" element={<Login />} />
 						<Route path="/register" element={<Register />} />
@@ -35,6 +38,7 @@ export function AppRoutes() {
 							</Route>
 						</Route>
 					</Routes>
+
 				</Suspense>
 			</AuthProvider>
 		</BrowserRouter>

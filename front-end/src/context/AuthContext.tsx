@@ -1,9 +1,11 @@
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import jwt_decode from "jwt-decode";
 
 interface AuthData {
 	isAuthenticated: boolean;
 	token: string | null;
+	user: User;
 	setToken: (token: string | null) => void;
 	logout: () => void;
 }
@@ -12,10 +14,25 @@ interface AuthProviderProps {
 	children: ReactNode;
 }
 
+interface TokenPayload {
+	sub: string;
+	exp: number;
+	username: string;
+}
+
+interface User {
+	uuid: string;
+	username: string;
+}
+
 const AuthContext = createContext<AuthData | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+	const [user, setUser] = useState<User>({
+		uuid: "",
+		username: "",
+	});
 	const navigate = useNavigate();
 
 	const isAuthenticated = useMemo(() => {
@@ -25,10 +42,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	useEffect(() => {
 		const storedToken = localStorage.getItem("token");
 		if (storedToken) {
-			const { exp } = parseToken(storedToken);
+			const { exp, username, sub } = parseToken(storedToken);
 
 			if (exp && exp * 1000 > Date.now()) {
 				setToken(storedToken);
+				setUser({
+					uuid: sub,
+					username: username,
+				});
 			} else {
 				logout();
 			}
@@ -36,16 +57,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	}, []);
 
 	const parseToken = (token: string) => {
-		const base64Url = token.split(".")[1];
-		const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-		const jsonPayload = decodeURIComponent(
-			atob(base64)
-				.split("")
-				.map((char) => "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2))
-				.join(""),
-		);
-
-		return JSON.parse(jsonPayload);
+		const decodedToken = jwt_decode<TokenPayload>(token);
+		return decodedToken;
 	};
 
 	const handleSetToken = (newToken: string | null) => {
@@ -65,7 +78,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ isAuthenticated, token, setToken: handleSetToken, logout }}
+			value={{ isAuthenticated, token, user, setToken: handleSetToken, logout }}
 		>
 			{children}
 		</AuthContext.Provider>

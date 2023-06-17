@@ -13,7 +13,6 @@ import {
 	TypeRevenue,
 } from "../../../../types/Interfaces.type";
 import { Tags } from "../../../../types/tags.types";
-import toast, { Toaster } from 'react-hot-toast';
 
 export const useRevenuesFormController = (props: IRevenuesForm) => {
 	const navigate = useNavigate();

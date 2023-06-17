@@ -38,7 +38,6 @@ export function AppRoutes() {
 							</Route>
 						</Route>
 					</Routes>
-
 				</Suspense>
 			</AuthProvider>
 		</BrowserRouter>

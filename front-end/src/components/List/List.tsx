@@ -70,7 +70,9 @@ function List(props: IListProps) {
 			onScroll={handleScroll}
 		>
 			{isTitle && renderHeader()}
-			<div className="w-full flex flex-1 flex-col gap-4">{items.map(renderCell)}</div>
+			<div className="w-full flex flex-1 flex-col gap-4">
+				{columns && items.map(renderCell)}
+			</div>
 		</div>
 	);
 }

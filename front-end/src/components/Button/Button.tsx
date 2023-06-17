@@ -4,7 +4,7 @@ const Button = (props: IButtonProps) => {
 	return (
 		<div
 			className={`flex justify-center items-center ${!props.width && "w-full"}`}
-			style={{ width: props.width, height: props.height }}
+			style={{ width: props.width, height: props.height, ...props.style }}
 		>
 			<button
 				onClick={props.onClick}

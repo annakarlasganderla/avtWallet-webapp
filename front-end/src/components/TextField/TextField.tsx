@@ -5,7 +5,9 @@ const TextField = (props: ITextFieldProps) => {
 
 	return (
 		<div
-			className={`flex flex-col ${!props.width && !props.class && "w-100"} ${props.class}`}
+			className={`flex flex-col ${!props.width && !props.class && "w-100"} ${
+				props.class
+			}`}
 			style={{ width: props.width }}
 		>
 			<label htmlFor={props.name} className="text-lg text-gray-900 font-bold mb-1 ">
@@ -18,6 +20,7 @@ const TextField = (props: ITextFieldProps) => {
 					placeholder={props.placeholder}
 					disabled={props.disabled}
 					onChange={props.onChange}
+					value={props.value}
 					className={`w-full h-full block text-sm border-2 rounded-lg
 							disabled:bg-gray-300 disabled:border-gray-400 resize-none
 							focus:outline-none focus:ring-0.2 focus:ring-offset-0.5
@@ -36,6 +39,7 @@ const TextField = (props: ITextFieldProps) => {
 					name={props.name}
 					placeholder={props.placeholder}
 					disabled={props.disabled}
+					value={props.value}
 					onChange={props.onChange}
 					className={`w-full h-100 block text-sm border-2 rounded-lg
 							disabled:bg-gray-300 disabled:border-gray-400
@@ -49,7 +53,9 @@ const TextField = (props: ITextFieldProps) => {
 				/>
 			)}
 			{props.error && (
-				<p className="mt-1 text-sm text-red-600 dark:text-red-500 font-medium">{props.error}</p>
+				<p className="mt-1 text-sm text-red-600 dark:text-red-500 font-medium">
+					{props.error}
+				</p>
 			)}
 		</div>
 	);

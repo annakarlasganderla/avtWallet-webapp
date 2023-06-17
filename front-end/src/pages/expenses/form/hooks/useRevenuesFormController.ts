@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { revenuesFormSchema } from "../utils/revenuesForm.schemas";
 import { IRevenueSchema, IRevenuesForm } from "../utils/revenuesForm.types";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SourcesApi from "../../../../api/Sources";
 import TagsApi from "../../../../api/Tags";
@@ -89,13 +89,13 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 		},
 		validationSchema: validationSchema,
 		validateOnChange: false,
-		onSubmit: (value) => {
+		onSubmit: (value, { resetForm }) => {
 			let newObject = value;
 			newObject.payMethod = Number(newObject.payMethod);
 			newObject.typeRevenue = Number(newObject.typeRevenue);
 
 			revenueApi.postRevenue(newObject);
-			revenue.resetForm({ values: revenue.initialValues });
+			resetForm({ values: revenue.initialValues });
 		},
 	});
 

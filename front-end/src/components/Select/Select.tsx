@@ -19,6 +19,7 @@ const Select = (props: ISelectProps) => {
 						? "border-red-500 focus:border-red-500 focus:ring-red-500"
 						: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
 				}`}
+				value={props.value}
 				defaultValue={props.value || ""}
 			>
 				{props.optionDefault ? (

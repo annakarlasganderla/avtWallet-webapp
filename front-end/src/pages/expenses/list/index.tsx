@@ -109,7 +109,7 @@ const RevenueList = () => {
 	];
 
 	return (
-		<main className="flex flex-1 flex-col items-center gap-y-4 md:gap-y-10">
+		<main className="flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">
 			<div className="w-full flex flex-col bg-black md:bg-white justify-center items-center">
 				<div className="w-3/5 flex flex-col md:items-start md:border-2 border-black md:rounded-2xl gap-y-4 py-4 px-8 md:px-10 md:mt-8">
 					<p className="text-gray-50 md:text-black">Amount: </p>

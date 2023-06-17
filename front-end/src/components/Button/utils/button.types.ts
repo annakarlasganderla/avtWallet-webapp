@@ -10,5 +10,6 @@ export interface IButtonProps {
 	textsize?: string;
 	outlined?: boolean;
 	spacing?: number | string;
+	style?: React.CSSProperties;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }

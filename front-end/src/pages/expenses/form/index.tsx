@@ -5,14 +5,23 @@ import Select from "../../../components/Select/Select";
 import TextField from "../../../components/TextField";
 import { useRevenuesFormController } from "./hooks/useRevenuesFormController";
 import { IRevenuesForm } from "./utils/revenuesForm.types";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 
 const RevenuesForm = (props: IRevenuesForm) => {
-	const { coinsOptions, revenue, title, navigate, tags, sources, payMethods, typeRevenues } = useRevenuesFormController(props);
+	const {
+		coinsOptions,
+		revenue,
+		title,
+		navigate,
+		tags,
+		sources,
+		payMethods,
+		typeRevenues,
+	} = useRevenuesFormController(props);
 
 	return (
-		<div className="w-full flex flex-col items-center mt-12">
-			<h1 className="hidden md:block mb-8 text-3xl">{title}</h1>
+		<div className="w-full md:h-max h-4/5 flex flex-col items-center mt-12 overflow-auto">
+			<h1 className="block mb-8 text-3xl">{title}</h1>
 			<form
 				onSubmit={revenue.handleSubmit}
 				className="w-10/12 flex flex-col gap-5 md:w-2/3"
@@ -44,7 +53,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						name={"sourceId"}
 						optionDefault={"Source"}
 						options={sources}
-						value={revenue.values.sourceId}
+						value={revenue.values.sourceId || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.sourceId}
 					/>
@@ -52,7 +61,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						name={"tagId"}
 						optionDefault={"Tag"}
 						options={tags}
-						value={revenue.values.tagId}
+						value={revenue.values.tagId || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.tagId}
 					/>
@@ -62,7 +71,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						name={"payMethod"}
 						optionDefault={"Pay Method"}
 						options={payMethods}
-						value={revenue.values.payMethod}
+						value={revenue.values.payMethod || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.payMethod}
 					/>
@@ -70,7 +79,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						name={"typeRevenue"}
 						optionDefault={"Type Revenue"}
 						options={typeRevenues}
-						value={revenue.values.typeRevenue}
+						value={revenue.values.typeRevenue || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.typeRevenue}
 					/>
@@ -80,7 +89,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						type={"date"}
 						name={"date"}
 						placeholder={"Date"}
-						value={revenue.values.date}
+						value={revenue.values.date || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.date}
 					/>

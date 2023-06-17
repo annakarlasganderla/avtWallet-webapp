@@ -67,7 +67,7 @@ const ExtractsList = () => {
 		<>
 			<SideNav isOpen={open} setIsOpen={setOpen} />
 
-			<main className="flex flex-1 flex flex-col items-center">
+			<main className="flex flex-1 md:h-4/5 flex flex-col items-center">
 				<div className="w-4/5 h-20 flex items-center justify-end mt-2 mb-2 md:w-3/5">
 					<AiOutlineFilter
 						className="block"

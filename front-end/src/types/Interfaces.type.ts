@@ -21,7 +21,7 @@ export interface ITags {
 
 export enum TypeRevenue {
 	EXPENSE,
-	INCOMING
+	INCOMING,
 }
 
 export enum PaymentMethods {
@@ -46,3 +46,5 @@ export interface IRevenue {
 	typeRevenue: number;
 	description?: string;
 }
+
+export type MODALTYPE = "tags" | "sources";

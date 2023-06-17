@@ -1,7 +1,6 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Menu from "../Menu";
 import Header from "../Header";
-import Modal from "../Modal/Modal";
 import SideBar from "../SideBar/SideBar";
 import useAuth from "../../context/hooks/useAuth";
 import SideBarItem from "../SideBar/components/SideBarItem/SideBarItem";
@@ -12,11 +11,19 @@ import { BsThreeDots } from "react-icons/bs";
 import { ISideBarItem } from "../SideBar/utils/sideBar.types";
 import { FaList, FaUserCircle } from "react-icons/fa";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { MODALTYPE } from "../../types/Interfaces.type";
+import GenericModal from "../../pages/genericModal/GenericModal";
+import useBoolean from "../../hooks/useBoolean";
 
 const Layout: FC = () => {
+	const { logout } = useAuth();
+	const [bool, { setTrue, setFalse }] = useBoolean(false);
+
 	const location = useLocation();
 	const navigate = useNavigate();
-	const { logout } = useAuth();
+
+	const [typeModal, setTypeModal] = useState<MODALTYPE | null>(null);
+
 	const sideBarItems: ISideBarItem[] = [
 		{
 			text: "Home",
@@ -56,8 +63,24 @@ const Layout: FC = () => {
 						/>
 					}
 				>
-					<li className="px-4 py-2 hover:bg-gray-100">Sources</li>
-					<li className="px-4 py-2 hover:bg-gray-100">Tags</li>
+					<li
+						className="px-4 py-2 hover:bg-gray-100"
+						onClick={() => {
+							setTypeModal("sources");
+							setTrue();
+						}}
+					>
+						Sources
+					</li>
+					<li
+						className="px-4 py-2 hover:bg-gray-100"
+						onClick={() => {
+							setTypeModal("tags");
+							setTrue();
+						}}
+					>
+						Tags
+					</li>
 				</Menu>
 			),
 		},
@@ -87,12 +110,10 @@ const Layout: FC = () => {
 	return (
 		<div className="w-screen h-screen flex flex-col flex-1">
 			<Header />
-			<div className="flex flex-row flex-1 overflow-auto">
+			<div className="flex flex-row flex-1 overflow-auto max-h-fit-content	">
 				<SideBar items={sideBarItems} />
 				<Outlet />
-				<Modal open={false} onClose={() => null} title="Teste">
-					<h3>vitor</h3>
-				</Modal>
+				<GenericModal open={bool} setFalse={setFalse} type={typeModal} />
 			</div>
 		</div>
 	);

@@ -76,7 +76,6 @@ export class RevenueService {
         .orderBy('revenue.createdAt', order)
         .skip(skip)
         .take(take)
-        .leftJoinAndSelect('revenue.user', 'user')
         .leftJoinAndSelect('revenue.tag', 'tag')
         .where(whereString, values);
 

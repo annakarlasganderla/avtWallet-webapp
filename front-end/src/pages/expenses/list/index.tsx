@@ -6,9 +6,11 @@ import { MdEdit } from "react-icons/md";
 import List from "../../../components/List";
 import { IColumn } from "../../../components/List/utils/list.types";
 import { IRevenue } from "../../../types/Interfaces.type";
+import { useRevenueList } from "./hooks/useRevenueList";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
+	const { list, changePage } = useRevenueList();
 
 	const columns: IColumn<IRevenue>[] = [
 		{
@@ -120,9 +122,9 @@ const RevenueList = () => {
 			<div className="w-4/5 h-2/3 md:h-3/5 md:w-3/5">
 				<List
 					columns={columns}
-					items={items}
+					items={list || []}
 					isTitle={false}
-					onChangePage={(number) => console.log(number)}
+					onChangePage={(number) => changePage(number)}
 				/>
 			</div>
 

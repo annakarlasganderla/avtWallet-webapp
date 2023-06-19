@@ -1,8 +1,9 @@
 import { IRevenueSchema } from "../pages/expenses/form/utils/revenuesForm.types";
 import { IPageable, PageOrder } from "../types/Interfaces.type";
 import { listAll, post, remove, update } from './Common';
-import { IRevenueList } from "../pages/expenses/list/utils/revenuesList.types";
+import { IRevenueList, IRevenueOptions } from "../pages/expenses/list/utils/revenuesList.types";
 import toast from 'react-hot-toast';
+import api from "./Api";
 
 const RevenueApi = () => {
     const url = '/revenues';
@@ -12,9 +13,9 @@ const RevenueApi = () => {
         return Promise.reject(error.response);
     };
 
-    const listAllRevenues = async (obj: IRevenueList) => {
+    const listAllRevenuesPageable = async (obj: IRevenueOptions): Promise<IRevenueList> => {
         try {
-            return await listAll(url);
+            return (await api.post(`${url}/list-all`, obj)).data
         } catch (e: any) {
             return handleError(e);
         }
@@ -47,7 +48,7 @@ const RevenueApi = () => {
         }
     }
 
-    return { postRevenue, updateRevenue, deleteRevenue, listAllRevenues }
+    return { postRevenue, updateRevenue, deleteRevenue, listAllRevenuesPageable }
 }
 
 export default RevenueApi;

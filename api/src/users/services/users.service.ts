@@ -16,9 +16,10 @@ import {
 } from 'src/common/dto/default-responses';
 import { handleErrors } from 'src/common/services/common.service';
 import { GetUserResponse } from '../dto/get-user.dto';
+import { compare, hash } from 'bcrypt';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   private logger = new Logger(User.name);
 
   constructor(
@@ -28,6 +29,11 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<CreatedEntity> {
     try {
+      const { password } = createUserDto;
+      const hashedPassword = await this.hashPassword(password);
+
+      createUserDto.password = hashedPassword;
+
       const user = this.usersRepository.create(createUserDto);
 
       this.usersRepository.save(user);
@@ -137,5 +143,22 @@ export class UsersService {
     } catch (e) {
       handleErrors(e.message, e.code);
     }
+  }
+
+  /**
+   * HELPERS
+   */
+
+  async hashPassword(password: string): Promise<string> {
+    const saltRounds = 10; // Number of salt rounds for bcrypt
+    const hashedPassword = await hash(password, saltRounds);
+    return hashedPassword;
+  }
+
+  async isPasswordsEqual(
+    password: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
+    return await compare(password, hashedPassword);
   }
 }

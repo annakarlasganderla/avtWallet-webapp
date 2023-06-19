@@ -13,7 +13,7 @@ import {
 } from '../dto/page.dto';
 import { TagsService } from 'src/tags/services/tags.service';
 import { SourcesService } from 'src/sources/services/sources.service';
-import { UsersService } from 'src/users/services/users.service';
+import { UserService } from 'src/users/services/users.service';
 
 @Injectable()
 export class RevenueService {
@@ -22,10 +22,10 @@ export class RevenueService {
   constructor(
     @InjectRepository(Revenue)
     private revenueRepository: Repository<Revenue>,
-    private userService: UsersService,
+    private userService: UserService,
     private sourceService: SourcesService,
     private tagService: TagsService,
-  ) { }
+  ) {}
 
   async create(createRevenueDto: CreateRevenueDto) {
     const { sourceId, tagId, userId } = createRevenueDto;

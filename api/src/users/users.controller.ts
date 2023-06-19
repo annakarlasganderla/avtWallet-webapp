@@ -7,7 +7,7 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
-import { UsersService } from './services/users.service';
+import { UserService } from './services/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from 'src/auth/decorators/auth.decorators';
@@ -17,7 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('users')
 @Public()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UserService) {}
 
   @Public()
   @Post('create')

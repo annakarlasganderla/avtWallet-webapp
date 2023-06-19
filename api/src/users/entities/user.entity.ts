@@ -4,7 +4,7 @@ import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class User extends AbstractClass {
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -13,7 +13,7 @@ export class User extends AbstractClass {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ unique: true })
   login: string;
 
   @OneToMany(() => Revenue, (revenue) => revenue.user)

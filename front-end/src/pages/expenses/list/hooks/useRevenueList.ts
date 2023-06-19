@@ -2,16 +2,20 @@ import { useState } from "react"
 import { IRevenueList, IRevenueOptions, RevenueEntity } from "../utils/revenuesList.types";
 import RevenueApi from "../../../../api/Revenues";
 import { useQuery } from "react-query";
+import useAuth from "../../../../context/hooks/useAuth";
 
 
 export const useRevenueList = () => {
     const revenueApi = RevenueApi();
     const [revenueList, setRevenueList] = useState<IRevenueList>();
+    const { user } = useAuth()
     const [pageable, setPageable] = useState<IRevenueOptions>({
         order: "ASC",
         page: 1,
         take: 10,
-        where: {}
+        where: {
+            user: user.uuid
+        }
     });
 
     useQuery<IRevenueList>(["revenue-list", { pageable }], {

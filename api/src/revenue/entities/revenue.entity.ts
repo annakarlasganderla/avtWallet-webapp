@@ -32,9 +32,9 @@ export class Revenue extends AbstractClass {
   @ManyToOne(() => User, (user) => user.revenues)
   user: User;
 
-  @ManyToOne(() => Source, (source) => source)
+  @ManyToOne(() => Source, (source) => source.revenues)
   source: Source;
 
-  @ManyToOne(() => Tag, (tag) => tag)
+  @ManyToOne(() => Tag, (tag) => tag.revenues)
   tag: Tag;
 }

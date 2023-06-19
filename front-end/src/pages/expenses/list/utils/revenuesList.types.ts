@@ -34,5 +34,6 @@ export interface FilterOptions {
     name?: string,
     value?: number,
     tagId?: string,
-    payMethod?: PaymentMethods
+    payMethod?: PaymentMethods,
+    user: string;
 }

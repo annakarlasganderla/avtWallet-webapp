@@ -17,6 +17,7 @@ export interface WhereDto {
   value?: number;
   tagId?: number;
   payMethod?: PayMethod;
+  user: string;
 }
 
 export class PageOptionsDto {

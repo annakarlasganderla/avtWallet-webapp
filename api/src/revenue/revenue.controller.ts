@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   Query,
+  Logger,
 } from '@nestjs/common';
 import { RevenueService } from './services/revenue.service';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
@@ -14,12 +15,14 @@ import { UpdateRevenueDto } from './dto/update-revenue.dto';
 import { PageOptionsDto } from './dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/auth/decorators/auth.decorators';
+import { Revenue } from './entities/revenue.entity';
 
 @ApiTags('revenues')
 @Controller('revenues')
 @Public()
 export class RevenueController {
   constructor(private readonly revenueService: RevenueService) { }
+  private logger = new Logger(Revenue.name);
 
   @Post('create')
   create(@Body() createRevenueDto: CreateRevenueDto) {

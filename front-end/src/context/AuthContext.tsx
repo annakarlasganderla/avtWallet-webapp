@@ -63,8 +63,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	const handleSetToken = (newToken: string | null) => {
 		if (newToken) {
+			const { username, sub } = parseToken(newToken);
 			localStorage.setItem("token", newToken);
 			setToken(newToken);
+			setUser({
+				uuid: sub,
+				username: username,
+			});
 		} else {
 			logout();
 		}
@@ -73,6 +78,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const logout = () => {
 		localStorage.removeItem("token");
 		setToken(null);
+		setUser({
+			uuid: "",
+			username: "",
+		})
 		navigate("/");
 	};
 

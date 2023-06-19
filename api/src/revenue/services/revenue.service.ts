@@ -76,6 +76,8 @@ export class RevenueService {
         .orderBy('revenue.createdAt', order)
         .skip(skip)
         .take(take)
+        .leftJoinAndSelect('revenue.user', 'user')
+        .leftJoinAndSelect('revenue.tag', 'tag')
         .where(whereString, values);
 
       const itemCount = await queryBuilder.getCount();
@@ -167,6 +169,12 @@ export class RevenueService {
   private buildWhere(options: WhereDto) {
     let whereString = '';
     let values = {};
+
+    if (options.user && options.user != '') {
+      whereString += `revenue.userId = :user`;
+
+      values['user'] = options.user;
+    }
 
     if (options.name && options.name != '') {
       whereString += `revenue.name = :name`;

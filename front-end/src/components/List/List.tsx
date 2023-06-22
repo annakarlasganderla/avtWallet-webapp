@@ -28,7 +28,7 @@ function List(props: IListProps) {
 	}
 
 	const convertColumnType = (type: columnType, item: any) => {
-		if (type === "text") return item;
+		if (type === "text") return <p className="truncate">{item}</p>;
 		if (type === "currency")
 			return item.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
 		if (type === "date") return moment(item).format("DD/MM/YYYY");
@@ -51,7 +51,9 @@ function List(props: IListProps) {
 							fontWeight: column.bold ? "bold" : "normal",
 							justifyContent: column.align,
 						}}
-						className={`text-black ${column.classname}`}
+						className={`text-black ${column.classname} ${
+							column.type === "text" || !column.type ? "truncate" : ""
+						}`}
 					>
 						{column.onRender
 							? column.onRender(item)

@@ -5,7 +5,7 @@ import { BsTrash } from "react-icons/bs";
 import { MdEdit } from "react-icons/md";
 import List from "../../../components/List";
 import { IColumn } from "../../../components/List/utils/list.types";
-import { IRevenue } from "../../../types/Interfaces.type";
+import { IRevenue, TypeRevenue } from "../../../types/Interfaces.type";
 import { useRevenueList } from "./hooks/useRevenueList";
 
 const RevenueList = () => {
@@ -14,6 +14,8 @@ const RevenueList = () => {
 
 	const columns: IColumn<IRevenue>[] = [
 		{
+			minSize: 80,
+			maxSize: 90,
 			name: "name",
 			type: "text",
 			bold: true,
@@ -23,9 +25,16 @@ const RevenueList = () => {
 			name: "value",
 			type: "currency",
 			bold: true,
+			onRender: (item) =>
+				`${
+					item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
+				} ${item.value.toLocaleString("en-us", {
+					style: "currency",
+					currency: item.coin || "BRL",
+				})}`,
 		},
 		{
-			maxSize: 120,
+			maxSize: 150,
 			minSize: 90,
 			name: "tag",
 			classname: "hidden md:flex",

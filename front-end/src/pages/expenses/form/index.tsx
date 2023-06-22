@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../../../components/Button";
 import InputValue from "../../../components/InputValue/InputValue";
 import Select from "../../../components/Select/Select";

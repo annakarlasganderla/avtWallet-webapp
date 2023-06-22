@@ -51,7 +51,7 @@ function List(props: IListProps) {
 							fontWeight: column.bold ? "bold" : "normal",
 							justifyContent: column.align,
 						}}
-						className={`text-black ${column.classname} ${
+						className={`text-black flex flex-1 ${column.classname} ${
 							column.type === "text" || !column.type ? "truncate" : ""
 						}`}
 					>

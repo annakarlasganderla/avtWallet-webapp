@@ -15,13 +15,14 @@ const RevenueList = () => {
 	const columns: IColumn<IRevenue>[] = [
 		{
 			minSize: 80,
-			maxSize: 90,
+			maxSize: 250,
 			name: "name",
 			type: "text",
 			bold: true,
 		},
 		{
 			minSize: 80,
+			maxSize: 150,
 			name: "value",
 			type: "currency",
 			bold: true,
@@ -34,18 +35,20 @@ const RevenueList = () => {
 				})}`,
 		},
 		{
-			maxSize: 150,
+			maxSize: 200,
 			minSize: 90,
 			name: "tag",
+			align: "center",
 			classname: "hidden md:flex",
 			onRender: (item) => (
-				<div className="w-full bg-black text-white font-bold rounded-lg p-1 px-4 hidden justify-center md:flex">
+				<div className="w-2/3 bg-black text-white font-bold rounded-lg p-1 px-4 hidden justify-center md:flex">
 					{item.tag?.name}
 				</div>
 			),
 		},
 		{
 			name: "actions",
+			maxSize: 70,
 			onRender: (item) => (
 				<div className="flex gap-6">
 					<BsTrash className="hidden md:block" />

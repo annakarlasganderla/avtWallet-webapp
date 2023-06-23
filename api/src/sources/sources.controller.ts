@@ -15,9 +15,8 @@ import { Public } from 'src/auth/decorators/auth.decorators';
 
 @ApiTags('sources')
 @Controller('sources')
-@Public()
 export class SourcesController {
-  constructor(private readonly sourcesService: SourcesService) { }
+  constructor(private readonly sourcesService: SourcesService) {}
 
   @Post('create')
   create(@Body() createSourceDto: CreateSourceDto) {

@@ -15,9 +15,8 @@ import { Public } from 'src/auth/decorators/auth.decorators';
 
 @ApiTags('tags')
 @Controller('tags')
-@Public()
 export class TagsController {
-  constructor(private readonly tagsService: TagsService) { }
+  constructor(private readonly tagsService: TagsService) {}
 
   @Post('create')
   create(@Body() createTagDto: CreateTagDto) {

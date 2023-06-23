@@ -189,7 +189,7 @@ export class RevenueService {
    * HELPERS
    */
 
-  private buildWhere(options: WhereDto) {
+  private buildWhere(options: WhereDto, deteleted = false) {
     let whereString = '';
     let values = {};
 
@@ -233,6 +233,14 @@ export class RevenueService {
         : (whereString = `${condition}`);
 
       values['value'] = options.value;
+    }
+
+    if (!deteleted) {
+      const condition = `revenue.deletedAt is null`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : (whereString = `${condition}`);
     }
 
     return {

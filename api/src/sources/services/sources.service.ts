@@ -31,7 +31,11 @@ export class SourcesService {
 
   async findAll(): Promise<Source[]> {
     try {
-      return this.sourceRepository.find();
+      return this.sourceRepository.find({
+        where: {
+          deletedAt: IsNull(),
+        },
+      });
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }

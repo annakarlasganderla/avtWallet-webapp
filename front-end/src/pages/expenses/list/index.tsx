@@ -10,7 +10,7 @@ import { useRevenueList } from "./hooks/useRevenueList";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
-	const { list, changePage } = useRevenueList();
+	const { list, changePage, deleteRevenue } = useRevenueList();
 
 	const columns: IColumn<IRevenue>[] = [
 		{
@@ -21,7 +21,7 @@ const RevenueList = () => {
 			bold: true,
 		},
 		{
-			minSize: 80,
+			minSize: 90,
 			maxSize: 150,
 			name: "value",
 			type: "currency",
@@ -35,95 +35,36 @@ const RevenueList = () => {
 				})}`,
 		},
 		{
-			maxSize: 200,
 			minSize: 90,
+			maxSize: 200,
 			name: "tag",
 			align: "center",
-			classname: "hidden md:flex",
+			classname: "hidden lg:flex",
 			onRender: (item) => (
-				<div className="w-2/3 bg-black text-white font-bold rounded-lg p-1 px-4 hidden justify-center md:flex">
+				<div className="w-3/4 bg-black text-white font-bold text-sm rounded-lg p-1 px-4 hidden justify-center md:flex">
 					{item.tag?.name}
 				</div>
 			),
 		},
 		{
+			minSize: 15,
+			align: "center",
 			name: "actions",
-			maxSize: 70,
 			onRender: (item) => (
 				<div className="flex gap-6">
-					<BsTrash className="hidden md:block" />
-					<AiOutlineRight className="md:hidden" />
-					<MdEdit className="hidden md:block" />
+					<BsTrash
+						className="hidden lg:block hover:opacity-80 hover:text-red-500 cursor-pointer"
+						onClick={() => deleteRevenue.mutate(item.id)}
+					/>
+					<AiOutlineRight className="lg:hidden cursor-pointer" />
+					<MdEdit className="hidden lg:block hover:opacity-80 hover:text-gray-800 cursor-pointer" />
 				</div>
 			),
 		},
 	];
 
-	const items = [
-		{
-			name: "teste",
-			value: 33,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste1",
-			value: 31,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste2",
-			value: 32,
-			tag: { name: "comida" },
-		},
-		{
-			name: "teste",
-			value: 33,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste1",
-			value: 31,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste2",
-			value: 32,
-			tag: { name: "comida" },
-		},
-		{
-			name: "teste",
-			value: 33,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste1",
-			value: 31,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste2",
-			value: 32,
-			tag: { name: "comida" },
-		},
-		{
-			name: "teste",
-			value: 33,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste1",
-			value: 31,
-			tag: { name: "lazer" },
-		},
-		{
-			name: "teste2",
-			value: 32,
-			tag: { name: "comida" },
-		},
-	];
-
 	return (
-		<main className="flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">
+		<main className="w-full flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">
 			<div className="w-full flex flex-col bg-black md:bg-white justify-center items-center">
 				<div className="w-3/5 flex flex-col md:items-start md:border-2 border-black md:rounded-2xl gap-y-4 py-4 px-8 md:px-10 md:mt-8">
 					<p className="text-gray-50 md:text-black">Amount: </p>
@@ -131,7 +72,7 @@ const RevenueList = () => {
 				</div>
 			</div>
 
-			<div className="w-4/5 h-2/3 md:h-3/5 md:w-3/5">
+			<div className="w-4/5 h-3/5 lg:h-2/3 md:w-3/5">
 				<List
 					columns={columns}
 					items={list || []}

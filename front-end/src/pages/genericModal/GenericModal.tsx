@@ -1,4 +1,3 @@
-import { Source } from "webpack-sources";
 import List from "../../components/List";
 import Modal from "../../components/Modal";
 import TextField from "../../components/TextField";
@@ -8,14 +7,29 @@ import { Tags } from "../../types/tags.types";
 import { IColumn } from "../../components/List/utils/list.types";
 import { RiAddFill } from "react-icons/ri";
 import Button from "../../components/Button";
+import { BsTrash } from "react-icons/bs";
+import { Sources } from "../../types/sources.types";
 
 const GenericModal = (props: IGenericModalProps) => {
-	const { title, list, form } = useGenericModalController(props);
+	const { title, list, form, deleteGeneric } = useGenericModalController(props);
 
-	const columns: IColumn<Tags | Source>[] = [
+	const columns: IColumn<Tags | Sources>[] = [
 		{
+			minSize: 180,
 			name: "name",
 			type: "text",
+		},
+		{
+			minSize: 15,
+			maxSize: 20,
+			align: "end",
+			name: "delete",
+			onRender: (item) => (
+				<BsTrash
+					className="hover:opacity-80 hover:text-red-500 cursor-pointer"
+					onClick={() => deleteGeneric.mutate(item.id)}
+				/>
+			),
 		},
 	];
 

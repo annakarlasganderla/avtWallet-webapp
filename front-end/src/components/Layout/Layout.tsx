@@ -41,7 +41,7 @@ const Layout: FC = () => {
 			text: "",
 			icon: <IoMdAdd color="white" size={40} />,
 			classname:
-				"md:hidden absolute bottom-12 p-2 rounded-full bg-black transition ease-in-out delay-150 hover:border-none hover:scale-125",
+				"lg:hidden absolute bottom-12 p-2 rounded-full bg-black transition ease-in-out delay-150 hover:border-none hover:scale-125",
 			onClick: () => navigate("/revenue/form/NEW"),
 		},
 		{
@@ -59,7 +59,7 @@ const Layout: FC = () => {
 						<SideBarItem
 							text="More"
 							icon={<BsThreeDots size={28} />}
-							classname="h-full md:h-auto"
+							classname="h-full lg:h-auto"
 						/>
 					}
 				>
@@ -93,10 +93,10 @@ const Layout: FC = () => {
 						<SideBarItem
 							text="User"
 							icon={<FaUserCircle size={28} />}
-							classname="h-full md:h-auto"
+							classname="h-full lg:h-auto"
 						/>
 					}
-					classname="h-full flex items-center hidden md:block md:h-auto md:absolute md:bottom-0"
+					classname="h-full flex items-center hidden lg:block lg:h-auto lg:absolute lg:bottom-0"
 				>
 					<li className="px-4 py-2 hover:bg-gray-100">Profile</li>
 					<li className="px-4 py-2 hover:bg-gray-100" onClick={logout}>
@@ -110,7 +110,7 @@ const Layout: FC = () => {
 	return (
 		<div className="w-screen h-screen flex flex-col flex-1">
 			<Header />
-			<div className="flex flex-row flex-1 overflow-auto max-h-fit-content	">
+			<div className="flex flex-row flex-1 overflow-auto max-h-fit-content">
 				<SideBar items={sideBarItems} />
 				<Outlet />
 				<GenericModal open={bool} setFalse={setFalse} type={typeModal} />

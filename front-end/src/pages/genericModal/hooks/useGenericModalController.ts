@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import TagsApi from "../../../api/Tags";
 import SourcesApi from "../../../api/Sources";
 import { Data, IData, IGenericModalProps } from "../utils/genericModal.types";
@@ -50,5 +50,23 @@ export const useGenericModalController = (props: IGenericModalProps) => {
 		return [];
 	});
 
-	return { title, list: list.data, form };
+	const deleteGeneric = useMutation(
+		async (id: string | undefined) => {
+			if (id) {
+				if (props.type == "tags") {
+					return await apiTags.deleteTag(id);
+				}
+				if (props.type === "sources") {
+					return await apiSources.deleteSource(id);
+				}
+			}
+		},
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(["generic-list"]);
+			},
+		},
+	);
+
+	return { title, list: list.data, form, deleteGeneric };
 };

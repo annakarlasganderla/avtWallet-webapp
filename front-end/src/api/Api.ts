@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import useAuth from "../context/hooks/useAuth";
 
 const api: AxiosInstance = axios.create({
 	baseURL: "http://localhost:3030/",
@@ -18,8 +19,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
 	(response: AxiosResponse) => response,
 	(error) => {
+		const { logout } = useAuth();
 		if (error.response?.status === 401) {
-			// Tratar erro de autorização aqui
+			logout();
 		}
 		return Promise.reject(error);
 	},

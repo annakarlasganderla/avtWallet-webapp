@@ -14,6 +14,7 @@ import {
 import { TagsService } from 'src/tags/services/tags.service';
 import { SourcesService } from 'src/sources/services/sources.service';
 import { UserService } from 'src/users/services/users.service';
+import { typeRevenue } from '../enum/typeRevenue';
 
 @Injectable()
 export class RevenueService {
@@ -161,6 +162,29 @@ export class RevenueService {
     }
   }
 
+  async getAmount() {
+    try {
+      const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
+      queryBuilder.where('revenue.deletedAt is null');
+
+      const { entities } = await queryBuilder.getRawAndEntities();
+
+      const amount = entities.reduce((amount: number, entity: Revenue) => {
+        let value = 0;
+        if (entity.typeRevenue === typeRevenue.EXPENSE) {
+          value = amount - entity.value;
+        }
+        if (entity.typeRevenue === typeRevenue.INCOMING) {
+          value = amount + entity.value;
+        }
+        return value;
+      }, 0);
+
+      return amount;
+    } catch (e) {
+      handleErrors(e.message, e.code);
+    }
+  }
   /**
    * HELPERS
    */

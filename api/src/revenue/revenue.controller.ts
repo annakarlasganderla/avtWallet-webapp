@@ -19,9 +19,8 @@ import { Revenue } from './entities/revenue.entity';
 
 @ApiTags('revenues')
 @Controller('revenues')
-@Public()
 export class RevenueController {
-  constructor(private readonly revenueService: RevenueService) { }
+  constructor(private readonly revenueService: RevenueService) {}
   private logger = new Logger(Revenue.name);
 
   @Post('create')
@@ -37,6 +36,11 @@ export class RevenueController {
   @Get('get/:id')
   findOne(@Param('id') id: string) {
     return this.revenueService.findOne(id);
+  }
+
+  @Get('amount')
+  getAmount() {
+    return this.revenueService.getAmount();
   }
 
   @Put('edit/:id')

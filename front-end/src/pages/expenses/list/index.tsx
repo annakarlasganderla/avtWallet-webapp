@@ -10,7 +10,7 @@ import { useRevenueList } from "./hooks/useRevenueList";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
-	const { list, changePage, deleteRevenue } = useRevenueList();
+	const { list, changePage, deleteRevenue, amount } = useRevenueList();
 
 	const columns: IColumn<IRevenue>[] = [
 		{
@@ -29,7 +29,7 @@ const RevenueList = () => {
 			onRender: (item) =>
 				`${
 					item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
-				} ${item.value.toLocaleString("en-us", {
+				} ${item.value.toLocaleString("pt-br", {
 					style: "currency",
 					currency: item.coin || "BRL",
 				})}`,
@@ -42,7 +42,7 @@ const RevenueList = () => {
 			classname: "hidden lg:flex",
 			onRender: (item) => (
 				<div className="w-3/4 bg-black text-white font-bold text-sm rounded-lg p-1 px-4 hidden justify-center md:flex">
-					{item.tag?.name}
+					<p className="truncate">{item.tag?.name}</p>
 				</div>
 			),
 		},
@@ -68,7 +68,12 @@ const RevenueList = () => {
 			<div className="w-full flex flex-col bg-black md:bg-white justify-center items-center">
 				<div className="w-3/5 flex flex-col md:items-start md:border-2 border-black md:rounded-2xl gap-y-4 py-4 px-8 md:px-10 md:mt-8">
 					<p className="text-gray-50 md:text-black">Amount: </p>
-					<h1 className="font-bold text-3xl text-gray-50 md:text-black">R$ 199,99</h1>
+					<h1 className="font-bold text-3xl text-gray-50 md:text-black">
+						{amount?.toLocaleString("pt-br", {
+							style: "currency",
+							currency: "BRL",
+						})}
+					</h1>
 				</div>
 			</div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { IRevenueList, IRevenueOptions } from "../utils/revenuesList.types";
 import RevenueApi from "../../../../api/Revenues";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -17,6 +17,14 @@ export const useRevenueList = () => {
 			user: user.uuid,
 		},
 	});
+
+	const amount = useQuery(
+		["amount", { revenueList }],
+		async () => {
+			return await revenueApi.getAmount();
+		},
+		{ keepPreviousData: true, refetchOnWindowFocus: false },
+	);
 
 	useQuery<IRevenueList>(["revenue-list", { pageable }], {
 		keepPreviousData: true,
@@ -60,5 +68,5 @@ export const useRevenueList = () => {
 		},
 	);
 
-	return { list: revenueList?.data, changePage, deleteRevenue };
+	return { list: revenueList?.data, changePage, deleteRevenue, amount: amount.data };
 };

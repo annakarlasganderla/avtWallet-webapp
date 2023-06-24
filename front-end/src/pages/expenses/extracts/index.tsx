@@ -1,14 +1,14 @@
 import { IColumn } from "../../../components/List/utils/list.types";
 import { IRevenue, PaymentMethods, TypeRevenue } from "../../../types/Interfaces.type";
-import { BsCurrencyEuro, BsTrash } from "react-icons/bs";
 import { AiOutlineRight, AiOutlineFilter } from "react-icons/ai";
-import { MdEdit } from "react-icons/md";
 import List from "../../../components/List";
 import SideNav from "./components/SideNav";
 import { useListExtracts } from "./hooks/useListExtracts";
 import useBoolean from "../../../hooks/useBoolean";
+import { useNavigate } from "react-router-dom";
 
 const ExtractsList = () => {
+	const navigate = useNavigate();
 	const [bool, { setTrue, setFalse }] = useBoolean(false);
 	const { list, changePage, setListFiltered } = useListExtracts();
 
@@ -26,13 +26,17 @@ const ExtractsList = () => {
 			name: "value",
 			type: "currency",
 			bold: true,
-			onRender: (item) =>
-				`${
-					item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
-				} ${item.value.toLocaleString("en-us", {
-					style: "currency",
-					currency: item.coin || "BRL",
-				})}`,
+			onRender: (item) => (
+				<p className="truncate ">
+					{`${
+						item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
+					} ${item.value.toLocaleString("en-us", {
+						style: "currency",
+						currency: item.coin || "BRL",
+					})}
+					`}
+				</p>
+			),
 		},
 		{
 			minSize: 90,
@@ -71,7 +75,7 @@ const ExtractsList = () => {
 		<>
 			<SideNav isOpen={bool} setIsFalse={setFalse} setWhere={setListFiltered} />
 
-			<main className="flex flex-1 md:h-4/5 flex flex-col items-center">
+			<main className="w-full flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">
 				<div className="w-4/5 h-20 flex items-center justify-end mt-2 mb-2 md:w-3/5">
 					<AiOutlineFilter
 						className="block"
@@ -81,12 +85,14 @@ const ExtractsList = () => {
 						size={30}
 					/>
 				</div>
-				<div className="w-4/5 h-3/5 md:h-4/6 md:w-3/5 ">
+				<div className="w-4/5 h-3/5 lg:h-4/5 md:w-3/5">
 					<List
 						columns={columns}
 						items={list || []}
 						isTitle={false}
-						onChangePage={(number) => changePage(number)}
+						pointer
+						onClick={(index) => navigate(`/revenue/form/${index}`)}
+						onChangePage={() => changePage()}
 					/>
 				</div>
 			</main>

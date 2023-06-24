@@ -12,10 +12,12 @@ export interface IPageable {
 }
 
 export interface ISource {
+	id: string;
 	name: string;
 }
 
 export interface ITags {
+	id: string;
 	name: string;
 }
 
@@ -50,9 +52,9 @@ export interface IRevenue {
 export type MODALTYPE = "tags" | "sources";
 
 export interface FilterOptions {
-	name?: string,
-	value?: number | null,
-	tagId?: string,
-	payMethod?: PaymentMethods | null,
+	name?: string;
+	value?: number | null;
+	tagId?: string;
+	payMethod?: PaymentMethods | null;
 	user: string;
 }

@@ -12,7 +12,7 @@ const InputValue = (props: IInputValueProps) => {
 					onChange={props.onChange}
 					className="w-24 absolute bg-gray-900 text-gray-50 cursor-pointer
 						outline-none border-none rounded-lg text-center rounded-lg
-						disabled:bg-gray-300 focus:outline-0"
+						disabled:bg-gray-450 focus:outline-0"
 					defaultValue={props.valueSelect}
 				>
 					{props.options.map((item: ISelectOption, index) => (
@@ -37,9 +37,10 @@ const InputValue = (props: IInputValueProps) => {
 						[&::-webkit-outer-spin-button]:appearance-none 
 						[&::-webkit-inner-spin-button]:m-0 
 						[&::-webkit-inner-spin-button]:appearance-none
-						${props.error
-							? "border-red-500 focus:border-red-500 focus:ring-red-500"
-							: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
+						${
+							props.error
+								? "border-red-500 focus:border-red-500 focus:ring-red-500"
+								: "border-gray-900 focus:border-gray-900 focus:ring-gray-900"
 						}`}
 				/>
 			</div>

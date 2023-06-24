@@ -32,7 +32,7 @@ export function AppRoutes() {
 									element={<ExpensesForm type={"VIEW"} />}
 								/>
 								<Route
-									path="/revenue/form/:id/edit"
+									path="/revenue/form/edit/:id"
 									element={<ExpensesForm type={"EDIT"} />}
 								/>
 								<Route path="/revenue" element={<RevenueList />} />

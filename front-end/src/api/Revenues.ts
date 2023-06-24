@@ -1,11 +1,12 @@
 import { IRevenueSchema } from "../pages/expenses/form/utils/revenuesForm.types";
-import { post, remove, update, handleErrors } from "./Common";
+import { post, remove, getById, update, handleErrors } from "./Common";
 import {
 	IRevenueList,
 	IRevenueOptions,
 } from "../pages/expenses/list/utils/revenuesList.types";
 import toast from "react-hot-toast";
 import api from "./Api";
+import { IRevenue } from "../types/Interfaces.type";
 
 const RevenueApi = () => {
 	const url = "/revenues";
@@ -16,6 +17,10 @@ const RevenueApi = () => {
 		} catch (e: any) {
 			return handleErrors(e);
 		}
+	};
+
+	const findRevenue = async (id: string): Promise<IRevenue> => {
+		return await getById(url, id);
 	};
 
 	const getAmount = async (): Promise<number> => {
@@ -48,6 +53,7 @@ const RevenueApi = () => {
 		deleteRevenue,
 		listAllRevenuesPageable,
 		getAmount,
+		findRevenue,
 	};
 };
 

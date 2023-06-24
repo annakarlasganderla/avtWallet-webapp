@@ -7,9 +7,11 @@ import List from "../../../components/List";
 import { IColumn } from "../../../components/List/utils/list.types";
 import { IRevenue, TypeRevenue } from "../../../types/Interfaces.type";
 import { useRevenueList } from "./hooks/useRevenueList";
+import useWindowSize from "../../../hooks/useWindowsSize";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
+	const { width } = useWindowSize();
 	const { list, changePage, deleteRevenue, amount } = useRevenueList();
 
 	const columns: IColumn<IRevenue>[] = [
@@ -26,12 +28,17 @@ const RevenueList = () => {
 			name: "value",
 			type: "currency",
 			bold: true,
-			onRender: (item) =>
-				`${item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
-				} ${item.value.toLocaleString("en-us", {
-					style: "currency",
-					currency: item.coin || "BRL",
-				})}`,
+			onRender: (item) => (
+				<p className="truncate ">
+					{`${
+						item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
+					} ${item.value.toLocaleString("en-us", {
+						style: "currency",
+						currency: item.coin || "BRL",
+					})}
+					`}
+				</p>
+			),
 		},
 		{
 			minSize: 90,
@@ -52,11 +59,23 @@ const RevenueList = () => {
 			onRender: (item) => (
 				<div className="flex gap-6">
 					<BsTrash
-						className="hidden lg:block hover:opacity-80 hover:text-red-500 cursor-pointer"
-						onClick={() => deleteRevenue.mutate(item.id)}
+						className="hidden lg:block hover:opacity-80 hover:text-red-500 cursor-pointe z-10"
+						onClick={(event) => {
+							event.stopPropagation();
+							deleteRevenue.mutate(item.id);
+						}}
 					/>
-					<AiOutlineRight className="lg:hidden cursor-pointer" />
-					<MdEdit className="hidden lg:block hover:opacity-80 hover:text-gray-800 cursor-pointer" />
+					<AiOutlineRight
+						className="lg:hidden cursor-pointer"
+						onClick={() => navigate(`/revenue/form/${item.id}`)}
+					/>
+					<MdEdit
+						className="hidden lg:block hover:opacity-80 hover:text-gray-800 cursor-pointer z-10"
+						onClick={(event) => {
+							event.stopPropagation();
+							navigate(`/revenue/form/edit/${item.id}`);
+						}}
+					/>
 				</div>
 			),
 		},
@@ -81,13 +100,16 @@ const RevenueList = () => {
 					columns={columns}
 					items={list || []}
 					isTitle={false}
-					onChangePage={(number) => changePage(number)}
+					pointer
+					isScreenSmall={width >= 1024}
+					onClick={(index) => navigate(`/revenue/form/${index}`)}
+					onChangePage={() => changePage()}
 				/>
 			</div>
 
 			<div className="w-full md:flex justify-center items-center hidden">
 				<div className="w-3/5">
-					<Button type={"button"} onClick={() => navigate("/revenue/form/NEW")}>
+					<Button type={"button"} onClick={() => navigate("/revenue/form/new")}>
 						+ Expenses
 					</Button>
 				</div>

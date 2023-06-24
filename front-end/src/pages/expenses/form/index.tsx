@@ -4,7 +4,6 @@ import Select from "../../../components/Select/Select";
 import TextField from "../../../components/TextField";
 import { useRevenuesFormController } from "./hooks/useRevenuesFormController";
 import { IRevenuesForm } from "./utils/revenuesForm.types";
-import { toast } from "react-hot-toast";
 
 const RevenuesForm = (props: IRevenuesForm) => {
 	const {
@@ -34,6 +33,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						value={revenue.values.name}
 						onChange={revenue.handleChange}
 						error={revenue.errors.name}
+						disabled={props.type === "VIEW"}
 					/>
 					<InputValue
 						class="md:w-1/2"
@@ -45,6 +45,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						valueSelect={revenue.values.coin}
 						onChange={revenue.handleChange}
 						error={revenue.errors.value}
+						disabled={props.type === "VIEW"}
 					/>
 				</div>
 				<div className="flex flex-col md:flex-row gap-4">
@@ -55,6 +56,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						value={revenue.values.sourceId || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.sourceId}
+						disabled={props.type === "VIEW"}
 					/>
 					<Select
 						name={"tagId"}
@@ -63,6 +65,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						value={revenue.values.tagId || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.tagId}
+						disabled={props.type === "VIEW"}
 					/>
 				</div>
 				<div className="flex flex-col md:flex-row gap-4">
@@ -73,6 +76,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						value={revenue.values.payMethod || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.payMethod}
+						disabled={props.type === "VIEW"}
 					/>
 					<Select
 						name={"typeRevenue"}
@@ -81,6 +85,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						value={revenue.values.typeRevenue || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.typeRevenue}
+						disabled={props.type === "VIEW"}
 					/>
 				</div>
 				<div className="w-100">
@@ -91,6 +96,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						value={revenue.values.date || ""}
 						onChange={revenue.handleChange}
 						error={revenue.errors.date}
+						disabled={props.type === "VIEW"}
 					/>
 				</div>
 				<TextField
@@ -101,6 +107,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 					value={revenue.values.description}
 					onChange={revenue.handleChange}
 					error={revenue.errors.description}
+					disabled={props.type === "VIEW"}
 				/>
 				<div className="w-100 flex justify-between items-center mt-8 mb-10">
 					<Button
@@ -111,9 +118,15 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						outlined
 						onClick={() => navigate(-1)}
 					>
-						Cancel
+						{props.type !== "VIEW" ? "Cancel" : "Back"}
 					</Button>
-					<Button width={"40%"} height={"35px"} textsize={"16px"} type={"submit"}>
+					<Button
+						width={"40%"}
+						height={"35px"}
+						textsize={"16px"}
+						type={"submit"}
+						disabled={props.type === "VIEW"}
+					>
 						Save
 					</Button>
 				</div>

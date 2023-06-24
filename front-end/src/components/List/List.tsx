@@ -1,8 +1,17 @@
 import moment from "moment";
-import { IListProps, columnType } from "./utils/list.types";
+import { IColumn, IListProps, columnType } from "./utils/list.types";
 
 function List(props: IListProps) {
-	const { columns, items, loading, onChangePage, isTitle, onClick } = props;
+	const {
+		columns,
+		items,
+		isScreenSmall,
+		pointer = false,
+		loading,
+		onChangePage,
+		isTitle,
+		onClick,
+	} = props;
 
 	const renderHeader = () => {
 		return (
@@ -23,9 +32,17 @@ function List(props: IListProps) {
 	function handleScroll(event: React.UIEvent<HTMLDivElement>) {
 		const target = event.target as HTMLDivElement;
 		if (target.scrollHeight - target.scrollTop <= target.clientHeight) {
-			onChangePage && onChangePage(1);
+			onChangePage && onChangePage();
 		}
 	}
+
+	const handleOnClick = (value: boolean | undefined, index: number) => {
+		if (value === true && onClick) {
+			onClick(index);
+		} else if (value === undefined && onClick) {
+			onClick(index);
+		}
+	};
 
 	const convertColumnType = (type: columnType, item: any) => {
 		if (type === "text") return <p className="truncate">{item}</p>;
@@ -39,12 +56,27 @@ function List(props: IListProps) {
 		return item;
 	};
 
+	const renderColumn = (item: any, column: IColumn<any>) => {
+		if (column.onRender) {
+			if (typeof column.onRender(item) === "string") {
+				<p className="truncate">{column.onRender(item)}</p>;
+			}
+			return column.onRender(item);
+		}
+		if (column.type) {
+			return convertColumnType(column.type, item[column.name]);
+		}
+		return item[column.name];
+	};
+
 	const renderCell = (item: any, index: number) => {
 		return (
 			<div
-				className="w-full h-12 flex justify-between items-center px-8 gap-x-4 border-2 border-black rounded-lg overflow-y-none overflow-x-auto"
+				className={`w-full h-12 flex justify-between items-center px-8 gap-x-4 
+					border-2 border-black rounded-lg overflow-y-none overflow-x-auto
+					${pointer ? "cursor-pointer" : "cursor-normal"}`}
 				key={index}
-				onClick={() => (onClick ? onClick(item.id ? item.id : index) : null)}
+				onClick={() => handleOnClick(isScreenSmall, item.id ? item.id : index)}
 			>
 				{columns.map((column, index) => (
 					<div
@@ -59,13 +91,7 @@ function List(props: IListProps) {
 							column.type === "text" || !column.type ? "truncate" : ""
 						}`}
 					>
-						{column.onRender ? (
-							<p className="truncate">{column.onRender(item)}</p>
-						) : column.type ? (
-							convertColumnType(column.type, item[column.name])
-						) : (
-							item[column.name]
-						)}
+						{renderColumn(item, column)}
 					</div>
 				))}
 			</div>

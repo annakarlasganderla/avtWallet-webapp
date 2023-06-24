@@ -2,28 +2,53 @@ import { useFormik } from "formik";
 import { revenuesFormSchema } from "../utils/revenuesForm.schemas";
 import { IRevenueSchema, IRevenuesForm } from "../utils/revenuesForm.types";
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SourcesApi from "../../../../api/Sources";
 import TagsApi from "../../../../api/Tags";
 import RevenueApi from "../../../../api/Revenues";
 import { useQuery } from "react-query";
 import {
+	IRevenue,
 	ISelectOption,
 	PaymentMethods,
 	TypeRevenue,
 } from "../../../../types/Interfaces.type";
 import { Tags } from "../../../../types/tags.types";
 import useAuth from "../../../../context/hooks/useAuth";
+import moment from "moment";
 
 export const useRevenuesFormController = (props: IRevenuesForm) => {
 	const navigate = useNavigate();
 	const sourceApi = SourcesApi();
 	const tagApi = TagsApi();
 	const revenueApi = RevenueApi();
-	const { user } = useAuth()
-
+	const { user } = useAuth();
+	const { id } = useParams();
 	const [tags, setTags] = useState<ISelectOption[]>([]);
 	const [sources, setSources] = useState<ISelectOption[]>([]);
+
+	useQuery(["find-revenue", { id }], {
+		queryFn: () => {
+			if (id) {
+				return revenueApi.findRevenue(id);
+			}
+			return null;
+		},
+		onSuccess: (data: IRevenue) => {
+			revenue.setValues({
+				name: data.name,
+				coin: data.coin,
+				value: data.value,
+				sourceId: data.source.id,
+				tagId: data.tag.id,
+				payMethod: data.payMethod,
+				typeRevenue: data.typeRevenue,
+				date: moment(data.date).format("YYYY-MM-DD"),
+				description: data.description,
+				userId: user.uuid,
+			});
+		},
+	});
 
 	useQuery("tags-list", {
 		queryFn: () => tagApi.listAllTags(),
@@ -33,9 +58,6 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 					return { name: e.name, data: e.id };
 				}),
 			);
-		},
-		onError: (error) => {
-			console.log(error);
 		},
 	});
 
@@ -47,9 +69,6 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 					return { name: e.name, data: e.id };
 				}),
 			);
-		},
-		onError(error) {
-			console.log(error);
 		},
 	});
 
@@ -94,7 +113,9 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 			newObject.payMethod = Number(newObject.payMethod);
 			newObject.typeRevenue = Number(newObject.typeRevenue);
 
-			revenueApi.postRevenue(newObject);
+			if (!id) {
+				revenueApi.postRevenue(newObject);
+			}
 			resetForm({ values: revenue.initialValues });
 		},
 	});

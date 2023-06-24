@@ -99,6 +99,7 @@ export class RevenueService {
           id,
           deletedAt: IsNull(),
         },
+        relations: ['tag', 'source'],
       });
 
       if (!revenue) throw new HttpException('Revenue not found', 404);

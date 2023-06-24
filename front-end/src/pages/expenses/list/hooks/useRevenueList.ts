@@ -46,8 +46,8 @@ export const useRevenueList = () => {
 		},
 	});
 
-	const changePage = (value: number) => {
-		if (value && revenueList?.options.hasNextPage) {
+	const changePage = () => {
+		if (revenueList?.options.hasNextPage) {
 			setPageable({
 				...pageable,
 				page: pageable.page + 1,
@@ -63,6 +63,10 @@ export const useRevenueList = () => {
 		},
 		{
 			onSuccess: () => {
+				setPageable({
+					...pageable,
+					page: 1,
+				});
 				queryClient.invalidateQueries(["revenue-list"]);
 			},
 		},

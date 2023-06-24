@@ -42,7 +42,7 @@ export class SourcesService {
 
       return { message: source.name };
     } catch (e: any) {
-      throw e;
+      handleErrors(e.message, e.code);
     }
   }
 

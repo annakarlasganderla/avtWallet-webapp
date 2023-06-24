@@ -38,7 +38,7 @@ export class TagsService {
 
       return { message: tag.name };
     } catch (e: any) {
-      throw e;
+      handleErrors(e.message, e.code);
     }
   }
 

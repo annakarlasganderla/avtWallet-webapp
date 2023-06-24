@@ -1,20 +1,15 @@
 import { useState } from 'react';
 import { ISideNavProps } from './utils/sideNav.types';
 import { AiOutlineClose } from 'react-icons/ai';
-import TextField from '../TextField';
-import InputValue from '../InputValue';
-import Select from '../Select';
-import Button from '../Button';
+import TextField from '../../../../../components/TextField';
+import InputValue from '../../../../../components/InputValue';
+import Select from '../../../../../components/Select';
+import Button from '../../../../../components/Button';
+import { useFilterForm } from './hooks/useFilterForm';
 
 const SideNav = (props: ISideNavProps) => {
 
-    const coinsOptions = [
-        { text: "R$", data: "BRL" },
-        { text: "U$", data: "USD" },
-        { text: "€", data: "EUR" },
-        { text: "ARS", data: "ARS" },
-        { text: "Gs", data: "PYG" },
-    ];
+    const { filter, payMethods, tags } = useFilterForm(props.setWhere);
 
     return (
         <div className="flex">
@@ -31,32 +26,38 @@ const SideNav = (props: ISideNavProps) => {
                     <div>
                         <AiOutlineClose cursor={'pointer'} size={30} onClick={() => props.setIsOpen(!props.isOpen)} />
                     </div>
-                    <div className='flex justify-center items-center mt-5'>
+                    <form className='flex justify-center items-center mt-5' onSubmit={filter.handleSubmit}>
                         <div className='flex flex-col gap-2 w-3/5 md:w-full'>
-
                             <TextField
                                 type={"text"}
                                 name={"name"}
                                 placeholder={"Name"}
+                                value={filter.values.name}
+                                onChange={filter.handleChange}
                             />
 
-                            <InputValue
-                                nameInput={"value"}
-                                nameSelect={"coin"}
+                            <TextField
+                                type={"number"}
+                                name={"value"}
                                 placeholder={"Value"}
-                                options={coinsOptions}
+                                value={filter.values.value}
+                                onChange={filter.handleChange}
                             />
 
                             <Select
-                                name={"source"}
+                                name={"tagId"}
                                 optionDefault={"Tag"}
-                                options={[]}
+                                options={tags}
+                                onChange={filter.handleChange}
+                                value={filter.values.tagId}
                             />
 
                             <Select
-                                name={"source"}
+                                name={"payMethod"}
                                 optionDefault={"Pay Method"}
-                                options={[]}
+                                options={payMethods}
+                                onChange={filter.handleChange}
+                                value={filter.values.payMethod}
                             />
 
                             <div className='flex justify-center items-center mt-6'>
@@ -70,7 +71,7 @@ const SideNav = (props: ISideNavProps) => {
                             </div>
 
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -48,3 +48,11 @@ export interface IRevenue {
 }
 
 export type MODALTYPE = "tags" | "sources";
+
+export interface FilterOptions {
+	name?: string,
+	value?: number | null,
+	tagId?: string,
+	payMethod?: PaymentMethods | null,
+	user: string;
+}

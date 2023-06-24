@@ -15,7 +15,7 @@ import { PayMethod } from '../enum/payMethod';
 export interface WhereDto {
   name?: string;
   value?: number;
-  tagId?: number;
+  tagId?: string;
   payMethod?: PayMethod;
   user: string;
 }
@@ -52,7 +52,7 @@ export class PageOptionsDto {
     example: {
       name: 'Conta de Luz',
       value: 172,
-      tagId: 1,
+      tagId: "70d1b7eb-01ca-4f43-bea9-9031e2c889fc",
       payMethod: PayMethod.MONEY,
     },
   })

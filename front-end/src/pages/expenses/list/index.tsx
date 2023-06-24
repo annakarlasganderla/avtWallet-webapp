@@ -27,9 +27,8 @@ const RevenueList = () => {
 			type: "currency",
 			bold: true,
 			onRender: (item) =>
-				`${
-					item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
-				} ${item.value.toLocaleString("pt-br", {
+				`${item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
+				} ${item.value.toLocaleString("en-us", {
 					style: "currency",
 					currency: item.coin || "BRL",
 				})}`,

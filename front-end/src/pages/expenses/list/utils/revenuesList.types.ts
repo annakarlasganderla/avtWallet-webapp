@@ -1,4 +1,4 @@
-import { IPageable, PaymentMethods } from "../../../../types/Interfaces.type";
+import { FilterOptions, IPageable, PaymentMethods } from "../../../../types/Interfaces.type";
 
 export interface IRevenueList {
     data: RevenueEntity[] | [];
@@ -29,11 +29,4 @@ export interface Options {
 }
 export interface IRevenueOptions extends IPageable {
     where: FilterOptions;
-}
-export interface FilterOptions {
-    name?: string,
-    value?: number,
-    tagId?: string,
-    payMethod?: PaymentMethods,
-    user: string;
 }

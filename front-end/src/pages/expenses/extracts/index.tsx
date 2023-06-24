@@ -1,16 +1,15 @@
 import { IColumn } from "../../../components/List/utils/list.types";
-import { IRevenue, TypeRevenue } from "../../../types/Interfaces.type";
+import { IRevenue, PaymentMethods, TypeRevenue } from "../../../types/Interfaces.type";
 import { BsCurrencyEuro, BsTrash } from "react-icons/bs";
 import { AiOutlineRight, AiOutlineFilter } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
 import List from "../../../components/List";
 import SideNav from "./components/SideNav";
-import { useState } from "react";
 import { useListExtracts } from "./hooks/useListExtracts";
+import useBoolean from "../../../hooks/useBoolean";
 
 const ExtractsList = () => {
-	const [open, setOpen] = useState(false);
-
+	const [bool, { setTrue, setFalse }] = useBoolean(false);
 	const { list, changePage, setListFiltered } = useListExtracts();
 
 	const columns: IColumn<IRevenue>[] = [
@@ -22,38 +21,47 @@ const ExtractsList = () => {
 			bold: true,
 		},
 		{
-			minSize: 80,
+			minSize: 90,
 			maxSize: 150,
 			name: "value",
 			type: "currency",
 			bold: true,
 			onRender: (item) =>
-				`${item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
+				`${
+					item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
 				} ${item.value.toLocaleString("en-us", {
 					style: "currency",
 					currency: item.coin || "BRL",
 				})}`,
 		},
 		{
-			maxSize: 200,
 			minSize: 90,
+			maxSize: 200,
 			name: "tag",
 			align: "center",
-			classname: "hidden md:flex",
+			classname: "hidden lg:flex",
 			onRender: (item) => (
-				<div className="w-2/3 bg-black text-white font-bold rounded-lg p-1 px-4 hidden justify-center md:flex">
-					{item.tag?.name}
+				<div className="w-3/4 bg-black text-white font-bold text-sm rounded-lg p-1 px-4 hidden justify-center md:flex">
+					<p className="truncate">{item.tag?.name}</p>
 				</div>
 			),
 		},
 		{
+			minSize: 60,
+			maxSize: 250,
+			name: "payMethod",
+			align: "center",
+			classname: "hidden lg:flex",
+			bold: true,
+			onRender: (item) => PaymentMethods[item.payMethod],
+		},
+		{
+			minSize: 15,
+			align: "center",
 			name: "actions",
-			maxSize: 70,
 			onRender: (item) => (
 				<div className="flex gap-6">
-					<BsTrash className="hidden md:block" />
-					<AiOutlineRight className="md:hidden" />
-					<MdEdit className="hidden md:block" />
+					<AiOutlineRight className="cursor-pointer" />
 				</div>
 			),
 		},
@@ -61,17 +69,13 @@ const ExtractsList = () => {
 
 	return (
 		<>
-			<SideNav
-				isOpen={open}
-				setIsOpen={setOpen}
-				setWhere={setListFiltered}
-			/>
+			<SideNav isOpen={bool} setIsFalse={setFalse} setWhere={setListFiltered} />
 
 			<main className="flex flex-1 md:h-4/5 flex flex-col items-center">
 				<div className="w-4/5 h-20 flex items-center justify-end mt-2 mb-2 md:w-3/5">
 					<AiOutlineFilter
 						className="block"
-						onClick={() => setOpen(!open)}
+						onClick={() => setTrue()}
 						cursor={"pointer"}
 						color="black"
 						size={30}

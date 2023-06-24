@@ -26,7 +26,7 @@ export class RevenueService {
     private userService: UserService,
     private sourceService: SourcesService,
     private tagService: TagsService,
-  ) { }
+  ) {}
 
   async create(createRevenueDto: CreateRevenueDto) {
     const { sourceId, tagId, userId } = createRevenueDto;
@@ -78,7 +78,8 @@ export class RevenueService {
         .skip(skip)
         .take(take)
         .leftJoinAndSelect('revenue.tag', 'tag')
-        .where(whereString, values);
+        .where(whereString, values)
+        .andWhere('revenue.userId = :user', { user: where.user });
 
       const itemCount = await queryBuilder.getCount();
       const { entities } = await queryBuilder.getRawAndEntities();
@@ -193,16 +194,10 @@ export class RevenueService {
     let whereString = '';
     let values = {};
 
-    if (options.user && options.user != '') {
-      whereString += `revenue.userId = :user`;
-
-      values['user'] = options.user;
-    }
-
     if (options.name && options.name != '') {
-      whereString += `revenue.name = :name`;
+      whereString += `revenue.name like :name`;
 
-      values['name'] = options.name;
+      values['name'] = `%${options.name}%`;
     }
 
     if (options.payMethod) {

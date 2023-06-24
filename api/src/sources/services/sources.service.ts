@@ -4,7 +4,7 @@ import { UpdateSourceDto } from '../dto/update-source.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Source } from '../entities/source.entity';
 import { IsNull, Repository } from 'typeorm';
-import { DeletedUserDto } from 'src/common/dto/default-responses';
+import { DeletedEntity } from 'src/common/dto/default-responses';
 import {
   convertToken,
   handleErrors,
@@ -101,7 +101,7 @@ export class SourcesService {
     }
   }
 
-  async softDelete(id: string, context: any): Promise<DeletedUserDto> {
+  async softDelete(id: string, context: any): Promise<DeletedEntity> {
     try {
       const userId = convertToken(context);
       const source = await this.sourceRepository

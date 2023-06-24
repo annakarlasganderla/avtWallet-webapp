@@ -1,23 +1,22 @@
-export class CreatedEntity {
-  message = 'Successfully created:';
+import { ApiProperty } from '@nestjs/swagger';
 
-  constructor(entity: string) {
-    this.message = `${this.message} ${entity}`;
-  }
+export class CreatedEntity {
+  @ApiProperty({
+    example: 'EntityName created successfully',
+  })
+  message: string;
 }
 
 export class UpdatedEntity {
-  message = 'Successfully edited:';
-
-  constructor(entity: string) {
-    this.message = `${this.message} ${entity}`;
-  }
+  @ApiProperty({
+    example: 'EntityName updated successfully',
+  })
+  message: string;
 }
 
-export class DeletedUserDto {
-  message = 'Successfully deleted:';
-
-  constructor(entity: string) {
-    this.message = `${this.message} ${entity}`;
-  }
+export class DeletedEntity {
+  @ApiProperty({
+    example: 'EntityName deleted successfully',
+  })
+  message: string;
 }

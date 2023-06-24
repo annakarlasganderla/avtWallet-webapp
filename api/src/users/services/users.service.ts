@@ -9,11 +9,7 @@ import { UpdateUserDto, UpdateUserResponse } from '../dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import {
-  CreatedEntity,
-  DeletedUserDto,
-  UpdatedEntity,
-} from 'src/common/dto/default-responses';
+import { CreatedEntity, DeletedEntity } from 'src/common/dto/default-responses';
 import { handleErrors } from 'src/common/services/common.service';
 import { GetUserResponse } from '../dto/get-user.dto';
 import { compare, hash } from 'bcrypt';
@@ -132,14 +128,14 @@ export class UserService {
     }
   }
 
-  async softDelete(id: string): Promise<DeletedUserDto> {
+  async softDelete(id: string): Promise<DeletedEntity> {
     try {
       const user = await this.usersRepository.findOneBy({ id }).then((user) => {
         user.deletedAt = new Date();
         return this.usersRepository.save(user);
       });
 
-      return { message: user.name };
+      return { message: `User ${user.name} deleted successfully` };
     } catch (e) {
       handleErrors(e.message, e.code);
     }

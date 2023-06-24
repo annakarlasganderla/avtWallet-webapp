@@ -18,6 +18,8 @@ export class SourcesService {
 
   async create(createSourceDto: CreateSourceDto) {
     try {
+      if (createSourceDto.name === '')
+        throw new HttpException('Tag is not empty', 404);
       const source = this.sourceRepository.create(createSourceDto);
 
       this.logger.log('Source created successfully');
@@ -25,7 +27,7 @@ export class SourcesService {
 
       return { message: source.name };
     } catch (e: any) {
-      handleErrors(e.message, e.code);
+      throw e;
     }
   }
 

@@ -1,47 +1,26 @@
-import { listAll, post, remove, update } from "./Common";
+import { listAll, post, remove, update, handleErrors } from "./Common";
 import { UsersDto } from "../types/users.types";
 import toast from "react-hot-toast";
 
 const UserApi = () => {
 	const url = "/users";
 
-	const handleError = (error: any) => {
-		toast.error("Critical error! Contact the administrator");
-		return Promise.reject(error.response);
-	};
-
 	const listUsers = async () => {
-		try {
-			return await listAll(url);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await listAll(url);
 	};
 
 	const postUser = async (obj: UsersDto) => {
-		try {
-			toast.success("User created successfully");
-			return await post(url, obj);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await post(url, obj).then(() => toast.success("User created successfully"));
 	};
 
 	const updateUser = async (obj: UsersDto, id: string) => {
-		try {
-			toast.success("User updated successfully");
-			return await update(url, obj, id);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await update(url, obj, id).then(() =>
+			toast.success("User updated successfully"),
+		);
 	};
 
 	const deleteUser = async (id: string) => {
-		try {
-			return await remove(url, id);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await remove(url, id);
 	};
 
 	return { listUsers, postUser, updateUser, deleteUser };

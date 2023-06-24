@@ -4,6 +4,7 @@ import Loading from "../components/Loading/Loading";
 import { AuthProvider } from "../context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import { Toaster } from "react-hot-toast";
+import { AuthorizationInterceptor } from "../api/Api";
 
 const Layout = lazy(() => import("../components/Layout/Layout"));
 const Login = lazy(() => import("../pages/login"));
@@ -14,8 +15,9 @@ const RevenueList = lazy(() => import("../pages/expenses/list"));
 
 export function AppRoutes() {
 	return (
-		<BrowserRouter>
-			<AuthProvider>
+		<AuthProvider>
+			<AuthorizationInterceptor />
+			<BrowserRouter>
 				<Suspense fallback={<Loading />}>
 					<Toaster position="top-right" />
 
@@ -39,7 +41,7 @@ export function AppRoutes() {
 						</Route>
 					</Routes>
 				</Suspense>
-			</AuthProvider>
-		</BrowserRouter>
+			</BrowserRouter>
+		</AuthProvider>
 	);
 }

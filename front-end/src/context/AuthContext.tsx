@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
 
 interface AuthData {
@@ -33,7 +32,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		uuid: "",
 		username: "",
 	});
-	const navigate = useNavigate();
 
 	const isAuthenticated = useMemo(() => {
 		return token ? true : false;
@@ -81,8 +79,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		setUser({
 			uuid: "",
 			username: "",
-		})
-		navigate("/");
+		});
 	};
 
 	return (

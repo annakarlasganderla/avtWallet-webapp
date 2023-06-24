@@ -17,6 +17,8 @@ export class TagsService {
 
   async create(createTagDto: CreateTagDto) {
     try {
+      if (createTagDto.name === '')
+        throw new HttpException('Tag is not empty', 404);
       const tag = this.tagRepository.create(createTagDto);
 
       this.logger.log('Created successfully');
@@ -24,7 +26,7 @@ export class TagsService {
 
       return { message: tag.name };
     } catch (e: any) {
-      handleErrors(e.message, e.code);
+      throw e;
     }
   }
 

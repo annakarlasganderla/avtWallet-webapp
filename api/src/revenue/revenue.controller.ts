@@ -14,7 +14,6 @@ import { CreateRevenueDto } from './dto/create-revenue.dto';
 import { UpdateRevenueDto } from './dto/update-revenue.dto';
 import { PageOptionsDto } from './dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Public } from 'src/auth/decorators/auth.decorators';
 import { Revenue } from './entities/revenue.entity';
 
 @ApiTags('revenues')

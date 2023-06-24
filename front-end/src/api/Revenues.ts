@@ -1,5 +1,5 @@
 import { IRevenueSchema } from "../pages/expenses/form/utils/revenuesForm.types";
-import { post, remove, update } from "./Common";
+import { post, remove, update, handleErrors } from "./Common";
 import {
 	IRevenueList,
 	IRevenueOptions,
@@ -10,16 +10,11 @@ import api from "./Api";
 const RevenueApi = () => {
 	const url = "/revenues";
 
-	const handleError = (error: any) => {
-		toast.error("Critical error! Contact the administrator");
-		return Promise.reject(error.response);
-	};
-
 	const listAllRevenuesPageable = async (obj: IRevenueOptions): Promise<IRevenueList> => {
 		try {
 			return (await api.post(`${url}/list-all`, obj)).data;
 		} catch (e: any) {
-			return handleError(e);
+			return handleErrors(e);
 		}
 	};
 
@@ -27,35 +22,24 @@ const RevenueApi = () => {
 		try {
 			return (await api.get(`${url}/amount`)).data;
 		} catch (e: any) {
-			return handleError(e);
+			return handleErrors(e);
 		}
 	};
 
 	const postRevenue = async (obj: IRevenueSchema) => {
-		try {
-			toast.success("Revenue created successfully");
-			return await post(url, obj);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await post(url, obj).then(() => toast.success("Revenue created successfully"));
 	};
 
 	const updateRevenue = async (obj: IRevenueSchema, id: string) => {
-		try {
-			toast.success("Revenue updated successfully");
-			return await update(url, obj, id);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await update(url, obj, id).then(() =>
+			toast.success("Revenue updated successfully"),
+		);
 	};
 
 	const deleteRevenue = async (id: string) => {
-		try {
-			toast.success("Revenue deleted successfully");
-			return await remove(url, id);
-		} catch (e: any) {
-			return handleError(e);
-		}
+		return await remove(url, id).then(() =>
+			toast.success("Revenue deleted successfully"),
+		);
 	};
 
 	return {

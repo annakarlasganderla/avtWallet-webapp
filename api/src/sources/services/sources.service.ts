@@ -4,7 +4,7 @@ import { UpdateSourceDto } from '../dto/update-source.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Source } from '../entities/source.entity';
 import { IsNull, Repository } from 'typeorm';
-import { DeletedEntity } from 'src/common/dto/default-responses';
+import { DeletedEntity, UpdatedEntity } from 'src/common/dto/default-responses';
 import {
   convertToken,
   handleErrors,
@@ -61,7 +61,7 @@ export class SourcesService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Source> {
     try {
       const source = await this.sourceRepository.findOne({
         where: {
@@ -78,7 +78,10 @@ export class SourcesService {
     }
   }
 
-  async update(id: string, updateSourceDto: UpdateSourceDto) {
+  async update(
+    id: string,
+    updateSourceDto: UpdateSourceDto,
+  ): Promise<UpdatedEntity> {
     try {
       const source = await this.sourceRepository.findOne({
         where: {
@@ -87,15 +90,14 @@ export class SourcesService {
         },
       });
 
-      if (source) {
-        source.name = updateSourceDto.name;
-        source.updatedAt = new Date();
+      if (!source) throw new HttpException('Source not found', 404);
 
-        await this.sourceRepository.update(id, source);
-        return { message: UpdateSourceDto.name };
-      }
+      source.name = updateSourceDto.name;
+      source.updatedAt = new Date();
 
-      throw HttpException;
+      await this.sourceRepository.update(id, source);
+
+      return { message: `Source ${UpdateSourceDto.name} updated successfully` };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -104,14 +106,14 @@ export class SourcesService {
   async softDelete(id: string, context: any): Promise<DeletedEntity> {
     try {
       const userId = convertToken(context);
-      const source = await this.sourceRepository
+      await this.sourceRepository
         .findOne({ where: { id: id, user: { id: userId } } })
         .then((source) => {
           source.deletedAt = new Date();
           return this.sourceRepository.save(source);
         });
 
-      return { message: source.name };
+      return { message: `Source ${UpdateSourceDto.name} deleted successfully` };
     } catch (e) {
       handleErrors(e.message, e.code);
     }

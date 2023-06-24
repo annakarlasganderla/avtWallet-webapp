@@ -15,6 +15,11 @@ import { TagsService } from 'src/tags/services/tags.service';
 import { SourcesService } from 'src/sources/services/sources.service';
 import { UserService } from 'src/users/services/users.service';
 import { typeRevenue } from '../enum/typeRevenue';
+import {
+  CreatedEntity,
+  DeletedEntity,
+  UpdatedEntity,
+} from 'src/common/dto/default-responses';
 
 @Injectable()
 export class RevenueService {
@@ -28,7 +33,7 @@ export class RevenueService {
     private tagService: TagsService,
   ) {}
 
-  async create(createRevenueDto: CreateRevenueDto) {
+  async create(createRevenueDto: CreateRevenueDto): Promise<CreatedEntity> {
     const { sourceId, tagId, userId } = createRevenueDto;
 
     const user = await this.userService.findOne(userId);
@@ -60,7 +65,9 @@ export class RevenueService {
       await this.revenueRepository.save(newRevenue);
       this.logger.log('Revenue created successfully');
 
-      return { message: createRevenueDto.name };
+      return {
+        message: `Revenue ${createRevenueDto.name} created successfully`,
+      };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -92,7 +99,7 @@ export class RevenueService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Revenue> {
     try {
       const revenue = await this.revenueRepository.findOne({
         where: {
@@ -110,7 +117,10 @@ export class RevenueService {
     }
   }
 
-  async update(id: string, updateRevenueDto: UpdateRevenueDto) {
+  async update(
+    id: string,
+    updateRevenueDto: UpdateRevenueDto,
+  ): Promise<UpdatedEntity> {
     const { sourceId, tagId } = updateRevenueDto;
 
     try {
@@ -143,13 +153,15 @@ export class RevenueService {
       revenue.updatedAt = new Date();
 
       await this.revenueRepository.update(id, revenue);
-      return { message: updateRevenueDto.name };
+      return {
+        message: `Revenue ${updateRevenueDto.name} updated successfully`,
+      };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
   }
 
-  async softDelete(id: string) {
+  async softDelete(id: string): Promise<DeletedEntity> {
     try {
       const revenue = await this.revenueRepository
         .findOneBy({ id })
@@ -158,13 +170,15 @@ export class RevenueService {
           return this.revenueRepository.save(revenue);
         });
 
-      return { message: revenue.name };
+      return {
+        message: `Revenue ${revenue.name} deleted successfully`,
+      };
     } catch (e) {
       handleErrors(e.message, e.code);
     }
   }
 
-  async getAmount() {
+  async getAmount(): Promise<Number> {
     try {
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
       queryBuilder.where('revenue.deletedAt is null');

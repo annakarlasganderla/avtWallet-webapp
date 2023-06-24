@@ -1,6 +1,8 @@
+import toast from "react-hot-toast";
 import api from "./Api";
 
 export const handleErrors = (error: any) => {
+	toast.error("Critical error! Contact the administrator");
 	if (error?.response?.data?.message) {
 		return Promise.reject(error.response.data.error);
 	}

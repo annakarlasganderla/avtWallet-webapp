@@ -1,5 +1,6 @@
 import { listAll, post, remove, update } from "./Common";
 import { Sources, SourcesDto } from "../types/sources.types";
+import toast from "react-hot-toast";
 
 const SourcesApi = () => {
 	const url = "/sources";
@@ -18,6 +19,7 @@ const SourcesApi = () => {
 
 	const postSource = async (obj: SourcesDto) => {
 		try {
+			toast.success("Source created successfully");
 			return await post(url, obj);
 		} catch (e: any) {
 			return handleError(e);
@@ -26,6 +28,7 @@ const SourcesApi = () => {
 
 	const updateSource = async (obj: SourcesDto, id: string) => {
 		try {
+			toast.success("Source updated successfully");
 			return await update(url, obj, id);
 		} catch (e: any) {
 			return handleError(e);
@@ -34,6 +37,7 @@ const SourcesApi = () => {
 
 	const deleteSource = async (id: string) => {
 		try {
+			toast.success("Source deleted successfully");
 			return await remove(url, id);
 		} catch (e: any) {
 			return handleError(e);

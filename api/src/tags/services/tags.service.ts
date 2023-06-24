@@ -6,6 +6,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 import { convertToken, handleErrors } from 'src/common/services/common.service';
 import { UserService } from 'src/users/services/users.service';
+import {
+  CreatedEntity,
+  DeletedEntity,
+  UpdatedEntity,
+} from 'src/common/dto/default-responses';
 
 @Injectable()
 export class TagsService {
@@ -17,7 +22,7 @@ export class TagsService {
     private userService: UserService,
   ) {}
 
-  async create(createTagDto: CreateTagDto) {
+  async create(createTagDto: CreateTagDto): Promise<CreatedEntity> {
     if (createTagDto.name === '' || !createTagDto.name)
       throw new HttpException('Tag is empty', 404);
     if (createTagDto.userId === '' || !createTagDto.userId)
@@ -36,7 +41,7 @@ export class TagsService {
       this.logger.log('Created successfully');
       this.tagRepository.save(tag);
 
-      return { message: tag.name };
+      return { message: `Tag ${tag.name} created successfully` };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -57,7 +62,7 @@ export class TagsService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Tag> {
     try {
       const tag = await this.tagRepository.findOne({
         where: {
@@ -74,7 +79,7 @@ export class TagsService {
     }
   }
 
-  async update(id: string, updateTagDto: UpdateTagDto) {
+  async update(id: string, updateTagDto: UpdateTagDto): Promise<UpdatedEntity> {
     try {
       const tag = await this.tagRepository.findOne({
         where: {
@@ -83,21 +88,19 @@ export class TagsService {
         },
       });
 
-      if (tag) {
-        tag.name = updateTagDto.name;
-        tag.updatedAt = new Date();
+      if (!tag) throw new HttpException('Tag not found', 404);
 
-        await this.tagRepository.update(id, tag);
-        return { message: updateTagDto.name };
-      }
+      tag.name = updateTagDto.name;
+      tag.updatedAt = new Date();
 
-      throw HttpException;
+      await this.tagRepository.update(id, tag);
+      return { message: `Tag ${updateTagDto.name} updated successfully` };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
   }
 
-  async softDelete(id: string, context: any) {
+  async softDelete(id: string, context: any): Promise<DeletedEntity> {
     try {
       const userId = convertToken(context);
       const tag = await this.tagRepository
@@ -107,7 +110,7 @@ export class TagsService {
           return this.tagRepository.save(tag);
         });
 
-      return { message: tag.name };
+      return { message: `Tag ${tag.name} deleted successfully` };
     } catch (e) {
       handleErrors(e.message, e.code);
     }

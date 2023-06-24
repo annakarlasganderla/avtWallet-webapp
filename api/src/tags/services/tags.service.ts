@@ -18,13 +18,13 @@ export class TagsService {
   ) {}
 
   async create(createTagDto: CreateTagDto) {
-    try {
-      if (createTagDto.name === '')
-        throw new HttpException('Tag is not empty', 404);
-      if (createTagDto.userId === '')
-        throw new HttpException('User is not empty', 404);
-      const { userId } = createTagDto;
+    if (createTagDto.name === '' || !createTagDto.name)
+      throw new HttpException('Tag is empty', 404);
+    if (createTagDto.userId === '' || !createTagDto.userId)
+      throw new HttpException('User is empty', 404);
 
+    try {
+      const { userId } = createTagDto;
       const user = await this.userService.findOne(userId);
 
       const newTag = new Tag();

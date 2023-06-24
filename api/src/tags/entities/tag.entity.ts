@@ -6,8 +6,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Tag extends AbstractClass {
-  @Column()
-  @IsNotEmpty()
+  @Column({ unique: true })
   name: string;
 
   @ManyToOne(() => User, (user) => user.tags)

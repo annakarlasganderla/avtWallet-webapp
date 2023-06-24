@@ -6,8 +6,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Source extends AbstractClass {
-  @Column()
-  @IsNotEmpty()
+  @Column({ unique: true })
   name: string;
 
   @ManyToOne(() => User, (user) => user.sources)

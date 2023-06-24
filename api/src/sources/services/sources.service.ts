@@ -22,13 +22,13 @@ export class SourcesService {
   ) {}
 
   async create(createSourceDto: CreateSourceDto) {
-    try {
-      if (createSourceDto.name === '')
-        throw new HttpException('Tag is not empty', 404);
-      if (createSourceDto.userId === '')
-        throw new HttpException('User is not empty', 404);
-      const { userId } = createSourceDto;
+    if (createSourceDto.name === '' || !createSourceDto.name)
+      throw new HttpException('Tag is empty', 404);
+    if (createSourceDto.userId === '' || !createSourceDto.userId)
+      throw new HttpException('User is empty', 404);
 
+    try {
+      const { userId } = createSourceDto;
       const user = await this.userService.findOne(userId);
 
       const newSource = new Source();

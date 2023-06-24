@@ -22,6 +22,7 @@ export class UsersController {
 
   @Public()
   @Post('create')
+  @ApiResponse({ status: 201, type: CreatedEntity })
   async create(@Body() createUserDto: CreateUserDto): Promise<CreatedEntity> {
     return await this.usersService.create(createUserDto);
   }

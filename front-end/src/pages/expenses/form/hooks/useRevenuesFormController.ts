@@ -35,18 +35,20 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 			return null;
 		},
 		onSuccess: (data: IRevenue) => {
-			revenue.setValues({
-				name: data.name,
-				coin: data.coin,
-				value: data.value,
-				sourceId: data.source.id,
-				tagId: data.tag.id,
-				payMethod: data.payMethod,
-				typeRevenue: data.typeRevenue,
-				date: moment(data.date).format("YYYY-MM-DD"),
-				description: data.description,
-				userId: user.uuid,
-			});
+			if (data) {
+				revenue.setValues({
+					name: data.name,
+					coin: data.coin,
+					value: data.value,
+					sourceId: data.source.id,
+					tagId: data.tag.id,
+					payMethod: data.payMethod,
+					typeRevenue: data.typeRevenue,
+					date: moment(data.date).format("YYYY-MM-DD"),
+					description: data.description,
+					userId: user.uuid,
+				});
+			}
 		},
 	});
 
@@ -115,6 +117,11 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 
 			if (!id) {
 				revenueApi.postRevenue(newObject);
+			}
+
+			if (id) {
+				revenueApi.updateRevenue(newObject, id);
+				navigate("/revenue");
 			}
 			resetForm({ values: revenue.initialValues });
 		},

@@ -15,13 +15,11 @@ import { UpdateRevenueDto } from './dto/update-revenue.dto';
 import { PageOptionsDto } from './dto/page.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Revenue } from './entities/revenue.entity';
-import { Public } from 'src/auth/decorators/auth.decorators';
 
 @ApiTags('revenues')
 @Controller('revenues')
-@Public()
 export class RevenueController {
-  constructor(private readonly revenueService: RevenueService) { }
+  constructor(private readonly revenueService: RevenueService) {}
   private logger = new Logger(Revenue.name);
 
   @Post('create')

@@ -6,14 +6,17 @@ import {
   Param,
   Delete,
   Put,
+  Request,
 } from '@nestjs/common';
 import { TagsService } from './services/tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/decorators/auth.decorators';
 
 @ApiTags('tags')
 @Controller('tags')
+@Public()
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 
@@ -23,8 +26,8 @@ export class TagsController {
   }
 
   @Get('list-all')
-  findAll() {
-    return this.tagsService.findAll();
+  findAll(@Request() request: any) {
+    return this.tagsService.findAll(request);
   }
 
   @Get('get/:id')
@@ -38,7 +41,7 @@ export class TagsController {
   }
 
   @Delete('delete/:id')
-  remove(@Param('id') id: string) {
-    return this.tagsService.softDelete(id);
+  remove(@Param('id') id: string, @Request() request: any) {
+    return this.tagsService.softDelete(id, request);
   }
 }

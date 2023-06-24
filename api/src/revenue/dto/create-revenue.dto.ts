@@ -1,13 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PayMethod } from '../enum/payMethod';
 import { typeRevenue } from '../enum/typeRevenue';
-import {
-  IsDate,
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-} from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateRevenueDto {
   @ApiProperty({
@@ -18,7 +12,7 @@ export class CreateRevenueDto {
   name: string;
 
   @ApiProperty({
-    example: "BRL",
+    example: 'BRL',
   })
   @IsNotEmpty()
   coin: string;

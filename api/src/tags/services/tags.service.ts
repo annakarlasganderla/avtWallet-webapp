@@ -4,7 +4,8 @@ import { UpdateTagDto } from '../dto/update-tag.dto';
 import { Tag } from '../entities/tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
-import { handleErrors } from 'src/common/services/common.service';
+import { convertToken, handleErrors } from 'src/common/services/common.service';
+import { UserService } from 'src/users/services/users.service';
 
 @Injectable()
 export class TagsService {
@@ -13,13 +14,24 @@ export class TagsService {
   constructor(
     @InjectRepository(Tag)
     private tagRepository: Repository<Tag>,
+    private userService: UserService,
   ) {}
 
   async create(createTagDto: CreateTagDto) {
     try {
       if (createTagDto.name === '')
         throw new HttpException('Tag is not empty', 404);
-      const tag = this.tagRepository.create(createTagDto);
+      if (createTagDto.userId === '')
+        throw new HttpException('User is not empty', 404);
+      const { userId } = createTagDto;
+
+      const user = await this.userService.findOne(userId);
+
+      const newTag = new Tag();
+      newTag.name = createTagDto.name;
+      newTag.user = user;
+
+      const tag = this.tagRepository.create(newTag);
 
       this.logger.log('Created successfully');
       this.tagRepository.save(tag);
@@ -30,13 +42,16 @@ export class TagsService {
     }
   }
 
-  async findAll(): Promise<Tag[]> {
+  async findAll(context: any): Promise<Tag[]> {
     try {
-      return await this.tagRepository.find({
-        where: {
-          deletedAt: IsNull(),
-        },
-      });
+      const userId = convertToken(context);
+      const query = this.tagRepository
+        .createQueryBuilder('tag')
+        .where('tag.deletedAt IS NULL')
+        .andWhere('(tag.userId =:userId OR tag.userId IS NULL)', {
+          userId,
+        });
+      return query.getMany();
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -82,12 +97,15 @@ export class TagsService {
     }
   }
 
-  async softDelete(id: string) {
+  async softDelete(id: string, context: any) {
     try {
-      const tag = await this.tagRepository.findOneBy({ id }).then((tag) => {
-        tag.deletedAt = new Date();
-        return this.tagRepository.save(tag);
-      });
+      const userId = convertToken(context);
+      const tag = await this.tagRepository
+        .findOne({ where: { id: id, user: { id: userId } } })
+        .then((tag) => {
+          tag.deletedAt = new Date();
+          return this.tagRepository.save(tag);
+        });
 
       return { message: tag.name };
     } catch (e) {

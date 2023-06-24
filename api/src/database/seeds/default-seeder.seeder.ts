@@ -11,7 +11,6 @@ export default class Seeder {
     const userRepository = connection.getRepository(User);
     const tagRepository = connection.getRepository(Tag);
     const sourceRepository = connection.getRepository(Source);
-
     const default_user: CreateUserDto = {
       email: 'default_user@gmail.com',
       name: 'admin',
@@ -25,6 +24,7 @@ export default class Seeder {
 
     const default_tag: CreateTagDto = {
       name: 'Tag Deafult',
+      userId: null,
     };
 
     if ((await tagRepository.find()).length === 0) {
@@ -33,6 +33,7 @@ export default class Seeder {
 
     const default_source: CreateSourceDto = {
       name: 'Source Default',
+      userId: null,
     };
 
     if ((await sourceRepository.find()).length === 0) {

@@ -5,7 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Source } from '../entities/source.entity';
 import { IsNull, Repository } from 'typeorm';
 import { DeletedUserDto } from 'src/common/dto/default-responses';
-import { handleErrors } from '../../common/services/common.service';
+import {
+  convertToken,
+  handleErrors,
+} from '../../common/services/common.service';
+import { UserService } from 'src/users/services/users.service';
 
 @Injectable()
 export class SourcesService {
@@ -14,13 +18,24 @@ export class SourcesService {
   constructor(
     @InjectRepository(Source)
     private sourceRepository: Repository<Source>,
+    private userService: UserService,
   ) {}
 
   async create(createSourceDto: CreateSourceDto) {
     try {
       if (createSourceDto.name === '')
         throw new HttpException('Tag is not empty', 404);
-      const source = this.sourceRepository.create(createSourceDto);
+      if (createSourceDto.userId === '')
+        throw new HttpException('User is not empty', 404);
+      const { userId } = createSourceDto;
+
+      const user = await this.userService.findOne(userId);
+
+      const newSource = new Source();
+      newSource.name = createSourceDto.name;
+      newSource.user = user;
+
+      const source = this.sourceRepository.create(newSource);
 
       this.logger.log('Source created successfully');
       this.sourceRepository.save(source);
@@ -31,13 +46,16 @@ export class SourcesService {
     }
   }
 
-  async findAll(): Promise<Source[]> {
+  async findAll(context: any): Promise<Source[]> {
     try {
-      return this.sourceRepository.find({
-        where: {
-          deletedAt: IsNull(),
-        },
-      });
+      const userId = convertToken(context);
+      const query = this.sourceRepository
+        .createQueryBuilder('source')
+        .where('source.deletedAt IS NULL')
+        .andWhere('(source.userId =:userId OR source.userId IS NULL)', {
+          userId,
+        });
+      return query.getMany();
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -83,10 +101,11 @@ export class SourcesService {
     }
   }
 
-  async softDelete(id: string): Promise<DeletedUserDto> {
+  async softDelete(id: string, context: any): Promise<DeletedUserDto> {
     try {
+      const userId = convertToken(context);
       const source = await this.sourceRepository
-        .findOneBy({ id })
+        .findOne({ where: { id: id, user: { id: userId } } })
         .then((source) => {
           source.deletedAt = new Date();
           return this.sourceRepository.save(source);

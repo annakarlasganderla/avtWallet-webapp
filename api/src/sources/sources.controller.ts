@@ -6,6 +6,7 @@ import {
   Put,
   Param,
   Delete,
+  Request,
 } from '@nestjs/common';
 import { SourcesService } from './services/sources.service';
 import { CreateSourceDto } from './dto/create-source.dto';
@@ -23,8 +24,8 @@ export class SourcesController {
   }
 
   @Get('list-all')
-  findAll() {
-    return this.sourcesService.findAll();
+  findAll(@Request() request: any) {
+    return this.sourcesService.findAll(request);
   }
 
   @Get('get/:id')
@@ -38,7 +39,7 @@ export class SourcesController {
   }
 
   @Delete('delete/:id')
-  remove(@Param('id') id: string) {
-    return this.sourcesService.softDelete(id);
+  remove(@Param('id') id: string, @Request() request: any) {
+    return this.sourcesService.softDelete(id, request);
   }
 }

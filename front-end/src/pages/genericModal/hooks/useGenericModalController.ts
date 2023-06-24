@@ -5,8 +5,11 @@ import { Data, IData, IGenericModalProps } from "../utils/genericModal.types";
 import { useFormik } from "formik";
 import { useEffect, useMemo, useState } from "react";
 import { MODALTYPE } from "../../../types/Interfaces.type";
+import useAuth from "../../../context/hooks/useAuth";
 
 export const useGenericModalController = (props: IGenericModalProps) => {
+	const { user } = useAuth();
+
 	const apiTags = TagsApi();
 	const apiSources = SourcesApi();
 
@@ -22,6 +25,7 @@ export const useGenericModalController = (props: IGenericModalProps) => {
 	const form = useFormik<IData>({
 		initialValues: {
 			name: "",
+			userId: user.uuid,
 		},
 		onSubmit: async (value, { resetForm }) => {
 			if (props.type === "tags") {

@@ -12,4 +12,5 @@ export interface IGenericModalProps {
 
 export interface IData {
 	name: string;
+	userId: string;
 }

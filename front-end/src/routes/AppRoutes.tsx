@@ -23,9 +23,10 @@ export function AppRoutes() {
 
 					<Routes>
 						<Route path="/" element={<Login />} />
-						<Route path="/register" element={<Register />} />
+						<Route path="/register" element={<Register type={'NEW'} />} />
 						<Route element={<ProtectedRoute />}>
 							<Route element={<Layout />}>
+								<Route path="/profile" element={<Register type={"VIEW"} />} />
 								<Route path="/revenue/form/new" element={<ExpensesForm type={"NEW"} />} />
 								<Route
 									path="/revenue/form/:id"

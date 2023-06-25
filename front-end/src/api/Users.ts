@@ -1,4 +1,4 @@
-import { listAll, post, remove, update, handleErrors } from "./Common";
+import { listAll, post, remove, update, handleErrors, getById } from "./Common";
 import { UsersDto } from "../types/users.types";
 import toast from "react-hot-toast";
 
@@ -13,6 +13,10 @@ const UserApi = () => {
 		return await post(url, obj).then(() => toast.success("User created successfully"));
 	};
 
+	const getUserById = async (id: string) => {
+		return await getById(url, id);
+	}
+
 	const updateUser = async (obj: UsersDto, id: string) => {
 		return await update(url, obj, id).then(() =>
 			toast.success("User updated successfully"),
@@ -23,7 +27,7 @@ const UserApi = () => {
 		return await remove(url, id);
 	};
 
-	return { listUsers, postUser, updateUser, deleteUser };
+	return { listUsers, postUser, getUserById, updateUser, deleteUser };
 };
 
 export default UserApi;

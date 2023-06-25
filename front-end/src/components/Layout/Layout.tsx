@@ -98,7 +98,7 @@ const Layout: FC = () => {
 					}
 					classname="h-full flex items-center hidden lg:block lg:h-auto lg:absolute lg:bottom-0"
 				>
-					<li className="px-4 py-2 hover:bg-gray-100">Profile</li>
+					<li className="px-4 py-2 hover:bg-gray-100" onClick={() => navigate("/profile")}>Profile</li>
 					<li className="px-4 py-2 hover:bg-gray-100" onClick={logout}>
 						Logout
 					</li>

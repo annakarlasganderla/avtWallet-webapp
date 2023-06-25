@@ -115,7 +115,7 @@ const RevenueList = () => {
 					<p className="text-gray-50 md:text-black">Amount: </p>
 					<h1
 						className={`font-bold text-3xl ${
-							amount && amount >= 0 ? "text-gray-50 md:text-black" : "text-red-500"
+							amount && amount < 0 ? "text-red-500" : "text-gray-50 md:text-black"
 						}`}
 					>
 						{amount?.toLocaleString("pt-br", {

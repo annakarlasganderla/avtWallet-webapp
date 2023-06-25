@@ -1,17 +1,8 @@
 import { useState } from "react";
 import RevenueApi from "../../../../api/Revenues";
-import {
-	IRevenueList,
-	IRevenueOptions,
-	RevenueEntity,
-} from "../../list/utils/revenuesList.types";
-import useAuth from "../../../../context/hooks/useAuth";
+import { IRevenueList, IRevenueOptions } from "../../list/utils/revenuesList.types";
 import { useQuery } from "react-query";
-import {
-	FilterOptions,
-	ISelectOption,
-	PaymentMethods,
-} from "../../../../types/Interfaces.type";
+import { FilterOptions, ISelectOption } from "../../../../types/Interfaces.type";
 import { Tags } from "../../../../types/tags.types";
 import TagsApi from "../../../../api/Tags";
 
@@ -20,14 +11,11 @@ export const useListExtracts = () => {
 	const tagApi = TagsApi();
 	const [revenueList, setRevenueList] = useState<IRevenueList>();
 	const [tags, setTags] = useState<ISelectOption[]>([]);
-	const { user } = useAuth();
 	const [pageable, setPageable] = useState<IRevenueOptions>({
 		order: "ASC",
 		page: 1,
 		take: 10,
-		where: {
-			user: user.uuid,
-		},
+		where: {},
 	});
 
 	useQuery("tags-list", {

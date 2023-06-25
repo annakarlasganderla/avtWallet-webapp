@@ -4,7 +4,7 @@ import { UpdateRevenueDto } from '../dto/update-revenue.dto';
 import { Revenue } from '../entities/revenue.entity';
 import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { handleErrors } from 'src/common/services/common.service';
+import { convertToken, handleErrors } from 'src/common/services/common.service';
 import {
   PageDto,
   PageMetaDto,
@@ -73,11 +73,14 @@ export class RevenueService {
     }
   }
 
-  async findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<Revenue>> {
+  async findAll(
+    pageOptionsDto: PageOptionsDto,
+    context: any,
+  ): Promise<PageDto<Revenue>> {
     try {
       const { order, skip, take, where } = pageOptionsDto;
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
-
+      const userId = convertToken(context);
       const { whereString, values } = this.buildWhere(where);
 
       queryBuilder
@@ -86,7 +89,7 @@ export class RevenueService {
         .take(take)
         .leftJoinAndSelect('revenue.tag', 'tag')
         .where(whereString, values)
-        .andWhere('revenue.userId = :user', { user: where.user });
+        .andWhere('revenue.userId = :user', { user: userId });
 
       const itemCount = await queryBuilder.getCount();
       const { entities } = await queryBuilder.getRawAndEntities();
@@ -178,10 +181,13 @@ export class RevenueService {
     }
   }
 
-  async getAmount(): Promise<Number> {
+  async getAmount(context: any): Promise<number> {
     try {
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
-      queryBuilder.where('revenue.deletedAt is null');
+      const userId = convertToken(context);
+      queryBuilder
+        .where('revenue.deletedAt is null')
+        .andWhere('revenue.userId = :user', { user: userId });
 
       const { entities } = await queryBuilder.getRawAndEntities();
 

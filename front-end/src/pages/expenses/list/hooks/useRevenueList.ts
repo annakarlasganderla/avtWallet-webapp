@@ -1,11 +1,9 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { IRevenueList, IRevenueOptions } from "../utils/revenuesList.types";
 import RevenueApi from "../../../../api/Revenues";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import useAuth from "../../../../context/hooks/useAuth";
 
 export const useRevenueList = () => {
-	const { user } = useAuth();
 	const revenueApi = RevenueApi();
 	const queryClient = useQueryClient();
 	const [revenueList, setRevenueList] = useState<IRevenueList>();
@@ -13,9 +11,7 @@ export const useRevenueList = () => {
 		order: "ASC",
 		page: 1,
 		take: 10,
-		where: {
-			user: user.uuid,
-		},
+		where: {},
 	});
 
 	const amount = useQuery(

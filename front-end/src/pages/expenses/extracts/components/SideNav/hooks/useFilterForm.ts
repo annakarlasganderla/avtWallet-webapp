@@ -4,7 +4,6 @@ import {
 	ISelectOption,
 	PaymentMethods,
 } from "../../../../../../types/Interfaces.type";
-import useAuth from "../../../../../../context/hooks/useAuth";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import TagsApi from "../../../../../../api/Tags";
@@ -13,7 +12,6 @@ import { ISideNavProps } from "../utils/sideNav.types";
 
 export const useFilterForm = (props: ISideNavProps) => {
 	const tagApi = TagsApi();
-	const { user } = useAuth();
 	const { setWhere, setIsFalse } = props;
 	const [tags, setTags] = useState<ISelectOption[]>([]);
 
@@ -44,7 +42,6 @@ export const useFilterForm = (props: ISideNavProps) => {
 			tagId: "",
 			payMethod: null,
 			value: null,
-			user: user.uuid,
 		},
 		onSubmit: (value) => {
 			let newObject = value;

@@ -1,14 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Order } from '../enum/order';
-import {
-  IsEnum,
-  IsInt,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PayMethod } from '../enum/payMethod';
 
@@ -17,7 +9,6 @@ export interface WhereDto {
   value?: number;
   tagId?: string;
   payMethod?: PayMethod;
-  user: string;
 }
 
 export class PageOptionsDto {
@@ -52,7 +43,7 @@ export class PageOptionsDto {
     example: {
       name: 'Conta de Luz',
       value: 172,
-      tagId: "70d1b7eb-01ca-4f43-bea9-9031e2c889fc",
+      tagId: '70d1b7eb-01ca-4f43-bea9-9031e2c889fc',
       payMethod: PayMethod.MONEY,
     },
   })

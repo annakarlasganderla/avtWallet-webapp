@@ -56,5 +56,4 @@ export interface FilterOptions {
 	value?: number | null;
 	tagId?: string;
 	payMethod?: PaymentMethods | null;
-	user: string;
 }

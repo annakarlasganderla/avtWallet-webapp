@@ -5,7 +5,7 @@ import { BsCurrencyEuro } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 
 const Header = (props: IHeaderProps) => {
-	const { isAuthenticated, logout } = useAuth();
+	const { isAuthenticated, user, logout } = useAuth();
 
 	return (
 		<div
@@ -24,6 +24,9 @@ const Header = (props: IHeaderProps) => {
 					Logout
 				</li>
 			</Menu>
+			{user.username && (
+				<span className="hidden lg:block text-white">Hello, {user.username}</span>
+			)}
 		</div>
 	);
 };

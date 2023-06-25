@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Put,
+  Request,
 } from '@nestjs/common';
 import { RevenueService } from './services/revenue.service';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
@@ -32,8 +33,11 @@ export class RevenueController {
 
   @Post('list-all')
   @ApiResponse({ status: 200, type: PageDto })
-  findAll(@Body() pageOptionsDto: PageOptionsDto): Promise<PageDto<Revenue>> {
-    return this.revenueService.findAll(pageOptionsDto);
+  findAll(
+    @Body() pageOptionsDto: PageOptionsDto,
+    @Request() request: any,
+  ): Promise<PageDto<Revenue>> {
+    return this.revenueService.findAll(pageOptionsDto, request);
   }
 
   @Get('get/:id')
@@ -44,8 +48,8 @@ export class RevenueController {
 
   @Get('amount')
   @ApiResponse({ status: 200, type: Number })
-  getAmount(): Promise<Number> {
-    return this.revenueService.getAmount();
+  getAmount(@Request() request: any): Promise<number> {
+    return this.revenueService.getAmount(request);
   }
 
   @Put('edit/:id')

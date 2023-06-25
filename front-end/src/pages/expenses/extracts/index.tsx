@@ -57,7 +57,7 @@ const ExtractsList = () => {
 			align: "center",
 			classname: "hidden lg:flex",
 			bold: true,
-			onRender: (item) => PaymentMethods[item.payMethod],
+			onRender: (item) => <p className="truncate">PaymentMethods[item.payMethod]</p>,
 		},
 		{
 			minSize: 15,
@@ -91,6 +91,7 @@ const ExtractsList = () => {
 						items={list || []}
 						isTitle={false}
 						pointer
+						emptyMessage={"No revenues registered yet"}
 						onClick={(index) => navigate(`/revenue/form/${index}`)}
 						onChangePage={() => changePage()}
 					/>

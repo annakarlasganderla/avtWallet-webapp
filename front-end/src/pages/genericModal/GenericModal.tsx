@@ -55,7 +55,12 @@ const GenericModal = (props: IGenericModalProps) => {
 					</form>
 					<div className="w-full  h-0.5 bg-black" />
 					<div className="h-2/3">
-						<List columns={columns} items={list || []} isTitle={false} />
+						<List
+							columns={columns}
+							items={list || []}
+							emptyMessage={"No items registered yet"}
+							isTitle={false}
+						/>
 					</div>
 				</div>
 			</Modal>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IMenuProps } from "./utils/munu.types";
+import { IMenuProps } from "./utils/menu.types";
 
 const Menu: React.FC<IMenuProps> = ({ target, children, classname }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);

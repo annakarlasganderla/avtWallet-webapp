@@ -32,7 +32,7 @@ const SideNav = (props: ISideNavProps) => {
 						className="flex justify-center items-center mt-5"
 						onSubmit={filter.handleSubmit}
 					>
-						<div className="flex flex-col gap-2 w-3/5 md:w-full">
+						<div className="flex flex-col items-center gap-2 w-3/5 md:w-full">
 							<TextField
 								type={"text"}
 								name={"name"}
@@ -65,8 +65,8 @@ const SideNav = (props: ISideNavProps) => {
 								value={filter.values.payMethod}
 							/>
 
-							<div className="flex justify-center items-center mt-6">
-								<Button width={"50%"} height={"35px"} textsize={"16px"} type={"submit"}>
+							<div className="flex justify-center items-center mt-6 w-full lg:w-3/5">
+								<Button height={"35px"} textsize={"16px"} type={"submit"}>
 									Aplicar filtros
 								</Button>
 							</div>

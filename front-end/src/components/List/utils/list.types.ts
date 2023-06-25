@@ -21,6 +21,7 @@ export interface IListProps {
 	isTitle: boolean;
 	pointer?: boolean;
 	isScreenSmall?: boolean;
+	emptyMessage: string;
 	onChangePage?: (page?: number) => void;
 	onClick?: (index: string | number) => void;
 }

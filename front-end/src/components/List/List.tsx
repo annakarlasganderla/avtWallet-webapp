@@ -1,4 +1,5 @@
 import moment from "moment";
+import { MdError } from "react-icons/md";
 import { IColumn, IListProps, columnType } from "./utils/list.types";
 
 function List(props: IListProps) {
@@ -100,12 +101,18 @@ function List(props: IListProps) {
 
 	return (
 		<div
-			className="w-full h-full flex-1 flex flex-col justify-start items-center gap-8 overflow-auto"
+			className="w-full h-full flex-1 flex flex-col justify-center items-center gap-8 overflow-auto"
 			onScroll={handleScroll}
 		>
 			{isTitle && renderHeader()}
 			<div className="w-full flex flex-1 flex-col gap-4">
-				{columns && items.map(renderCell)}
+				{columns && items.length > 0 && items.map(renderCell)}
+				{items.length === 0 && (
+					<div className="h-full flex flex-col justify-center items-center gap-2">
+						<MdError size={40} />
+						<span className="text-lg font-bold">{props.emptyMessage}</span>
+					</div>
+				)}
 			</div>
 		</div>
 	);

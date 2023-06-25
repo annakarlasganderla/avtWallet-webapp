@@ -8,6 +8,7 @@ import { IColumn } from "../../../components/List/utils/list.types";
 import { IRevenue, TypeRevenue } from "../../../types/Interfaces.type";
 import { useRevenueList } from "./hooks/useRevenueList";
 import useWindowSize from "../../../hooks/useWindowsSize";
+import Menu from "../../../components/Menu/Menu";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
@@ -65,10 +66,36 @@ const RevenueList = () => {
 							deleteRevenue.mutate(item.id);
 						}}
 					/>
-					<AiOutlineRight
-						className="lg:hidden cursor-pointer"
-						onClick={() => navigate(`/revenue/form/${item.id}`)}
-					/>
+					<Menu
+						target={<AiOutlineRight className="lg:hidden cursor-pointer" />}
+						classname="lg:hidden"
+					>
+						<li
+							className="px-4 py-2 hover:bg-gray-100"
+							onClick={(event) => {
+								navigate(`/revenue/form/${item.id}`);
+							}}
+						>
+							View
+						</li>
+						<li
+							className="px-4 py-2 hover:bg-gray-100"
+							onClick={() => {
+								navigate(`/revenue/form/edit/${item.id}`);
+							}}
+						>
+							Edit
+						</li>
+						<li
+							className="px-4 py-2 hover:bg-gray-100"
+							onClick={() => {
+								deleteRevenue.mutate(item.id);
+							}}
+						>
+							Delete
+						</li>
+					</Menu>
+
 					<MdEdit
 						className="hidden lg:block hover:opacity-80 hover:text-gray-800 cursor-pointer z-10"
 						onClick={(event) => {
@@ -86,7 +113,11 @@ const RevenueList = () => {
 			<div className="w-full flex flex-col bg-black md:bg-white justify-center items-center">
 				<div className="w-3/5 flex flex-col md:items-start md:border-2 border-black md:rounded-2xl gap-y-4 py-4 px-8 md:px-10 md:mt-8">
 					<p className="text-gray-50 md:text-black">Amount: </p>
-					<h1 className="font-bold text-3xl text-gray-50 md:text-black">
+					<h1
+						className={`font-bold text-3xl ${
+							amount && amount >= 0 ? "text-gray-50 md:text-black" : "text-red-500"
+						}`}
+					>
 						{amount?.toLocaleString("pt-br", {
 							style: "currency",
 							currency: "BRL",
@@ -101,6 +132,7 @@ const RevenueList = () => {
 					items={list || []}
 					isTitle={false}
 					pointer
+					emptyMessage={"No revenues registered yet"}
 					isScreenSmall={width >= 1024}
 					onClick={(index) => navigate(`/revenue/form/${index}`)}
 					onChangePage={() => changePage()}

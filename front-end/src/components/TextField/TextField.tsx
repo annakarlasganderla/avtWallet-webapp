@@ -5,7 +5,7 @@ const TextField = (props: ITextFieldProps) => {
 
 	return (
 		<div
-			className={`flex flex-col ${!props.width && !props.class && "w-100"} ${
+			className={`flex flex-col ${!props.width && !props.class && "w-full"} ${
 				props.class
 			}`}
 			style={{ width: props.width }}

@@ -36,6 +36,7 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 		},
 		onSuccess: (data: IRevenue) => {
 			if (data) {
+				console.log(data);
 				revenue.setValues({
 					name: data.name,
 					coin: data.coin,
@@ -76,10 +77,10 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 
 	const coinsOptions: ISelectOption[] = [
 		{ name: "R$", data: "BRL" },
-		{ name: "U$", data: "USD" },
-		{ name: "€", data: "EUR" },
-		{ name: "ARS", data: "ARS" },
-		{ name: "Gs", data: "PYG" },
+		// { name: "U$", data: "USD" },
+		// { name: "€", data: "EUR" },
+		// { name: "ARS", data: "ARS" },
+		// { name: "Gs", data: "PYG" },
 	];
 
 	const payMethods: ISelectOption<PaymentMethods>[] = [

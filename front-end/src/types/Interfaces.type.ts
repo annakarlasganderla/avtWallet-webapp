@@ -22,15 +22,15 @@ export interface ITags {
 }
 
 export enum TypeRevenue {
-	EXPENSE,
-	INCOMING,
+	EXPENSE = 1,
+	INCOMING = 2,
 }
 
 export enum PaymentMethods {
-	PIX,
-	CREDITCARD,
-	DEBITCARD,
-	MONEY,
+	PIX = 1,
+	CREDITCARD = 2,
+	DEBITCARD = 3,
+	MONEY = 4,
 }
 
 export interface IRevenue {

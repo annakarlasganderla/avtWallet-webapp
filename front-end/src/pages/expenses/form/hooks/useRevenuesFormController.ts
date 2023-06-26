@@ -36,7 +36,6 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 		},
 		onSuccess: (data: IRevenue) => {
 			if (data) {
-				console.log(data);
 				revenue.setValues({
 					name: data.name,
 					coin: data.coin,

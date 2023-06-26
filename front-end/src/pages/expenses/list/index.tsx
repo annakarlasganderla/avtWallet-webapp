@@ -107,7 +107,6 @@ const RevenueList = () => {
 			),
 		},
 	];
-	console.log(loading);
 
 	return (
 		<main className="w-full flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">

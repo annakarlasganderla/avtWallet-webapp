@@ -92,7 +92,7 @@ const ExtractsList = () => {
 						isTitle={false}
 						pointer
 						loading={loading}
-						emptyMessage={"No revenues registered yet"}
+						emptyMessage={"No revenues were found"}
 						onClick={(index) => navigate(`/revenue/form/${index}`)}
 						onChangePage={() => changePage()}
 					/>

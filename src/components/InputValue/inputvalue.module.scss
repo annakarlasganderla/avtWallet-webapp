@@ -1,0 +1,38 @@
+.area {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.area input {
+    border: 2px solid #000000;
+    outline: none;
+}
+
+.select {
+    width: 2.5rem;
+    height: 100%;
+    position: absolute;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    text-align: center;
+    cursor: pointer;
+}
+
+.input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 2px 5px 45px;
+}
+
+.input:disabled {
+    background-color: #E6E6E6;
+    opacity: 1;
+}

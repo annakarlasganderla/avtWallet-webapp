@@ -3,6 +3,7 @@ import {
 	FilterOptions,
 	ISelectOption,
 	PaymentMethods,
+	TypeRevenue,
 } from "../../../../../../types/Interfaces.type";
 import { useState } from "react";
 import { useQuery } from "react-query";
@@ -30,10 +31,15 @@ export const useFilterForm = (props: ISideNavProps) => {
 	});
 
 	const payMethods: ISelectOption<PaymentMethods>[] = [
-		{ name: "Cartão de crédito", data: PaymentMethods.CREDITCARD },
 		{ name: "Pix", data: PaymentMethods.PIX },
-		{ name: "Cartão de débito", data: PaymentMethods.DEBITCARD },
-		{ name: "Dinheiro", data: PaymentMethods.MONEY },
+		{ name: "Credit Card", data: PaymentMethods.CREDITCARD },
+		{ name: "Debit Card", data: PaymentMethods.DEBITCARD },
+		{ name: "Money", data: PaymentMethods.MONEY },
+	];
+
+	const typeRevenues: ISelectOption<TypeRevenue>[] = [
+		{ name: "Incoming", data: TypeRevenue.INCOMING },
+		{ name: "Expense", data: TypeRevenue.EXPENSE },
 	];
 
 	const filter = useFormik<FilterOptions>({
@@ -41,11 +47,13 @@ export const useFilterForm = (props: ISideNavProps) => {
 			name: "",
 			tagId: "",
 			payMethod: null,
+			typeRevenue: null,
 			value: null,
 		},
 		onSubmit: (value) => {
 			let newObject = value;
 			newObject.payMethod = value.payMethod ? Number(value.payMethod) : null;
+			newObject.typeRevenue = value.typeRevenue ? Number(value.typeRevenue) : null;
 			setWhere(newObject);
 			if (value !== filter.initialValues) {
 				setIsFalse();
@@ -53,5 +61,5 @@ export const useFilterForm = (props: ISideNavProps) => {
 		},
 	});
 
-	return { filter, payMethods, tags };
+	return { filter, payMethods, tags, typeRevenues };
 };

@@ -231,6 +231,16 @@ export class RevenueService {
       values['payMethod'] = options.payMethod;
     }
 
+    if (options.typeRevenue) {
+      const condition = `revenue.typeRevenue = :typeRevenue`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : (whereString = `${condition}`);
+
+      values['typeRevenue'] = options.typeRevenue;
+    }
+
     if (options.tagId) {
       const condition = `revenue.tagId = :tagId`;
 

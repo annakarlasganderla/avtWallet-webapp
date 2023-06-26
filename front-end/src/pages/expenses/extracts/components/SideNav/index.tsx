@@ -8,7 +8,7 @@ import Button from "../../../../../components/Button";
 import { useFilterForm } from "./hooks/useFilterForm";
 
 const SideNav = (props: ISideNavProps) => {
-	const { filter, payMethods, tags } = useFilterForm(props);
+	const { filter, payMethods, tags, typeRevenues } = useFilterForm(props);
 
 	return (
 		<div className="flex">
@@ -63,6 +63,14 @@ const SideNav = (props: ISideNavProps) => {
 								options={payMethods}
 								onChange={filter.handleChange}
 								value={filter.values.payMethod}
+							/>
+
+							<Select
+								name={"typeRevenue"}
+								optionDefault={"Type Revenue"}
+								options={typeRevenues}
+								onChange={filter.handleChange}
+								value={filter.values.typeRevenue}
 							/>
 
 							<div className="flex justify-center items-center mt-6 w-full lg:w-3/5">

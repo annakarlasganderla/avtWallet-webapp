@@ -84,15 +84,15 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 	];
 
 	const payMethods: ISelectOption<PaymentMethods>[] = [
-		{ name: "Cartão de crédito", data: PaymentMethods.CREDITCARD },
 		{ name: "Pix", data: PaymentMethods.PIX },
-		{ name: "Cartão de débito", data: PaymentMethods.DEBITCARD },
-		{ name: "Dinheiro", data: PaymentMethods.MONEY },
+		{ name: "Credit Card", data: PaymentMethods.CREDITCARD },
+		{ name: "Debit Card", data: PaymentMethods.DEBITCARD },
+		{ name: "Money", data: PaymentMethods.MONEY },
 	];
 
 	const typeRevenues: ISelectOption<TypeRevenue>[] = [
-		{ name: "Entrada", data: TypeRevenue.INCOMING },
-		{ name: "Gasto", data: TypeRevenue.EXPENSE },
+		{ name: "Incoming", data: TypeRevenue.INCOMING },
+		{ name: "Expense", data: TypeRevenue.EXPENSE },
 	];
 
 	const validationSchema = revenuesFormSchema();

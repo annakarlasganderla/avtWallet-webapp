@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const ExtractsList = () => {
 	const navigate = useNavigate();
 	const [bool, { setTrue, setFalse }] = useBoolean(false);
-	const { list, changePage, setListFiltered } = useListExtracts();
+	const { list, changePage, setListFiltered, loading } = useListExtracts();
 
 	const columns: IColumn<IRevenue>[] = [
 		{
@@ -57,7 +57,7 @@ const ExtractsList = () => {
 			align: "center",
 			classname: "hidden lg:flex",
 			bold: true,
-			onRender: (item) => <p className="truncate">PaymentMethods[item.payMethod]</p>,
+			onRender: (item) => <p className="truncate">{PaymentMethods[item.payMethod]}</p>,
 		},
 		{
 			minSize: 15,
@@ -91,6 +91,7 @@ const ExtractsList = () => {
 						items={list || []}
 						isTitle={false}
 						pointer
+						loading={loading}
 						emptyMessage={"No revenues registered yet"}
 						onClick={(index) => navigate(`/revenue/form/${index}`)}
 						onChangePage={() => changePage()}

@@ -13,7 +13,7 @@ import Menu from "../../../components/Menu/Menu";
 const RevenueList = () => {
 	const navigate = useNavigate();
 	const { width } = useWindowSize();
-	const { list, changePage, deleteRevenue, amount } = useRevenueList();
+	const { list, changePage, deleteRevenue, amount, loading } = useRevenueList();
 
 	const columns: IColumn<IRevenue>[] = [
 		{
@@ -107,6 +107,7 @@ const RevenueList = () => {
 			),
 		},
 	];
+	console.log(loading);
 
 	return (
 		<main className="w-full flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">
@@ -132,6 +133,7 @@ const RevenueList = () => {
 					items={list || []}
 					isTitle={false}
 					pointer
+					loading={loading}
 					emptyMessage={"No revenues registered yet"}
 					isScreenSmall={width >= 1024}
 					onClick={(index) => navigate(`/revenue/form/${index}`)}

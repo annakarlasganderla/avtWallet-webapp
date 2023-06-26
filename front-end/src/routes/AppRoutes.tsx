@@ -18,12 +18,18 @@ export function AppRoutes() {
 		<AuthProvider>
 			<AuthorizationInterceptor />
 			<BrowserRouter>
-				<Suspense fallback={<Loading />}>
+				<Suspense
+					fallback={
+						<div className="w-screen h-screen flex items-center justify-center">
+							<Loading />
+						</div>
+					}
+				>
 					<Toaster position="top-right" />
 
 					<Routes>
 						<Route path="/" element={<Login />} />
-						<Route path="/register" element={<Register type={'NEW'} />} />
+						<Route path="/register" element={<Register type={"NEW"} />} />
 						<Route element={<ProtectedRoute />}>
 							<Route element={<Layout />}>
 								<Route path="/profile" element={<Register type={"VIEW"} />} />

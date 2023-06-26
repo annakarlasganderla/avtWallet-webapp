@@ -11,7 +11,7 @@ import { BsTrash } from "react-icons/bs";
 import { Sources } from "../../types/sources.types";
 
 const GenericModal = (props: IGenericModalProps) => {
-	const { title, list, form, deleteGeneric } = useGenericModalController(props);
+	const { title, list, form, deleteGeneric, loading } = useGenericModalController(props);
 
 	const columns: IColumn<Tags | Sources>[] = [
 		{
@@ -58,6 +58,7 @@ const GenericModal = (props: IGenericModalProps) => {
 						<List
 							columns={columns}
 							items={list || []}
+							loading={loading}
 							emptyMessage={"No items registered yet"}
 							isTitle={false}
 						/>

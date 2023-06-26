@@ -22,10 +22,10 @@ export const useRevenueList = () => {
 		{ keepPreviousData: true, refetchOnWindowFocus: false },
 	);
 
-	useQuery<IRevenueList>(["revenue-list", { pageable }], {
+	const { isFetching } = useQuery<IRevenueList>(["revenue-list", { pageable }], {
 		keepPreviousData: true,
 		refetchOnWindowFocus: false,
-		queryFn: () => revenueApi.listAllRevenuesPageable(pageable),
+		queryFn: async () => await revenueApi.listAllRevenuesPageable(pageable),
 		onSuccess: (data) => {
 			if (data.options.page === 1 && !revenueList?.options.hasNextPage) {
 				return setRevenueList(data);
@@ -68,5 +68,11 @@ export const useRevenueList = () => {
 		},
 	);
 
-	return { list: revenueList?.data, changePage, deleteRevenue, amount: amount.data };
+	return {
+		list: revenueList?.data,
+		changePage,
+		deleteRevenue,
+		amount: amount.data,
+		loading: isFetching,
+	};
 };

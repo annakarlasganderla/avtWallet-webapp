@@ -1,6 +1,7 @@
 import moment from "moment";
 import { MdError } from "react-icons/md";
 import { IColumn, IListProps, columnType } from "./utils/list.types";
+import Loading from "../Loading";
 
 function List(props: IListProps) {
 	const {
@@ -107,10 +108,15 @@ function List(props: IListProps) {
 			{isTitle && renderHeader()}
 			<div className="w-full flex flex-1 flex-col gap-4">
 				{columns && items.length > 0 && items.map(renderCell)}
-				{items.length === 0 && (
+				{items.length === 0 && !loading && (
 					<div className="h-full flex flex-col justify-center items-center gap-2">
 						<MdError size={40} />
 						<span className="text-lg font-bold">{props.emptyMessage}</span>
+					</div>
+				)}
+				{loading && (
+					<div className="h-full flex flex-col justify-center items-center gap-2">
+						<Loading size={5} />
 					</div>
 				)}
 			</div>

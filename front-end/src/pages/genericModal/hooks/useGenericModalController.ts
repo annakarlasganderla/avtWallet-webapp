@@ -72,5 +72,5 @@ export const useGenericModalController = (props: IGenericModalProps) => {
 		},
 	);
 
-	return { title, list: list.data, form, deleteGeneric };
+	return { title, list: list.data, form, deleteGeneric, loading: list.isLoading };
 };

@@ -32,7 +32,7 @@ export const useListExtracts = () => {
 		},
 	});
 
-	useQuery<IRevenueList>(["revenue-list", { pageable }], {
+	const { isLoading } = useQuery<IRevenueList>(["revenue-list", { pageable }], {
 		keepPreviousData: true,
 		refetchOnWindowFocus: false,
 		queryFn: () => revenueApi.listAllRevenuesPageable(pageable),
@@ -65,5 +65,11 @@ export const useListExtracts = () => {
 		setPageable({ ...pageable, where: values });
 	};
 
-	return { list: revenueList?.data, changePage, tags, setListFiltered };
+	return {
+		list: revenueList?.data,
+		changePage,
+		tags,
+		setListFiltered,
+		loading: isLoading,
+	};
 };

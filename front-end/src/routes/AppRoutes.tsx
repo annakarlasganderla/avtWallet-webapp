@@ -12,6 +12,7 @@ const Register = lazy(() => import("../pages/register"));
 const ExtractsList = lazy(() => import("../pages/expenses/extracts"));
 const ExpensesForm = lazy(() => import("../pages/expenses/form/"));
 const RevenueList = lazy(() => import("../pages/expenses/list"));
+const Metrics = lazy(() => import("../pages/metrics"));
 
 export function AppRoutes() {
 	return (
@@ -44,6 +45,7 @@ export function AppRoutes() {
 								/>
 								<Route path="/revenue" element={<RevenueList />} />
 								<Route path="/extracts" element={<ExtractsList />} />
+								<Route path="/metrics" element={<Metrics />} />
 							</Route>
 						</Route>
 					</Routes>

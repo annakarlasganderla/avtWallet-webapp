@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/axios": "^0.14.0",
     "axios": "^1.4.0",
+    "echarts-for-react": "^3.0.2",
     "esbuild": "^0.15.16",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",

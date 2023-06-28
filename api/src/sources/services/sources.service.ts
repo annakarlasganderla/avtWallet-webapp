@@ -52,7 +52,7 @@ export class SourcesService {
       const query = this.sourceRepository
         .createQueryBuilder('source')
         .where('source.deletedAt IS NULL')
-        .andWhere('(source.userId =:userId OR source.userId IS NULL)', {
+        .andWhere('(source.userId = :userId OR source.userId IS NULL)', {
           userId,
         });
       return query.getMany();

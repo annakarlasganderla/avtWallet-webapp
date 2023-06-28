@@ -20,6 +20,11 @@ import {
   DeletedEntity,
   UpdatedEntity,
 } from 'src/common/dto/default-responses';
+import {
+  IBarChart,
+  IPieChart,
+  IStackedChart,
+} from '../dto/charts-interface.dto';
 
 @Injectable()
 export class RevenueService {
@@ -59,7 +64,7 @@ export class RevenueService {
     newRevenue.description = createRevenueDto.description;
     newRevenue.typeRevenue = createRevenueDto.typeRevenue;
     newRevenue.user = user;
-    newRevenue.date = new Date();
+    newRevenue.date = new Date(createRevenueDto.date);
 
     try {
       await this.revenueRepository.save(newRevenue);
@@ -194,15 +199,154 @@ export class RevenueService {
       const amount = entities.reduce((amount: number, entity: Revenue) => {
         let value = 0;
         if (entity.typeRevenue === typeRevenue.EXPENSE) {
-          value = amount - entity.value;
+          value = amount - Number(entity.value);
         }
         if (entity.typeRevenue === typeRevenue.INCOMING) {
-          value = amount + entity.value;
+          value = amount + Number(entity.value);
         }
         return value;
       }, 0);
 
       return amount;
+    } catch (e) {
+      handleErrors(e.message, e.code);
+    }
+  }
+
+  async getPieChart(context: any): Promise<IPieChart> {
+    try {
+      const userId = convertToken(context);
+      const query = this.revenueRepository
+        .createQueryBuilder('revenue')
+        .where('revenue.deletedAt IS NULL')
+        .andWhere('(revenue.userId = :userId ', {
+          userId,
+        });
+
+      const { entities } = await query.getRawAndEntities();
+
+      const totalExpenses = entities.reduce(
+        (total: number, entity: Revenue) => {
+          if (entity.typeRevenue === typeRevenue.EXPENSE) {
+            return total + Number(entity.value);
+          }
+          return total;
+        },
+        0,
+      );
+
+      const totalIncomings = entities.reduce(
+        (total: number, entity: Revenue) => {
+          if (entity.typeRevenue === typeRevenue.INCOMING) {
+            return total + Number(entity.value);
+          }
+          return total;
+        },
+        0,
+      );
+
+      return { expense: totalExpenses, incoming: totalIncomings };
+    } catch (e) {
+      handleErrors(e.message, e.code);
+    }
+  }
+
+  async getStackedChart(context: any): Promise<IStackedChart> {
+    try {
+      const userId = convertToken(context);
+      const currentDate = new Date();
+      const firstDayOfMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        1,
+      );
+      const lastDayOfMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        0,
+      );
+
+      const query = this.revenueRepository
+        .createQueryBuilder('revenue')
+        .where('revenue.deletedAt IS NULL')
+        .andWhere('(revenue.userId = :userId ', {
+          userId,
+        })
+        .andWhere('revenue.date BETWEEN :startDate AND :endDate', {
+          startDate: firstDayOfMonth,
+          endDate: lastDayOfMonth,
+        });
+
+      const { entities } = await query.getRawAndEntities();
+
+      const listDates = entities.map((entity) => entity.date);
+      const listExpenses = entities.reduce(
+        (accumulator: number[], entity: Revenue) => {
+          if (entity.typeRevenue === typeRevenue.EXPENSE) {
+            accumulator.push(Number(entity.value) * -1);
+          }
+          return accumulator;
+        },
+        [],
+      );
+
+      const listIncomings = entities.reduce(
+        (accumulator: number[], entity: Revenue) => {
+          if (entity.typeRevenue === typeRevenue.INCOMING) {
+            accumulator.push(Number(entity.value));
+          }
+          return accumulator;
+        },
+        [],
+      );
+      return {
+        dates: listDates,
+        expenses: listExpenses,
+        incomings: listIncomings,
+      };
+    } catch (e) {
+      handleErrors(e.message, e.code);
+    }
+  }
+
+  async getBarChart(
+    pageOptionsDto: PageOptionsDto,
+    context: any,
+  ): Promise<IBarChart> {
+    try {
+      const { order, skip, take, where } = pageOptionsDto;
+      const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
+      const userId = convertToken(context);
+      const { whereString, values } = this.buildWhere(where);
+
+      queryBuilder
+        .orderBy('revenue.createdAt', order)
+        .skip(skip)
+        .take(take)
+        .leftJoinAndSelect('revenue.tag', 'tag')
+        .where(whereString, values)
+        .andWhere('revenue.userId = :user', { user: userId });
+
+      const { entities } = await queryBuilder.getRawAndEntities();
+
+      const listDates = entities.map((entity) => entity.date);
+      const listRevenues = entities.reduce(
+        (accumulator: number[], entity: Revenue) => {
+          if (entity.typeRevenue === typeRevenue.EXPENSE) {
+            accumulator.push(Number(entity.value) * -1);
+          }
+          if (entity.typeRevenue === typeRevenue.INCOMING) {
+            accumulator.push(Number(entity.value));
+          }
+          return accumulator;
+        },
+        [],
+      );
+
+      return {
+        dates: listDates,
+        data: listRevenues,
+      };
     } catch (e) {
       handleErrors(e.message, e.code);
     }
@@ -259,6 +403,37 @@ export class RevenueService {
         : (whereString = `${condition}`);
 
       values['value'] = options.value;
+    }
+
+    if (options.startDate && !options.endDate) {
+      const condition = `revenue.date >= :startDate`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : (whereString = `${condition}`);
+
+      values['startDate'] = options.startDate;
+    }
+
+    if (!options.startDate && options.endDate) {
+      const condition = `revenue.date <= :endDate`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : (whereString = `${condition}`);
+
+      values['endDate'] = options.endDate;
+    }
+
+    if (options.startDate && options.endDate) {
+      const condition = `revenue.date >= :startDate AND revenue.date <= :endDate`;
+
+      whereString.length > 0
+        ? (whereString += ` AND ${condition}`)
+        : (whereString = `${condition}`);
+
+      values['startDate'] = options.startDate;
+      values['endDate'] = options.endDate;
     }
 
     if (!deteleted) {

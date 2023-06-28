@@ -57,4 +57,6 @@ export interface FilterOptions {
 	tagId?: string;
 	payMethod?: PaymentMethods | null;
 	typeRevenue?: TypeRevenue | null;
+	startDate?: Date | null;
+	endDate?: Date | null;
 }

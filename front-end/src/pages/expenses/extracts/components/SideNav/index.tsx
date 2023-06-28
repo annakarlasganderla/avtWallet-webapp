@@ -6,6 +6,7 @@ import InputValue from "../../../../../components/InputValue";
 import Select from "../../../../../components/Select";
 import Button from "../../../../../components/Button";
 import { useFilterForm } from "./hooks/useFilterForm";
+import DatePicker from "../../../../../components/DateRangePicker/DateRangePicker";
 
 const SideNav = (props: ISideNavProps) => {
 	const { filter, payMethods, tags, typeRevenues } = useFilterForm(props);
@@ -71,6 +72,16 @@ const SideNav = (props: ISideNavProps) => {
 								options={typeRevenues}
 								onChange={filter.handleChange}
 								value={filter.values.typeRevenue}
+							/>
+
+							<DatePicker
+								startDateName={"startDate"}
+								endDateName={"endDate"}
+								onChange={filter.handleChange}
+								value={{
+									startDate: filter.values.startDate as Date,
+									endDate: filter.values.endDate as Date,
+								}}
 							/>
 
 							<div className="flex justify-center items-center mt-6 w-full lg:w-3/5">

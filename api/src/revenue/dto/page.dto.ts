@@ -11,6 +11,8 @@ export interface WhereDto {
   tagId?: string;
   payMethod?: PayMethod;
   typeRevenue?: typeRevenue;
+  startDate?: Date;
+  endDate?: Date;
 }
 
 export class PageOptionsDto {

@@ -114,6 +114,7 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 			let newObject = value;
 			newObject.payMethod = Number(newObject.payMethod);
 			newObject.typeRevenue = Number(newObject.typeRevenue);
+			newObject.value = Number(newObject.value);
 
 			if (!id) {
 				revenueApi.postRevenue(newObject);

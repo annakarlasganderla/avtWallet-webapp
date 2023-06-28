@@ -28,9 +28,9 @@ const ExtractsList = () => {
 			bold: true,
 			onRender: (item) => (
 				<p className="truncate ">
-					{`${
-						item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
-					} ${item.value.toLocaleString("en-us", {
+					{`${item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"} ${Number(
+						item.value,
+					).toLocaleString("en-us", {
 						style: "currency",
 						currency: item.coin || "BRL",
 					})}

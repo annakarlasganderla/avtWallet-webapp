@@ -60,3 +60,8 @@ export interface FilterOptions {
 	startDate?: Date | null;
 	endDate?: Date | null;
 }
+
+export interface IPieChart {
+	incoming: number;
+	expense: number;
+}

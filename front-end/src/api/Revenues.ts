@@ -6,7 +6,7 @@ import {
 } from "../pages/expenses/list/utils/revenuesList.types";
 import toast from "react-hot-toast";
 import api from "./Api";
-import { IRevenue } from "../types/Interfaces.type";
+import { IPieChart, IRevenue } from "../types/Interfaces.type";
 
 const RevenueApi = () => {
 	const url = "/revenues";
@@ -18,6 +18,14 @@ const RevenueApi = () => {
 			return handleErrors(e);
 		}
 	};
+
+	const getRevenuePieChart = async (): Promise<IPieChart> => {
+		try {
+			return (await api.get(`${url}/pie-chart`)).data;
+		} catch (e: any) {
+			return handleErrors(e);
+		}
+	}
 
 	const findRevenue = async (id: string): Promise<IRevenue> => {
 		return await getById(url, id);
@@ -54,6 +62,7 @@ const RevenueApi = () => {
 		listAllRevenuesPageable,
 		getAmount,
 		findRevenue,
+		getRevenuePieChart
 	};
 };
 

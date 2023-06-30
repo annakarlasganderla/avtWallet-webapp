@@ -279,14 +279,16 @@ export class RevenueService {
 
       const { entities } = await query.getRawAndEntities();
 
-      const listDates = entities
+      const sortedDates = entities
         .map((entity) => entity.date)
         .sort((a, b) => {
           const dateA = new Date(a);
           const dateB = new Date(b);
           return dateA.getTime() - dateB.getTime();
-        })
-        .map((date) => this.formatDate(date));
+        });
+      const listDates = Array.from(
+        new Set(sortedDates.map((date) => this.formatDate(date))),
+      );
       const listExpenses = entities.reduce(
         (accumulator: number[], entity: Revenue) => {
           if (entity.typeRevenue === typeRevenue.EXPENSE) {

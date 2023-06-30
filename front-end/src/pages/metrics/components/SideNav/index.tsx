@@ -1,15 +1,13 @@
-import { useState } from "react";
 import { ISideNavProps } from "./utils/sideNav.types";
 import { AiOutlineClear, AiOutlineClose } from "react-icons/ai";
-import TextField from "../../../../../components/TextField";
-import InputValue from "../../../../../components/InputValue";
-import Select from "../../../../../components/Select";
-import Button from "../../../../../components/Button";
-import { useFilterForm } from "./hooks/useFilterForm";
-import DatePicker from "../../../../../components/DateRangePicker/DateRangePicker";
+import Select from "../../../../components/Select";
+import DatePicker from "../../../../components/DateRangePicker";
+import Button from "../../../../components/Button";
+import { useFilterMetricsForm } from "./hooks/useFilterForm";
 
-const SideNav = (props: ISideNavProps) => {
-	const { filter, payMethods, tags, typeRevenues, clearFilter } = useFilterForm(props);
+const SideNavMetrics = (props: ISideNavProps) => {
+	const { filter, payMethods, tags, typeRevenues, clearFilter } =
+		useFilterMetricsForm(props);
 
 	return (
 		<div className="flex">
@@ -41,22 +39,6 @@ const SideNav = (props: ISideNavProps) => {
 						onSubmit={filter.handleSubmit}
 					>
 						<div className="flex flex-col items-center gap-2 w-3/5 md:w-full">
-							<TextField
-								type={"text"}
-								name={"name"}
-								placeholder={"Name"}
-								value={filter.values.name}
-								onChange={filter.handleChange}
-							/>
-
-							<TextField
-								type={"number"}
-								name={"value"}
-								placeholder={"Value"}
-								value={filter.values.value}
-								onChange={filter.handleChange}
-							/>
-
 							<Select
 								name={"tagId"}
 								optionDefault={"Tag"}
@@ -69,7 +51,7 @@ const SideNav = (props: ISideNavProps) => {
 							<Select
 								name={"payMethod"}
 								optionDefault={"Pay Method"}
-								options={payMethods}
+								options={payMethods || []}
 								onChange={filter.handleChange}
 								value={filter.values.payMethod}
 								removeDefaultOption={false}
@@ -78,7 +60,7 @@ const SideNav = (props: ISideNavProps) => {
 							<Select
 								name={"typeRevenue"}
 								optionDefault={"Type Revenue"}
-								options={typeRevenues}
+								options={typeRevenues || []}
 								onChange={filter.handleChange}
 								value={filter.values.typeRevenue}
 								removeDefaultOption={false}
@@ -107,4 +89,4 @@ const SideNav = (props: ISideNavProps) => {
 	);
 };
 
-export default SideNav;
+export default SideNavMetrics;

@@ -4,12 +4,12 @@ export interface IPieChart {
 }
 
 export interface IStackedChart {
-  dates: Date[];
+  dates: string[];
   incomings: number[];
   expenses: number[];
 }
 
 export interface IBarChart {
-  dates: Date[];
+  dates: string[];
   data: number[];
 }

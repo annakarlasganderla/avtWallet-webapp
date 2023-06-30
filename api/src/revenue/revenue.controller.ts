@@ -11,7 +11,7 @@ import {
 import { RevenueService } from './services/revenue.service';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
 import { UpdateRevenueDto } from './dto/update-revenue.dto';
-import { PageDto, PageOptionsDto } from './dto/page.dto';
+import { PageDto, PageOptionsDto, WhereDto } from './dto/page.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Revenue } from './entities/revenue.entity';
 import {
@@ -71,7 +71,7 @@ export class RevenueController {
   @Post('bar-chart')
   @ApiResponse({ status: 200 })
   getBarChart(
-    @Body() pageOptionsDto: PageOptionsDto,
+    @Body() pageOptionsDto: WhereDto,
     @Request() request: any,
   ): Promise<IBarChart> {
     return this.revenueService.getBarChart(pageOptionsDto, request);

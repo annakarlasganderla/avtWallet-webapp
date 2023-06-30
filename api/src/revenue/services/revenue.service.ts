@@ -219,7 +219,7 @@ export class RevenueService {
       const query = this.revenueRepository
         .createQueryBuilder('revenue')
         .where('revenue.deletedAt IS NULL')
-        .andWhere('(revenue.userId = :userId ', {
+        .andWhere('revenue.userId = :userId ', {
           userId,
         });
 
@@ -269,7 +269,7 @@ export class RevenueService {
       const query = this.revenueRepository
         .createQueryBuilder('revenue')
         .where('revenue.deletedAt IS NULL')
-        .andWhere('(revenue.userId = :userId ', {
+        .andWhere('revenue.userId = :userId ', {
           userId,
         })
         .andWhere('revenue.date BETWEEN :startDate AND :endDate', {
@@ -279,11 +279,18 @@ export class RevenueService {
 
       const { entities } = await query.getRawAndEntities();
 
-      const listDates = entities.map((entity) => entity.date);
+      const listDates = entities
+        .map((entity) => entity.date)
+        .sort((a, b) => {
+          const dateA = new Date(a);
+          const dateB = new Date(b);
+          return dateA.getTime() - dateB.getTime();
+        })
+        .map((date) => this.formatDate(date));
       const listExpenses = entities.reduce(
         (accumulator: number[], entity: Revenue) => {
           if (entity.typeRevenue === typeRevenue.EXPENSE) {
-            accumulator.push(Number(entity.value) * -1);
+            accumulator.push(Number(entity.value));
           }
           return accumulator;
         },
@@ -310,26 +317,32 @@ export class RevenueService {
   }
 
   async getBarChart(
-    pageOptionsDto: PageOptionsDto,
+    pageOptionsDto: WhereDto,
     context: any,
   ): Promise<IBarChart> {
     try {
-      const { order, skip, take, where } = pageOptionsDto;
+      const where = pageOptionsDto;
       const queryBuilder = this.revenueRepository.createQueryBuilder('revenue');
       const userId = convertToken(context);
       const { whereString, values } = this.buildWhere(where);
 
       queryBuilder
-        .orderBy('revenue.createdAt', order)
-        .skip(skip)
-        .take(take)
+        .orderBy('revenue.createdAt', 'ASC')
         .leftJoinAndSelect('revenue.tag', 'tag')
         .where(whereString, values)
         .andWhere('revenue.userId = :user', { user: userId });
 
       const { entities } = await queryBuilder.getRawAndEntities();
 
-      const listDates = entities.map((entity) => entity.date);
+      const listDates = entities
+        .map((entity) => entity.date)
+        .sort((a, b) => {
+          const dateA = new Date(a);
+          const dateB = new Date(b);
+          return dateA.getTime() - dateB.getTime();
+        })
+        .map((date) => this.formatDate(date));
+
       const listRevenues = entities.reduce(
         (accumulator: number[], entity: Revenue) => {
           if (entity.typeRevenue === typeRevenue.EXPENSE) {
@@ -448,5 +461,12 @@ export class RevenueService {
       whereString,
       values,
     };
+  }
+  private formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear());
+
+    return `${day}/${month}/${year}`;
   }
 }

@@ -7,6 +7,7 @@ export interface ISelectProps {
 	disabled?: boolean;
 	multiple?: boolean;
 	required?: boolean;
+	removeDefaultOption?: boolean;
 	optionDefault?: string;
 	class?: string;
 	style?: React.CSSProperties | undefined;

@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { FilterOptions, ISelectOption } from "../../../../types/Interfaces.type";
 import { Tags } from "../../../../types/tags.types";
 import TagsApi from "../../../../api/Tags";
+import moment from "moment";
 
 export const useListExtracts = () => {
 	const revenueApi = RevenueApi();
@@ -35,7 +36,17 @@ export const useListExtracts = () => {
 	const { isFetching } = useQuery<IRevenueList>(["revenue-list", { pageable }], {
 		keepPreviousData: true,
 		refetchOnWindowFocus: false,
-		queryFn: () => revenueApi.listAllRevenuesPageable(pageable),
+		queryFn: async () => {
+			if (pageable.where.startDate) {
+				pageable.where.startDate = moment(pageable.where.startDate)
+					.startOf("day")
+					.toDate();
+			}
+			if (pageable.where.endDate) {
+				pageable.where.endDate = moment(pageable.where.endDate).endOf("day").toDate();
+			}
+			return await revenueApi.listAllRevenuesPageable(pageable);
+		},
 		onSuccess: (data) => {
 			if (data.options.page === 1 && !revenueList?.options.hasNextPage) {
 				return setRevenueList(data);
@@ -65,11 +76,16 @@ export const useListExtracts = () => {
 		setPageable({ ...pageable, where: values });
 	};
 
+	const clearFilter = () => {
+		setPageable({ ...pageable, where: {} });
+	};
+
 	return {
 		list: revenueList?.data,
 		changePage,
 		tags,
 		setListFiltered,
 		loading: isFetching,
+		clearFilter,
 	};
 };

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const ExtractsList = () => {
 	const navigate = useNavigate();
 	const [bool, { setTrue, setFalse }] = useBoolean(false);
-	const { list, changePage, setListFiltered, loading } = useListExtracts();
+	const { list, changePage, setListFiltered, loading, clearFilter } = useListExtracts();
 
 	const columns: IColumn<IRevenue>[] = [
 		{
@@ -28,9 +28,9 @@ const ExtractsList = () => {
 			bold: true,
 			onRender: (item) => (
 				<p className="truncate ">
-					{`${
-						item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"
-					} ${item.value.toLocaleString("en-us", {
+					{`${item.typeRevenue === TypeRevenue.EXPENSE ? "-" : "+"} ${Number(
+						item.value,
+					).toLocaleString("en-us", {
 						style: "currency",
 						currency: item.coin || "BRL",
 					})}
@@ -73,9 +73,14 @@ const ExtractsList = () => {
 
 	return (
 		<>
-			<SideNav isOpen={bool} setIsFalse={setFalse} setWhere={setListFiltered} />
+			<SideNav
+				isOpen={bool}
+				setIsFalse={setFalse}
+				setWhere={setListFiltered}
+				clearFilter={clearFilter}
+			/>
 
-			<main className="w-full flex flex-1 md:h-4/5 flex-col items-center gap-y-4 md:gap-y-10">
+			<main className="w-full flex flex-1 md:h-full flex-col items-center gap-y-4 md:gap-y-10">
 				<div className="w-4/5 h-20 flex items-center justify-end mt-2 mb-2 md:w-3/5">
 					<AiOutlineFilter
 						className="block"
@@ -85,7 +90,7 @@ const ExtractsList = () => {
 						size={30}
 					/>
 				</div>
-				<div className="w-4/5 h-3/5 lg:h-4/5 md:w-3/5">
+				<div className="w-4/5 h-3/5 md:w-3/5">
 					<List
 						columns={columns}
 						items={list || []}

@@ -3,14 +3,15 @@ import { useState } from "react";
 import { IProfile, IRegisterUser } from "../utils/register.types";
 import { registerFormSchema } from "../utils/registerForm.schema";
 import UserApi from "../../../api/Users";
-import { UsersDto } from "../../../types/users.types";
 import useAuth from "../../../context/hooks/useAuth";
-import { useQueries, useQuery } from "react-query";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 export const useRegisterController = () => {
 	const { user } = useAuth();
 	const [error, setError] = useState();
 	const validationSchema = registerFormSchema();
+	const navigate = useNavigate();
 	const userApi = UserApi();
 
 	const userForm = useFormik<IRegisterUser>({
@@ -25,26 +26,30 @@ export const useRegisterController = () => {
 		validateOnChange: false,
 		onSubmit: (value) => {
 			const { confirmPassword, ...restValues } = value;
-			userApi.postUser(restValues);
-			userForm.resetForm({ values: userForm.initialValues });
+			userApi.postUser(restValues).then((value) => {
+				userForm.resetForm({ values: userForm.initialValues });
+				navigate("/");
+			});
 		},
 	});
 
 	useQuery(["find-user", { user }], {
 		queryFn: () => {
-			if (user.uuid) {
+			if (user.uuid && user.uuid !== "") {
 				return userApi.getUserById(user.uuid);
 			}
 			return null;
 		},
 		onSuccess: (data: IProfile) => {
-			userForm.setValues({
-				name: data.name,
-				email: data.email,
-				login: data.login,
-				password: "",
-				confirmPassword: "",
-			});
+			if (data) {
+				userForm.setValues({
+					name: data.name,
+					email: data.email,
+					login: data.login,
+					password: "",
+					confirmPassword: "",
+				});
+			}
 		},
 	});
 

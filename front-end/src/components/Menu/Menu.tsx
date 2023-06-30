@@ -46,15 +46,15 @@ const Menu: React.FC<IMenuProps> = ({ target, children, classname }) => {
 
 	return (
 		<div className={`relative ${classname}`} ref={menuRef}>
-			<div onClick={handleToggle} className="h-full md:h-auto" ref={menuRef}>
+			<div onClick={handleToggle} className="h-full lg:h-auto" ref={menuRef}>
 				{target}
 			</div>
 			{isOpen && (
 				<div
-					className="w-5/6 md:w-auto fixed z-10 bg-white rounded shadow-lg"
+					className="w-5/6 lg:w-auto fixed z-10 bg-white rounded shadow-lg"
 					style={calculateMenuPosition()}
 				>
-					<ul className="py-2 px-4 md:px-2">{children}</ul>
+					<ul className="py-2 px-4 lg:px-2">{children}</ul>
 				</div>
 			)}
 		</div>

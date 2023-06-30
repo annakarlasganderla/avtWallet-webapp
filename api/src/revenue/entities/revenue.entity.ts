@@ -14,7 +14,7 @@ export class Revenue extends AbstractClass {
   @Column()
   coin: string;
 
-  @Column()
+  @Column({ type: 'decimal' })
   value: number;
 
   @Column()

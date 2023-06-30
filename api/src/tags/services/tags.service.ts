@@ -53,7 +53,7 @@ export class TagsService {
       const query = this.tagRepository
         .createQueryBuilder('tag')
         .where('tag.deletedAt IS NULL')
-        .andWhere('(tag.userId =:userId OR tag.userId IS NULL)', {
+        .andWhere('(tag.userId = :userId OR tag.userId IS NULL)', {
           userId,
         });
       return query.getMany();

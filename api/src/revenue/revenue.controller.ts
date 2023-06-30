@@ -11,7 +11,7 @@ import {
 import { RevenueService } from './services/revenue.service';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
 import { UpdateRevenueDto } from './dto/update-revenue.dto';
-import { PageDto, PageOptionsDto } from './dto/page.dto';
+import { PageDto, PageOptionsDto, WhereDto } from './dto/page.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Revenue } from './entities/revenue.entity';
 import {
@@ -19,7 +19,11 @@ import {
   DeletedEntity,
   UpdatedEntity,
 } from 'src/common/dto/default-responses';
-
+import {
+  IBarChart,
+  IPieChart,
+  IStackedChart,
+} from './dto/charts-interface.dto';
 @ApiTags('revenues')
 @Controller('revenues')
 export class RevenueController {
@@ -50,6 +54,27 @@ export class RevenueController {
   @ApiResponse({ status: 200, type: Number })
   getAmount(@Request() request: any): Promise<number> {
     return this.revenueService.getAmount(request);
+  }
+
+  @Get('pie-chart')
+  @ApiResponse({ status: 200 })
+  getPieChart(@Request() request: any): Promise<IPieChart> {
+    return this.revenueService.getPieChart(request);
+  }
+
+  @Get('stacked-chart')
+  @ApiResponse({ status: 200 })
+  getStackedChart(@Request() request: any): Promise<IStackedChart> {
+    return this.revenueService.getStackedChart(request);
+  }
+
+  @Post('bar-chart')
+  @ApiResponse({ status: 200 })
+  getBarChart(
+    @Body() pageOptionsDto: WhereDto,
+    @Request() request: any,
+  ): Promise<IBarChart> {
+    return this.revenueService.getBarChart(pageOptionsDto, request);
   }
 
   @Put('edit/:id')

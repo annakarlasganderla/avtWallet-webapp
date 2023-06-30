@@ -7,7 +7,7 @@ const SideBarItem = (props: ISiderBarItemProps) => {
 				props.selected && "lg:border-l-8 border-gray-800"
 			} gap-0 items-center lg:py-8 lg:gap-12 cursor-pointer lg:pl-12 border-black 
 				transition ease-out delay-150
-				hover:border-b-4 lg:hover:border-b-0 md:hover:border-l-8`}
+				hover:border-b-4 lg:hover:border-b-0 lg:hover:border-l-8`}
 			onClick={props.onClick}
 		>
 			{props.icon && <span>{props.icon}</span>}

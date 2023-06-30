@@ -14,7 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'debug'],
   });
-  const PORT = process.env.STAGE === 'dev' ? 3030 : process.env.PORT;
+  const PORT = process.env.PORT;
 
   app.use(
     ['/docs', '/docs-json'],
@@ -35,7 +35,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  app.enableCors();
+  app.enableCors({ origin: 'http://localhost:3000' });
 
   //Seeder
   const connection = app.get(Connection);

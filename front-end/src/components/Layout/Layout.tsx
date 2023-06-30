@@ -41,17 +41,18 @@ const Layout: FC = () => {
 			text: "",
 			icon: <IoMdAdd color="white" size={40} />,
 			classname:
-				"lg:hidden absolute bottom-12 p-2 rounded-full bg-black transition ease-in-out delay-150 hover:border-none hover:scale-125",
+				"lg:hidden absolute bottom-14 p-2 rounded-full bg-black transition ease-in-out delay-150 hover:border-none hover:scale-125",
 			onClick: () => navigate("/revenue/form/NEW"),
 		},
-		// {
-		// 	text: "Metrics",
-		// 	icon: <VscGraph size={24} />,
-		// 	selected: location.pathname === "/metrics",
-		// 	onClick: () => navigate("/metrics"),
-		// },
+		{
+			text: "Metrics",
+			icon: <VscGraph size={24} />,
+			selected: location.pathname === "/metrics",
+			onClick: () => navigate("/metrics"),
+		},
 		{
 			text: "More",
+			classname: "self-center",
 			onRender: (index) => (
 				<Menu
 					key={index}

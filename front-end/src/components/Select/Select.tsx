@@ -3,6 +3,8 @@ import { ISelectProps } from "./utils/select.types";
 import { ISelectOption } from "../../types/Interfaces.type";
 
 const Select = (props: ISelectProps) => {
+	const { removeDefaultOption = true } = props;
+
 	return (
 		<div className={"flex flex-col w-full"}>
 			<select
@@ -23,7 +25,7 @@ const Select = (props: ISelectProps) => {
 				defaultValue={props.value || ""}
 			>
 				{props.optionDefault ? (
-					<option disabled={true} hidden value={""}>
+					<option disabled={removeDefaultOption} hidden={removeDefaultOption} value={""}>
 						{props.optionDefault}
 					</option>
 				) : null}

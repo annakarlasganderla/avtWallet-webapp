@@ -8,12 +8,12 @@ const InputValue = (props: IInputValueProps) => {
 				<select
 					disabled={props.disabled}
 					name={props.nameSelect}
-					value={props.valueSelect}
 					onChange={props.onChange}
 					className="w-24 absolute bg-gray-900 text-gray-50 cursor-pointer
 						outline-none border-none rounded-lg text-center rounded-lg
 						disabled:bg-gray-450 focus:outline-0"
-					defaultValue={props.valueSelect}
+					value={props.valueSelect || ""}
+					defaultValue={props.valueSelect || ""}
 				>
 					{props.options.map((item: ISelectOption, index) => (
 						<option key={index} value={item.data}>
@@ -27,7 +27,7 @@ const InputValue = (props: IInputValueProps) => {
 					type="number"
 					disabled={props.disabled}
 					name={props.nameInput}
-					value={props.valueInput}
+					value={props.valueInput || ""}
 					placeholder={props.placeholder}
 					onChange={props.onChange}
 					className={`w-full h-10 block text-sm border-2 rounded-lg ps-28

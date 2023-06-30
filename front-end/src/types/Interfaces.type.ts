@@ -57,4 +57,30 @@ export interface FilterOptions {
 	tagId?: string;
 	payMethod?: PaymentMethods | null;
 	typeRevenue?: TypeRevenue | null;
+	startDate?: Date | null;
+	endDate?: Date | null;
+}
+
+export interface FilterMetricsOptions {
+	tagId?: string;
+	payMethod?: PaymentMethods | null;
+	typeRevenue?: TypeRevenue | null;
+	startDate?: Date | null;
+	endDate?: Date | null;
+}
+
+export interface IPieChart {
+	incoming: number;
+	expense: number;
+}
+
+export interface IStackedChart {
+	dates: string[];
+	incomings: number[];
+	expenses: number[];
+}
+
+export interface IBarChart {
+	dates: string[];
+	data: number[];
 }

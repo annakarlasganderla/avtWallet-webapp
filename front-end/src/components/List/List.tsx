@@ -102,7 +102,7 @@ function List(props: IListProps) {
 
 	return (
 		<div
-			className="w-full h-full flex-1 flex flex-col justify-center items-center gap-8 overflow-auto"
+			className="w-full h-full flex-1 flex flex-col justify-start items-center gap-8 overflow-auto"
 			onScroll={handleScroll}
 		>
 			{isTitle && renderHeader()}

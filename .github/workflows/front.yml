@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: ls -la
       - name: Open Directory
-        run: cd ./front-end
+        run: cd front-end
       - run: ls -la
 
       - name: Install Yarn

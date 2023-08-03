@@ -25,6 +25,7 @@ jobs:
       - run: ls -la
       - name: Open Directory
         run: cd ./front-end/
+      - run: ls -la
 
       - name: Install Yarn
         run: npm install -g yarn

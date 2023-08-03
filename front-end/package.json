@@ -10,7 +10,8 @@
     "docs": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "storybook": "start-storybook -p 6006",
-    "lint": "eslint ."
+    "lint": "eslint .",
+		"lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",

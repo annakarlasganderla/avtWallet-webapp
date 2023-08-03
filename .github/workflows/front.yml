@@ -23,10 +23,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: ls -la
+
+      - name: Install dependencies
+        run: |
+          cd front-end        
+          npm install -g yarn
+          yarn install
+
+      - name: Validate ESlint
+        run: |
+          cd front-end        
+          yarn lint:fix
+
       - name: Build
         run: |
           cd front-end
-          npm install -g yarn
-          yarn install
-          yarn lint
           yarn build

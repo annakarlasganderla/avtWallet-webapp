@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
+      - run: ls -la
       - name: Open Directory
         run: cd ./front-end/
 

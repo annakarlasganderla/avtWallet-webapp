@@ -60,7 +60,7 @@ export const useFilterForm = (props: ISideNavProps) => {
 			endDate: null,
 		},
 		onSubmit: (value) => {
-			let newObject = value;
+			const newObject = value;
 			newObject.payMethod = value.payMethod ? Number(value.payMethod) : null;
 			newObject.typeRevenue = value.typeRevenue ? Number(value.typeRevenue) : null;
 			setWhere(newObject);

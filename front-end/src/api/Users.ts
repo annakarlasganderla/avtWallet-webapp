@@ -15,7 +15,7 @@ const UserApi = () => {
 
 	const getUserById = async (id: string) => {
 		return await getById(url, id);
-	}
+	};
 
 	const updateUser = async (obj: UsersDto, id: string) => {
 		return await update(url, obj, id).then(() =>

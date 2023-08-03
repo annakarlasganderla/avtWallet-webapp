@@ -111,7 +111,7 @@ export const useRevenuesFormController = (props: IRevenuesForm) => {
 		validationSchema: validationSchema,
 		validateOnChange: false,
 		onSubmit: (value, { resetForm }) => {
-			let newObject = value;
+			const newObject = value;
 			newObject.payMethod = Number(newObject.payMethod);
 			newObject.typeRevenue = Number(newObject.typeRevenue);
 			newObject.value = Number(newObject.value);

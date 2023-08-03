@@ -26,6 +26,7 @@ interface User {
 
 const AuthContext = createContext<AuthData | undefined>(undefined);
 
+// eslint-disable-next-line react/prop-types
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
 	const [user, setUser] = useState<User>({

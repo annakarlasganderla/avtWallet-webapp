@@ -44,7 +44,7 @@ export const useGenericModalController = (props: IGenericModalProps) => {
 	const list = useQuery<Data>(["generic-list", { previousValue }], () => {
 		if (props.type !== null) {
 			form.values.name = "";
-			if (props.type == "tags") {
+			if (props.type === "tags") {
 				return apiTags.listAllTags();
 			}
 			if (props.type === "sources") {
@@ -57,7 +57,7 @@ export const useGenericModalController = (props: IGenericModalProps) => {
 	const deleteGeneric = useMutation(
 		async (id: string | undefined) => {
 			if (id) {
-				if (props.type == "tags") {
+				if (props.type === "tags") {
 					return await apiTags.deleteTag(id);
 				}
 				if (props.type === "sources") {

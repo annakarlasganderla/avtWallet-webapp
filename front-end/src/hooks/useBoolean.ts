@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useBoolean = (
-	bool: boolean = false,
+	bool = false,
 ): [boolean, { setTrue: () => void; setFalse: () => void; toggle: () => void }] => {
 	const [value, setValue] = useState<boolean>(bool);
 

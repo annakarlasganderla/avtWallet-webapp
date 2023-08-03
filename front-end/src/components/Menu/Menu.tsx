@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IMenuProps } from "./utils/menu.types";
 
+// eslint-disable-next-line react/prop-types
 const Menu: React.FC<IMenuProps> = ({ target, children, classname }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const menuRef = useRef<HTMLDivElement | null>(null);

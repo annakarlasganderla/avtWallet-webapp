@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useRegisterController = () => {
 	const { user } = useAuth();
-	const [error, setError] = useState();
+	const [error] = useState();
 	const validationSchema = registerFormSchema();
 	const navigate = useNavigate();
 	const userApi = UserApi();
@@ -26,7 +26,7 @@ export const useRegisterController = () => {
 		validateOnChange: false,
 		onSubmit: (value) => {
 			const { confirmPassword, ...restValues } = value;
-			userApi.postUser(restValues).then((value) => {
+			userApi.postUser(restValues).then(() => {
 				userForm.resetForm({ values: userForm.initialValues });
 				navigate("/");
 			});

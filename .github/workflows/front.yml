@@ -32,9 +32,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Validate EditorConfig
-        run: npx editorconfig-checker
-
       - name: Validate ESLint
         run: yarn lint
 

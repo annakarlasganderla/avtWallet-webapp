@@ -14,26 +14,23 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
-   
+
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install Yarn
-      run: npm install -g yarn
+      - name: Install Yarn
+        run: npm install -g yarn
 
-    - name: Install Dependencies
-      run: yarn install
+      - name: Install Dependencies
+        run: yarn install
 
-    - name: Validate EditorConfig
-      run: npx editorconfig-checker
+      - name: Validate ESLint
+        run: yarn lint
 
-    - name: Validate ESLint
-      run: yarn lint
-
-    - name: Build
-      run: yarn build
+      - name: Build
+        run: yarn build

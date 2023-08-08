@@ -13,3 +13,6 @@ export const Default: Story = (args) => {
 	return <InputValue {...args} />;
 };
 Default.storyName = "Padrão";
+Default.args = {
+	options: [],
+};

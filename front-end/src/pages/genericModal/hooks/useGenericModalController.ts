@@ -3,7 +3,7 @@ import TagsApi from "../../../api/Tags";
 import SourcesApi from "../../../api/Sources";
 import { Data, IData, IGenericModalProps } from "../utils/genericModal.types";
 import { useFormik } from "formik";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { MODALTYPE } from "../../../types/Interfaces.type";
 import useAuth from "../../../context/hooks/useAuth";
 

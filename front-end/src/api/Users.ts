@@ -1,4 +1,4 @@
-import { listAll, post, remove, update, handleErrors, getById } from "./Common";
+import { listAll, post, remove, update, getById } from "./Common";
 import { UsersDto } from "../types/users.types";
 import toast from "react-hot-toast";
 

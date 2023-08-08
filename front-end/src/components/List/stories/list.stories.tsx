@@ -13,3 +13,20 @@ export const Default: Story = (args) => {
 	return <List {...args} />;
 };
 Default.storyName = "Padrão";
+Default.args = {
+	items: [
+		{
+			id: 1,
+			title: "Item 1",
+		},
+		{
+			id: 2,
+			title: "Item 2",
+		},
+		{
+			id: 3,
+			title: "Item 3",
+		},
+	],
+	columns: [{ name: "title", title: "Title", type: "text" }],
+};

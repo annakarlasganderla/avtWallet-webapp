@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Header from "../Header";
+import { AuthProvider } from "../../../context/AuthContext";
 
 type Meta = ComponentMeta<typeof Header>;
 type Story = ComponentStory<typeof Header>;
@@ -10,5 +11,9 @@ export default {
 } as Meta;
 
 export const Default: Story = (args) => {
-	return <Header {...args} />;
+	return (
+		<AuthProvider>
+			<Header {...args} />
+		</AuthProvider>
+	);
 };

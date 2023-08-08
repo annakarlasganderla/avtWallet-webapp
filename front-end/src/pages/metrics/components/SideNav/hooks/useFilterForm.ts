@@ -10,7 +10,6 @@ import {
 	TypeRevenue,
 } from "../../../../../types/Interfaces.type";
 import { Tags } from "../../../../../types/tags.types";
-import moment from "moment";
 
 export const useFilterMetricsForm = (props: ISideNavProps) => {
 	const tagApi = TagsApi();

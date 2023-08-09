@@ -32,6 +32,8 @@ export class TagsService {
       const { userId } = createTagDto;
       const user = await this.userService.findOne(userId);
 
+      if (!user) throw new HttpException('user_not_found', 404);
+
       const newTag = new Tag();
       newTag.name = createTagDto.name;
       newTag.user = user;

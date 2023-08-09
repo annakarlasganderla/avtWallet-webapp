@@ -31,6 +31,8 @@ export class SourcesService {
       const { userId } = createSourceDto;
       const user = await this.userService.findOne(userId);
 
+      if (!user) throw new HttpException('user_not_found', 404);
+
       const newSource = new Source();
       newSource.name = createSourceDto.name;
       newSource.user = user;
@@ -40,7 +42,7 @@ export class SourcesService {
       this.logger.log('Source created successfully');
       this.sourceRepository.save(source);
 
-      return { message: source.name };
+      return { message: `Source ${source.name} created successfully` };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -97,7 +99,7 @@ export class SourcesService {
 
       await this.sourceRepository.update(id, source);
 
-      return { message: `Source ${UpdateSourceDto.name} updated successfully` };
+      return { message: `Source ${source.name} updated successfully` };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }
@@ -106,14 +108,14 @@ export class SourcesService {
   async softDelete(id: string, context: any): Promise<DeletedEntity> {
     try {
       const userId = convertToken(context);
-      await this.sourceRepository
+      const source = await this.sourceRepository
         .findOne({ where: { id: id, user: { id: userId } } })
         .then((source) => {
           source.deletedAt = new Date();
           return this.sourceRepository.save(source);
         });
 
-      return { message: `Source ${UpdateSourceDto.name} deleted successfully` };
+      return { message: `Source ${source.name} deleted successfully` };
     } catch (e) {
       handleErrors(e.message, e.code);
     }

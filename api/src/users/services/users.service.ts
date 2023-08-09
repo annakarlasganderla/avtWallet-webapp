@@ -104,25 +104,23 @@ export class UserService {
         },
       });
 
-      if (user) {
-        user.name = updateUserDto.name;
-        user.email = updateUserDto.email;
-        user.login = updateUserDto.login;
-        user.password = updateUserDto.password;
-        user.updatedAt = new Date();
+      if (!user) throw new HttpException('user_not_found', 404);
 
-        await this.usersRepository.update(id, user);
+      user.name = updateUserDto.name;
+      user.email = updateUserDto.email;
+      user.login = updateUserDto.login;
+      user.password = updateUserDto.password;
+      user.updatedAt = new Date();
 
-        this.logger.debug('User updated successfully');
+      await this.usersRepository.update(id, user);
 
-        return {
-          name: user.name,
-          email: user.email,
-          login: user.login,
-        };
-      }
+      this.logger.debug('User updated successfully');
 
-      throw new InternalServerErrorException();
+      return {
+        name: user.name,
+        email: user.email,
+        login: user.login,
+      };
     } catch (e: any) {
       handleErrors(e.message, e.code);
     }

@@ -52,6 +52,7 @@ export class UserService {
         name: user.name,
         email: user.email,
         login: user.login,
+        coin: user.coin
       };
     } catch (e: any) {
       handleErrors(e.message, e.code);
@@ -115,6 +116,7 @@ export class UserService {
         name: user.name,
         email: user.email,
         login: user.login,
+        coin: user.coin
       };
     } catch (e: any) {
       handleErrors(e.message, e.code);

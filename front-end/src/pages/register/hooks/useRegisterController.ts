@@ -1,11 +1,12 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { IProfile, IRegisterUser } from "../utils/register.types";
 import { registerFormSchema } from "../utils/registerForm.schema";
 import UserApi from "../../../api/Users";
 import useAuth from "../../../context/hooks/useAuth";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import coins from "../utils/coins.json";
 
 export const useRegisterController = () => {
 	const { user } = useAuth();
@@ -13,6 +14,14 @@ export const useRegisterController = () => {
 	const validationSchema = registerFormSchema();
 	const navigate = useNavigate();
 	const userApi = UserApi();
+	
+	const jsonCoins: any = coins;
+
+	const coinsOptions = useMemo(() => {
+		return Object.keys(jsonCoins).map((coin: string) => { return {name: jsonCoins[coin].name, data: coin}})
+	}, [jsonCoins])
+
+	// console.log(coins.AED)
 
 	const userForm = useFormik<IRegisterUser>({
 		initialValues: {
@@ -20,6 +29,7 @@ export const useRegisterController = () => {
 			email: "",
 			password: "",
 			login: "",
+			coin: "",
 			confirmPassword: "",
 		},
 		validationSchema: validationSchema,
@@ -46,6 +56,7 @@ export const useRegisterController = () => {
 					name: data.name,
 					email: data.email,
 					login: data.login,
+					coin: "",
 					password: "",
 					confirmPassword: "",
 				});
@@ -53,5 +64,5 @@ export const useRegisterController = () => {
 		},
 	});
 
-	return { userForm, error };
+	return { userForm, error, coinsOptions };
 };

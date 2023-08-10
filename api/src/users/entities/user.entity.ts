@@ -15,6 +15,9 @@ export class User extends AbstractClass {
   @Column()
   password: string;
 
+  @Column()
+  coin: string;
+
   @Column({ unique: true })
   login: string;
 

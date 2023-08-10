@@ -7,7 +7,6 @@ import { IRevenuesForm } from "./utils/revenuesForm.types";
 
 const RevenuesForm = (props: IRevenuesForm) => {
 	const {
-		coinsOptions,
 		revenue,
 		title,
 		navigate,
@@ -35,14 +34,13 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						error={revenue.errors.name}
 						disabled={props.type === "VIEW"}
 					/>
+					
 					<InputValue
 						class="md:w-1/2"
 						nameInput={"value"}
-						nameSelect={"coin"}
 						placeholder={"Value"}
-						options={coinsOptions}
+						name={revenue.values.coin}
 						valueInput={revenue.values.value}
-						valueSelect={revenue.values.coin}
 						onChange={revenue.handleChange}
 						error={revenue.errors.value}
 						disabled={props.type === "VIEW"}

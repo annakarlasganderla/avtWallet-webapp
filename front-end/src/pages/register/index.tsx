@@ -1,12 +1,13 @@
 import accountIcon from "../../assets/account.svg";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
+import Select from "../../components/Select/Select";
 import TextField from "../../components/TextField";
 import { useRegisterController } from "./hooks/useRegisterController";
 import { IRegisterForm } from "./utils/register.types";
 
 const Register = (props: IRegisterForm) => {
-	const { userForm, error } = useRegisterController();
+	const { userForm, error, coinsOptions } = useRegisterController();
 
 	return (
 		<div className="w-full">
@@ -52,6 +53,16 @@ const Register = (props: IRegisterForm) => {
 							onChange={userForm.handleChange}
 							error={userForm.errors.login}
 							disabled={props.type === "VIEW"}
+						/>
+
+						<Select
+							name={"coin"}
+							label="Coin"
+							optionDefault={"Coin"}
+							options={coinsOptions}
+							onChange={userForm.handleChange}
+							value={userForm.values.coin}
+							removeDefaultOption={true}
 						/>
 
 						{props.type === "NEW" && (

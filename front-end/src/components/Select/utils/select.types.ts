@@ -4,6 +4,7 @@ export interface ISelectProps {
 	options: ISelectOption[] | [];
 	name?: string;
 	value?: any;
+	label?: string;
 	disabled?: boolean;
 	multiple?: boolean;
 	required?: boolean;

@@ -29,6 +29,13 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   login: string;
+
+  @ApiProperty({
+    example: 'BRL',
+  })
+  @IsString()
+  @IsNotEmpty()
+  coin: string;
 }
 
 export class UpdateUserResponse {
@@ -52,4 +59,11 @@ export class UpdateUserResponse {
   @IsString()
   @IsNotEmpty()
   login: string;
+
+  @ApiProperty({
+    example: 'BRL',
+  })
+  @IsString()
+  @IsNotEmpty()
+  coin: string;
 }

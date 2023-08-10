@@ -9,10 +9,12 @@ import { IRevenue, TypeRevenue } from "../../../types/Interfaces.type";
 import { useRevenueList } from "./hooks/useRevenueList";
 import useWindowSize from "../../../hooks/useWindowsSize";
 import Menu from "../../../components/Menu/Menu";
+import useAuth from "../../../context/hooks/useAuth";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
 	const { width } = useWindowSize();
+	const { user } = useAuth();
 	const { list, changePage, deleteRevenue, amount, loading } = useRevenueList();
 
 	const columns: IColumn<IRevenue>[] = [
@@ -120,7 +122,7 @@ const RevenueList = () => {
 					>
 						{amount?.toLocaleString("pt-br", {
 							style: "currency",
-							currency: "BRL",
+							currency: user.coin,
 						})}
 					</h1>
 				</div>

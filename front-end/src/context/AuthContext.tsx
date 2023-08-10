@@ -17,11 +17,13 @@ interface TokenPayload {
 	sub: string;
 	exp: number;
 	username: string;
+	coin: string;
 }
 
 interface User {
 	uuid: string;
 	username: string;
+	coin: string;
 }
 
 const AuthContext = createContext<AuthData | undefined>(undefined);
@@ -32,6 +34,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [user, setUser] = useState<User>({
 		uuid: "",
 		username: "",
+		coin: ""
 	});
 
 	const isAuthenticated = useMemo(() => {
@@ -41,13 +44,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	useEffect(() => {
 		const storedToken = localStorage.getItem("token");
 		if (storedToken) {
-			const { exp, username, sub } = parseToken(storedToken);
+			const { exp, username, sub, coin } = parseToken(storedToken);
 
 			if (exp && exp * 1000 > Date.now()) {
 				setToken(storedToken);
 				setUser({
 					uuid: sub,
 					username: username,
+					coin: coin
 				});
 			} else {
 				logout();
@@ -62,12 +66,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	const handleSetToken = (newToken: string | null) => {
 		if (newToken) {
-			const { username, sub } = parseToken(newToken);
+			const { username, sub, coin } = parseToken(newToken);
 			localStorage.setItem("token", newToken);
 			setToken(newToken);
 			setUser({
 				uuid: sub,
 				username: username,
+				coin: coin
 			});
 		} else {
 			logout();
@@ -80,6 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		setUser({
 			uuid: "",
 			username: "",
+			coin: ""
 		});
 	};
 

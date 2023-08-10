@@ -3,6 +3,7 @@ export interface IRegisterUser {
 	email: string;
 	password: string;
 	login: string;
+	coin: string;
 	confirmPassword: string;
 }
 

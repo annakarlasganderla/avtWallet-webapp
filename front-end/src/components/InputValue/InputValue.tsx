@@ -5,22 +5,13 @@ const InputValue = (props: IInputValueProps) => {
 	return (
 		<div className={`w-full flex-col ${props.class}`}>
 			<div className={`w-full flex relative mt-1`}>
-				<select
-					disabled={props.disabled}
-					name={props.nameSelect}
-					onChange={props.onChange}
-					className="w-24 absolute bg-gray-900 text-gray-50 cursor-pointer
+				<div
+					className="w-24 h-full flex items-center justify-center absolute bg-gray-900 text-gray-50 cursor-pointer
 						outline-none border-none rounded-lg text-center rounded-lg
 						disabled:bg-gray-450 focus:outline-0"
-					value={props.valueSelect || ""}
-					defaultValue={props.valueSelect || ""}
 				>
-					{props.options.map((item: ISelectOption, index) => (
-						<option key={index} value={item.data}>
-							{item.name}
-						</option>
-					))}
-				</select>
+					{props.name}
+				</div>
 				<input
 					step="0.01"
 					min={0}

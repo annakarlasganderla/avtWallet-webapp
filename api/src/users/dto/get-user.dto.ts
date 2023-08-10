@@ -22,4 +22,11 @@ export class GetUserResponse {
   @IsString()
   @IsNotEmpty()
   login: string;
+
+  @ApiProperty({
+    example: 'BRL',
+  })
+  @IsString()
+  @IsNotEmpty()
+  coin: string;
 }

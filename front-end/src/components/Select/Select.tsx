@@ -7,6 +7,9 @@ const Select = (props: ISelectProps) => {
 
 	return (
 		<div className={"flex flex-col w-full"}>
+			<label htmlFor={props.name} className="text-lg text-gray-900 font-bold mb-1 ">
+				{props.label}
+			</label>
 			<select
 				name={props.name}
 				disabled={props.disabled}

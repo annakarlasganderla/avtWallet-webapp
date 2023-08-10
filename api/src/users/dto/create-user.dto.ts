@@ -29,4 +29,11 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   login: string;
+
+  @ApiProperty({
+    example: 'BRL',
+  })
+  @IsString()
+  @IsNotEmpty()
+  coin: string
 }

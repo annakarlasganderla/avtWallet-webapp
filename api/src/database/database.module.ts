@@ -4,8 +4,9 @@ import { Revenue } from 'src/revenue/entities/revenue.entity';
 import { Source } from 'src/sources/entities/source.entity';
 import { Tag } from 'src/tags/entities/tag.entity';
 import { User } from 'src/users/entities/user.entity';
+import * as dotenv from 'dotenv';
 
-require('dotenv').config();
+dotenv.config();
 
 @Module({
   imports: [
@@ -21,4 +22,4 @@ require('dotenv').config();
     }),
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

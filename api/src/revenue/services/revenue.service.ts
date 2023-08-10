@@ -372,7 +372,7 @@ export class RevenueService {
 
   private buildWhere(options: WhereDto, deteleted = false) {
     let whereString = '';
-    let values = {};
+    const values = {};
 
     if (options.name && options.name != '') {
       whereString += `revenue.name like :name`;

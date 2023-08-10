@@ -33,7 +33,7 @@ jobs:
       - name: Validate ESlint
         run: |
           cd api        
-          yarn lint:fix
+          yarn lint --fix
 
       - name: Format the code
         run: |

@@ -2,7 +2,7 @@ import { AiOutlineFilter } from "react-icons/ai";
 import { useMetrics } from "./hooks/useMetrics";
 import ReactECharts from "echarts-for-react";
 import useBoolean from "../../hooks/useBoolean";
-import SideNavMetrics from "./components/SideNav";
+import SideNav from "../../components/SideNavFilter";
 
 const Metrics = () => {
 	const { chartPie, chartStacked, barOption, setListFiltered, clearFilter } =
@@ -11,7 +11,7 @@ const Metrics = () => {
 
 	return (
 		<main className="w-full h-full flex flex-col items-center gap-y-4 overflow-auto md:gap-y-8">
-			<SideNavMetrics
+			<SideNav
 				isOpen={bool}
 				setIsFalse={setFalse}
 				setWhere={setListFiltered}

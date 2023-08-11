@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 import { ISelectProps } from "./utils/select.types";
 import { ISelectOption } from "../../types/Interfaces.type";
 

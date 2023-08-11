@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IRevenueList, IRevenueOptions } from "../utils/revenuesList.types";
 import RevenueApi from "../../../../api/Revenues";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { FilterOptions } from "../../../../types/Interfaces.type";
 
 export const useRevenueList = () => {
 	const revenueApi = RevenueApi();
@@ -69,11 +70,21 @@ export const useRevenueList = () => {
 		},
 	);
 
+	const setListFiltered = (values: FilterOptions) => {
+		setPageable({ ...pageable, where: values });
+	};
+
+	const clearFilter = () => {
+		setPageable({ ...pageable, where: {} });
+	};
+
 	return {
 		list: revenueList?.data,
 		changePage,
 		deleteRevenue,
 		amount: amount.data,
 		loading: isFetching,
+		setListFiltered,
+		clearFilter,
 	};
 };

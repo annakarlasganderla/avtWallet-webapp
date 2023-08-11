@@ -13,5 +13,6 @@ export interface ISelectProps {
 	class?: string;
 	style?: React.CSSProperties | undefined;
 	error?: string;
-	onChange: (event: any) => void;
+	label?: string;
+	onChange?: (event: any) => void;
 }

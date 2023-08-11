@@ -1,17 +1,18 @@
 import { useFormik } from "formik";
-import { useState } from "react";
-import { useQuery } from "react-query";
+
 import { ISideNavProps } from "../utils/sideNav.types";
-import TagsApi from "../../../../../api/Tags";
+import TagsApi from "../../../api/Tags";
+import { useState } from "react";
 import {
-	FilterMetricsOptions,
+	FilterOptions,
 	ISelectOption,
 	PaymentMethods,
 	TypeRevenue,
-} from "../../../../../types/Interfaces.type";
-import { Tags } from "../../../../../types/tags.types";
+} from "../../../types/Interfaces.type";
+import { useQuery } from "react-query";
+import { Tags } from "../../../types/tags.types";
 
-export const useFilterMetricsForm = (props: ISideNavProps) => {
+export const useFilterForm = (props: ISideNavProps) => {
 	const tagApi = TagsApi();
 	const { setWhere, setIsFalse } = props;
 	const [tags, setTags] = useState<ISelectOption[]>([]);
@@ -30,6 +31,13 @@ export const useFilterMetricsForm = (props: ISideNavProps) => {
 		},
 	});
 
+	const clearFilter = () => {
+		if (props.clearFilter) {
+			props.clearFilter();
+			filter.resetForm();
+		}
+	};
+
 	const payMethods: ISelectOption<PaymentMethods>[] = [
 		{ name: "Pix", data: PaymentMethods.PIX },
 		{ name: "Credit Card", data: PaymentMethods.CREDITCARD },
@@ -42,18 +50,13 @@ export const useFilterMetricsForm = (props: ISideNavProps) => {
 		{ name: "Expense", data: TypeRevenue.EXPENSE },
 	];
 
-	const clearFilter = () => {
-		if (props.clearFilter) {
-			props.clearFilter();
-			filter.resetForm();
-		}
-	};
-
-	const filter = useFormik<FilterMetricsOptions>({
+	const filter = useFormik<FilterOptions>({
 		initialValues: {
+			name: "",
 			tagId: "",
 			payMethod: null,
 			typeRevenue: null,
+			value: null,
 			startDate: null,
 			endDate: null,
 		},

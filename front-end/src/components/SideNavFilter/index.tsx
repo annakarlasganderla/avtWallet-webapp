@@ -1,19 +1,16 @@
-import { useState } from "react";
+import Button from "../Button";
+import DatePicker from "../DateRangePicker";
+import Select from "../Select";
+import TextField from "../TextField";
+import { useFilterForm } from "./hooks/useFilterForm";
 import { ISideNavProps } from "./utils/sideNav.types";
 import { AiOutlineClear, AiOutlineClose } from "react-icons/ai";
-import TextField from "../../../../../components/TextField";
-import InputValue from "../../../../../components/InputValue";
-import Select from "../../../../../components/Select";
-import Button from "../../../../../components/Button";
-import { useFilterForm } from "./hooks/useFilterForm";
-import DatePicker from "../../../../../components/DateRangePicker/DateRangePicker";
 
 const SideNav = (props: ISideNavProps) => {
 	const { filter, payMethods, tags, typeRevenues, clearFilter } = useFilterForm(props);
 
 	return (
 		<div className="flex">
-			{/* Sidenav */}
 			<div
 				className={`fixed right-0 top-0 h-full bg-white text-black-100 w-full md:w-2/5 
                             flex flex-col justify-between z-40 transform transition-all 

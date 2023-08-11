@@ -1,4 +1,4 @@
-import { FilterOptions } from "../../../../../types/Interfaces.type";
+import { FilterOptions } from "../../../types/Interfaces.type";
 
 export interface ISideNavProps {
 	isOpen: boolean;

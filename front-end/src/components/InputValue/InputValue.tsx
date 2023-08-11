@@ -1,4 +1,3 @@
-import { ISelectOption } from "../../types/Interfaces.type";
 import { IInputValueProps } from "./utils/inputValue.types";
 
 const InputValue = (props: IInputValueProps) => {
@@ -6,9 +5,8 @@ const InputValue = (props: IInputValueProps) => {
 		<div className={`w-full flex-col ${props.class}`}>
 			<div className={`w-full flex relative mt-1`}>
 				<div
-					className="w-24 h-full flex items-center justify-center absolute bg-gray-900 text-gray-50 cursor-pointer
-						outline-none border-none rounded-lg text-center rounded-lg
-						disabled:bg-gray-450 focus:outline-0"
+					className="w-24 h-full flex items-center justify-center absolute bg-gray-900 text-gray-50
+						outline-none border-none text-center rounded-lg disabled:bg-gray-450"
 				>
 					{props.name}
 				</div>

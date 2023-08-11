@@ -1,9 +1,5 @@
-import { ISelectOption } from "../../../types/Interfaces.type";
-
 export interface IInputValueProps {
-	nameSelect?: string;
 	nameInput?: string;
-	valueSelect?: any;
 	valueInput?: number;
 	placeholder?: string;
 	disabled?: boolean;

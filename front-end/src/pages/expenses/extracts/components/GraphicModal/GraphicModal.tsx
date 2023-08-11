@@ -12,7 +12,7 @@ export const GraphicModal = (props: IGraphicModal) => {
 				<TextField type={"text"} name={"title"} label={"Title"} />
 				<Select options={[]} onChange={() => null} label={"Graphic Type"} />
 				<Select options={[]} onChange={() => null} label={"Type Revenue"} />
-				<DatePicker />
+				<DatePicker startDateName={""} endDateName={""} />
 				<div className="w-full flex justify-between">
 					<Button
 						width={"25%"}

@@ -4,8 +4,8 @@ interface IDatePickerValue {
 }
 
 export interface IDatePicker {
-	startDateName?: string;
-	endDateName?: string;
+	startDateName: string;
+	endDateName: string;
 	value?: IDatePickerValue;
 	disabled?: boolean;
 	error?: string;

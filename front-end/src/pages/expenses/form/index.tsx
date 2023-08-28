@@ -6,15 +6,8 @@ import { useRevenuesFormController } from "./hooks/useRevenuesFormController";
 import { IRevenuesForm } from "./utils/revenuesForm.types";
 
 const RevenuesForm = (props: IRevenuesForm) => {
-	const {
-		revenue,
-		title,
-		navigate,
-		tags,
-		sources,
-		payMethods,
-		typeRevenues,
-	} = useRevenuesFormController(props);
+	const { revenue, title, navigate, tags, sources, payMethods, typeRevenues } =
+		useRevenuesFormController(props);
 
 	return (
 		<div className="w-full md:h-max h-4/5 flex flex-col items-center mt-12 overflow-auto">
@@ -34,7 +27,7 @@ const RevenuesForm = (props: IRevenuesForm) => {
 						error={revenue.errors.name}
 						disabled={props.type === "VIEW"}
 					/>
-					
+
 					<InputValue
 						class="md:w-1/2"
 						nameInput={"value"}

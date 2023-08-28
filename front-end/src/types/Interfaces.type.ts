@@ -69,6 +69,22 @@ export interface FilterMetricsOptions {
 	endDate?: Date | null;
 }
 
+export enum ChartType {
+	BAR = 1,
+	PIE = 2,
+	STACKED = 3,
+}
+
+export interface IChartCreate {
+	title?: string;
+	type: ChartType | null;
+	typeRevenue?: TypeRevenue | null;
+	payMethods?: PaymentMethods | null;
+	tagIds?: string;
+	startDate?: Date | null;
+	endDate?: Date | null;
+}
+
 export interface IPieChart {
 	incoming: number;
 	expense: number;
@@ -83,4 +99,19 @@ export interface IStackedChart {
 export interface IBarChart {
 	dates: string[];
 	data: number[];
+}
+
+export interface IChartData {
+	dates?: string[];
+	data?: number[];
+	incomings?: number[];
+	expenses?: number[];
+	incoming?: number;
+	expense?: number;
+}
+
+export interface IChartCard {
+	id: number;
+	type: ChartType;
+	data: IChartData;
 }

@@ -14,12 +14,14 @@ export const useRegisterController = () => {
 	const validationSchema = registerFormSchema();
 	const navigate = useNavigate();
 	const userApi = UserApi();
-	
+
 	const jsonCoins: any = coins;
 
 	const coinsOptions = useMemo(() => {
-		return Object.keys(jsonCoins).map((coin: string) => { return {name: jsonCoins[coin].name, data: coin}})
-	}, [jsonCoins])
+		return Object.keys(jsonCoins).map((coin: string) => {
+			return { name: jsonCoins[coin].name, data: coin };
+		});
+	}, [jsonCoins]);
 
 	// console.log(coins.AED)
 

@@ -18,8 +18,8 @@ const SideNav = (props: ISideNavProps) => {
                              ${props.isOpen ? "translate-x-0" : "translate-x-full"}
                             `}
 			>
-				<div className="py-5 px-5">
-					<div className="flex justify-between w-4/5 lg:w-full">
+				<div className="py-5 px-5 overflow-auto">
+					<div className="flex justify-between w-4/5 lg:w-full ">
 						<AiOutlineClose
 							cursor={"pointer"}
 							size={30}

@@ -11,12 +11,10 @@ import useWindowSize from "../../../hooks/useWindowsSize";
 import Menu from "../../../components/Menu/Menu";
 import SideNav from "../../../components/SideNavFilter";
 import useBoolean from "../../../hooks/useBoolean";
-import useAuth from "../../../context/hooks/useAuth";
 
 const RevenueList = () => {
 	const navigate = useNavigate();
 	const { width } = useWindowSize();
-	const { user } = useAuth();
 	const {
 		list,
 		changePage,
@@ -85,7 +83,7 @@ const RevenueList = () => {
 					>
 						<li
 							className="px-4 py-2 hover:bg-gray-100"
-							onClick={(event) => {
+							onClick={() => {
 								navigate(`/revenue/form/${item.id}`);
 							}}
 						>

@@ -9,6 +9,7 @@ import api from "./Api";
 import {
 	FilterMetricsOptions,
 	IBarChart,
+	IChartCreate,
 	IPieChart,
 	IRevenue,
 	IStackedChart,
@@ -53,7 +54,9 @@ const RevenueApi = () => {
 		}
 	};
 
-	const getBarChart = async (obj: FilterMetricsOptions): Promise<IBarChart> => {
+	const getBarChart = async (
+		obj: FilterMetricsOptions | IChartCreate,
+	): Promise<IBarChart> => {
 		try {
 			return (await api.post(`${url}/bar-chart`, obj)).data;
 		} catch (e: any) {

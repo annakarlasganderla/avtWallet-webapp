@@ -1,4 +1,4 @@
-import { listAll, post, remove, update, handleErrors } from "./Common";
+import { listAll, post, remove, update } from "./Common";
 import { Tags, TagsDto } from "../types/tags.types";
 import toast from "react-hot-toast";
 

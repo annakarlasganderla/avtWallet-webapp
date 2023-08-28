@@ -3,9 +3,11 @@ import useAuth from "../../context/hooks/useAuth";
 import { IHeaderProps } from "./utils/header.types";
 import { BsCurrencyEuro } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Header = (props: IHeaderProps) => {
 	const { isAuthenticated, user, logout } = useAuth();
+	const navigate = useNavigate();
 
 	return (
 		<div
@@ -19,7 +21,9 @@ const Header = (props: IHeaderProps) => {
 				target={<FaUserCircle size={28} color="white" className="hover:opacity-70" />}
 				classname={`cursor-pointer ${isAuthenticated ? "block" : "hidden"} md:hidden`}
 			>
-				<li className="px-4 py-2 hover:bg-gray-100">Profile</li>
+				<li className="px-4 py-2 hover:bg-gray-100" onClick={() => navigate("/profile")}>
+					Profile
+				</li>
 				<li className="px-4 py-2 hover:bg-gray-100" onClick={logout}>
 					Logout
 				</li>

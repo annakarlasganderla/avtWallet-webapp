@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [user, setUser] = useState<User>({
 		uuid: "",
 		username: "",
-		coin: ""
+		coin: "",
 	});
 
 	const isAuthenticated = useMemo(() => {
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				setUser({
 					uuid: sub,
 					username: username,
-					coin: coin
+					coin: coin,
 				});
 			} else {
 				logout();
@@ -72,7 +72,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			setUser({
 				uuid: sub,
 				username: username,
-				coin: coin
+				coin: coin,
 			});
 		} else {
 			logout();
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		setUser({
 			uuid: "",
 			username: "",
-			coin: ""
+			coin: "",
 		});
 	};
 

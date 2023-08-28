@@ -5,11 +5,12 @@ import { AuthProvider } from "../context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { AuthorizationInterceptor } from "../api/Api";
+import { ChartProvider } from "../context/ChartsContext";
 
 const Layout = lazy(() => import("../components/Layout/Layout"));
 const Login = lazy(() => import("../pages/login"));
 const Register = lazy(() => import("../pages/register"));
-const ExtractsList = lazy(() => import("../pages/expenses/extracts"));
+const ExtractsList = lazy(() => import("../pages/extracts"));
 const ExpensesForm = lazy(() => import("../pages/expenses/form/"));
 const RevenueList = lazy(() => import("../pages/expenses/list"));
 const Metrics = lazy(() => import("../pages/metrics"));
@@ -44,7 +45,15 @@ export function AppRoutes() {
 									element={<ExpensesForm type={"EDIT"} />}
 								/>
 								<Route path="/revenue" element={<RevenueList />} />
-								<Route path="/extracts" element={<ExtractsList />} />
+								-
+								<Route
+									path="/extracts"
+									element={
+										<ChartProvider>
+											<ExtractsList />{" "}
+										</ChartProvider>
+									}
+								/>
 								<Route path="/metrics" element={<Metrics />} />
 							</Route>
 						</Route>

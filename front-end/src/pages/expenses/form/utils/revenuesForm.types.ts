@@ -1,9 +1,4 @@
-import {
-	ISource,
-	ITags,
-	PaymentMethods,
-	TypeRevenue,
-} from "../../../../types/Interfaces.type";
+import { PaymentMethods, TypeRevenue } from "../../../../types/Interfaces.type";
 
 export enum revenuesTags {
 	alimentacao,

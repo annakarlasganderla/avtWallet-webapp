@@ -9,7 +9,6 @@
     "preview": "vite preview",
     "docs": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 6006",
     "lint": "eslint .",
 		"lint:fix": "eslint . --fix"
   },

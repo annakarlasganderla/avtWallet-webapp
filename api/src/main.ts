@@ -11,10 +11,13 @@ import * as basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const logger = new Logger();
-  const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn', 'debug'],
-  });
   const PORT = process.env.PORT;
+  const APP_ENV = process.env.APP_ENV;
+
+  const app = await NestFactory.create(AppModule, {
+    logger:
+      APP_ENV === 'dev' ? ['error', 'warn', 'debug', 'log'] : ['error', 'warn'],
+  });
 
   app.use(
     ['/docs', '/docs-json'],

@@ -14,6 +14,7 @@ import { Public } from 'src/auth/decorators/auth.decorators';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatedEntity, DeletedEntity } from 'src/common/dto/default-responses';
 import { GetUserResponse } from './dto/get-user.dto';
+import { RecoverPasswordDTO } from './dto/recover-user-password.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -46,5 +47,14 @@ export class UsersController {
   @ApiResponse({ status: 200, type: DeletedEntity })
   async delete(@Param('id') id: string): Promise<DeletedEntity> {
     return await this.usersService.softDelete(id);
+  }
+
+  @Public()
+  @Post('recover-password')
+  @ApiResponse({ status: 201 })
+  async recoverPassword(
+    @Body() recoverPassword: RecoverPasswordDTO,
+  ): Promise<void> {
+    return await this.usersService.recoverPassword(recoverPassword.email);
   }
 }

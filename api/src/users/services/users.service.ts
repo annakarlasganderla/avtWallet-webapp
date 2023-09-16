@@ -8,6 +8,7 @@ import { CreatedEntity, DeletedEntity } from 'src/common/dto/default-responses';
 import { handleErrors } from 'src/common/services/common.service';
 import { GetUserResponse } from '../dto/get-user.dto';
 import { compare, hash } from 'bcrypt';
+import { Resend } from 'resend';
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,8 @@ export class UserService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
+
+  private resend = new Resend('re_7dAqg21i_DS6dKxG4bvqAnRHP3mD43G9z');
 
   async create(createUserDto: CreateUserDto): Promise<CreatedEntity> {
     try {
@@ -52,7 +55,7 @@ export class UserService {
         name: user.name,
         email: user.email,
         login: user.login,
-        coin: user.coin
+        coin: user.coin,
       };
     } catch (e: any) {
       handleErrors(e.message, e.code);
@@ -116,7 +119,7 @@ export class UserService {
         name: user.name,
         email: user.email,
         login: user.login,
-        coin: user.coin
+        coin: user.coin,
       };
     } catch (e: any) {
       handleErrors(e.message, e.code);
@@ -134,6 +137,22 @@ export class UserService {
     } catch (e) {
       handleErrors(e.message, e.code);
     }
+  }
+
+  async recoverPassword(email: string): Promise<void> {
+    await this.resend.emails
+      .send({
+        from: 'onboarding@resend.dev',
+        to: [email],
+        subject: 'Recuperar senha:',
+        html: '<strong>It works!</strong>',
+      })
+      .then((response) => {
+        this.logger.log(`Email sent successfully: ${response.id}`);
+      })
+      .catch((error) => {
+        throw new HttpException('error_recover_password', 500);
+      });
   }
 
   /**

@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Put,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './services/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,7 +15,15 @@ import { Public } from 'src/auth/decorators/auth.decorators';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatedEntity, DeletedEntity } from 'src/common/dto/default-responses';
 import { GetUserResponse } from './dto/get-user.dto';
-import { RecoverPasswordDTO } from './dto/recover-user-password.dto';
+import { GetRecoverCodeDTO } from './dto/get-recover-code.dto';
+import {
+  ValidateRecoverCodeDTO,
+  ValidatedUserWithCodeDTO,
+} from './dto/validate-recover-code';
+import {
+  RecoverPasswordDTO,
+  RecoverPasswordResponse,
+} from './dto/recover-password';
 
 @ApiTags('users')
 @Controller('users')
@@ -50,11 +59,29 @@ export class UsersController {
   }
 
   @Public()
-  @Post('recover-password')
-  @ApiResponse({ status: 201 })
-  async recoverPassword(
-    @Body() recoverPassword: RecoverPasswordDTO,
+  @Post('get-recover-code')
+  @ApiResponse({ status: 200 })
+  async getRecoverCode(
+    @Body() recoverPassword: GetRecoverCodeDTO,
   ): Promise<void> {
-    return await this.usersService.recoverPassword(recoverPassword.email);
+    return await this.usersService.getRecoverCode(recoverPassword.email);
+  }
+
+  @Public()
+  @Post('validate-recover-code')
+  @ApiResponse({ status: 200 })
+  async validateRecoverCode(
+    @Body() { recoverCode }: ValidateRecoverCodeDTO,
+  ): Promise<ValidatedUserWithCodeDTO> {
+    return await this.usersService.validateRecoverCode(recoverCode);
+  }
+
+  @Post('recover-password')
+  @ApiResponse({ status: 200 })
+  async recoverPassword(
+    @Body() recover: RecoverPasswordDTO,
+    @Request() request: any,
+  ): Promise<RecoverPasswordResponse> {
+    return await this.usersService.recoverPassword(recover, request);
   }
 }

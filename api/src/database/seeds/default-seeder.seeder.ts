@@ -16,7 +16,7 @@ export default class Seeder {
       name: 'admin',
       password: 'admin',
       login: 'admin',
-      coin: 'BRL'
+      coin: 'BRL',
     };
 
     if ((await userRepository.find()).length === 0) {

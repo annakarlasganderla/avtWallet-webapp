@@ -29,4 +29,7 @@ export class User extends AbstractClass {
 
   @OneToMany(() => Source, (source) => source.user)
   sources: Source[];
+
+  @Column({ nullable: true })
+  recoverCode: string;
 }

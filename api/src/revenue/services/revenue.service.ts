@@ -380,8 +380,12 @@ export class RevenueService {
       values['name'] = `%${options.name}%`;
     }
 
-    if (options.payMethod) {
-      const condition = `revenue.payMethod = :payMethod`;
+    if (options.payMethod?.length > 0) {
+      
+      let condition = "revenue.payMethod in (";
+      options.payMethod.forEach((paymethodId, index) => (
+         condition += `${paymethodId}${index + 1 === options.payMethod.length ? ')' : ','}`
+      ))
 
       whereString.length > 0
         ? (whereString += ` AND ${condition}`)
@@ -390,8 +394,12 @@ export class RevenueService {
       values['payMethod'] = options.payMethod;
     }
 
-    if (options.typeRevenue) {
-      const condition = `revenue.typeRevenue = :typeRevenue`;
+    if (options.typeRevenue?.length > 0) {
+      let condition = "revenue.typeRevenue in (";
+
+      options.typeRevenue.forEach((typeRevenueId, index) => (
+        condition += `${typeRevenueId}${index + 1 === options.typeRevenue.length ? ')' : ','}`
+      ))
 
       whereString.length > 0
         ? (whereString += ` AND ${condition}`)
@@ -400,8 +408,12 @@ export class RevenueService {
       values['typeRevenue'] = options.typeRevenue;
     }
 
-    if (options.tagId) {
-      const condition = `revenue.tagId = :tagId`;
+    if (options.tagId?.length > 0) {
+      let condition = "revenue.tagId in (";
+
+      options.tagId.forEach((tagId, index) => (
+        condition += `'${tagId}'${index + 1 === options.tagId.length ? ')' : ','}` 
+      ))
 
       whereString.length > 0
         ? (whereString += ` AND ${condition}`)

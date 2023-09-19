@@ -8,9 +8,9 @@ import { typeRevenue } from '../enum/typeRevenue';
 export interface WhereDto {
   name?: string;
   value?: number;
-  tagId?: string;
-  payMethod?: PayMethod;
-  typeRevenue?: typeRevenue;
+  tagId?: [];
+  payMethod?: [];
+  typeRevenue?: [];
   startDate?: Date;
   endDate?: Date;
 }

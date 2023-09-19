@@ -54,9 +54,9 @@ export type MODALTYPE = "tags" | "sources";
 export interface FilterOptions {
 	name?: string;
 	value?: number | null;
-	tagId?: string;
-	payMethod?: PaymentMethods | null;
-	typeRevenue?: TypeRevenue | null;
+	tagId?: [];
+	payMethod?: PaymentMethods[];
+	typeRevenue?: TypeRevenue[];
 	startDate?: Date | null;
 	endDate?: Date | null;
 }

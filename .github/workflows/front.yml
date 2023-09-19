@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: ls -la
 
       - name: Install dependencies
         run: |
@@ -39,3 +38,10 @@ jobs:
         run: |
           cd front-end
           yarn build
+
+      - name: Deploy to Vercel
+        run: |
+          npm install -g vercel
+          vercel login --token ${{ secrets.VERCEL_TOKEN }}
+          cd front-end
+          vercel --prod

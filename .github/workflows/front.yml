@@ -40,9 +40,9 @@ jobs:
           yarn build
 
       - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm install -g vercel
-          cd front-end # or the directory where your code is
-          vercel --prod
+          npm install --global vercel@latest
+          cd front-end
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}

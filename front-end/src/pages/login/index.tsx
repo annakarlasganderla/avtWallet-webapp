@@ -5,6 +5,7 @@ import { useLoginController } from "./hooks/useLoginController";
 
 const Login = () => {
 	const { loginForm, error } = useLoginController();
+	console.log('teste git mac')
 
 	return (
 		<div>
